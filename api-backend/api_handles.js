@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { ApolloServer, gql } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 const { Product } = require('./models.js');
 // const { error } = require('console');
 

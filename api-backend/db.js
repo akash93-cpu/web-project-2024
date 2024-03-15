@@ -1,12 +1,12 @@
 // to connect to MongoDB Atlas database
-
+require('dotenv').config();
 const mongoose = require('mongoose');
 let db;
 
 async function connectToDatabase() {
 
     mongoose.Promise = global.Promise;
-    const url = 'mongodb+srv://akash:password123!@cluster0.99lxrzh.mongodb.net/sparks?retryWrites=true&w=majority&appName=Cluster0';
+    const url = process.env.MONGO_DB_CONNECTION_STRING;
     await mongoose.connect(url, { useNewUrlParser: true });
     db = mongoose.connection.once('open', () => console.log(`Connected to MongoDB Atlas database -> ${url}`));
 }
@@ -26,6 +26,5 @@ function insertOneIntoDatabase() { // not used
 function getDB() {
     return db;
 }
-
 
 module.exports = { connectToDatabase, getDB, insertOneIntoDatabase }
