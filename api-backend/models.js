@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const productSchema = new Schema({
+    product_id: {
+        type: String,
+        unique: true
+    },
     title: String,
     category: String,
     description: String,

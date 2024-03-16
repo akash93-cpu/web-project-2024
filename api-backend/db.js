@@ -25,6 +25,6 @@ function insertOneIntoDatabase() { // not used
 
 function getDB() {
     return db;
-}
+} 
 
 module.exports = { connectToDatabase, getDB, insertOneIntoDatabase }

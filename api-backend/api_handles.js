@@ -3,10 +3,17 @@ const { ApolloServer } = require('apollo-server-express');
 const { Product } = require('./models.js');
 // const { error } = require('console');
 
-
 const resolvers = {
     Query: {
-        getProducts: async () => await Product.find({}).exec()
+        getProducts: async () => await Product.find({}).exec(),
+        countProducts: async () => {
+            try {
+                const count = await Product.countDocuments({}).exec();
+                return { count };
+            } catch (e) {
+                return e.message;
+            }
+        }
     },
     Mutation: {
         addProducts: async (_, args) => {
@@ -66,6 +73,3 @@ module.exports = { startServer }
 // };
 
 // module.exports = { installHandler }
-
-
-
