@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+/**Product schema -> used to create and find all Product documents in 
+the database. */
 const productSchema = new Schema({
     product_id: {
         type: String,

@@ -12,12 +12,14 @@ type ProductCount {
 }
 
 type Query {
+    "Query used to return all Product objects in the database."
     getProducts: [Product]
 
-    "Query used to count number of database objects -> returns a number."
+    "Query used to count number of database objects -> returns an INT."
     countProducts: ProductCount!
 }
 
 type Mutation {
+    "Mutation used to add document entries into the database."
     addProducts(product_id: String!, title: String!, category: String!, description: String!, rating: [Int!]!): Product
 }
