@@ -9,7 +9,7 @@ class Home extends React.Component {
 function ProductRow(props) {
     const products = props.products;
     return (
-        <tr style={{textAlign: 'center'}}>
+        <tr>
             <td>{products.product_id}</td>
             <td>{products.title}</td>
             <td>{products.description}</td>
@@ -26,7 +26,7 @@ function ProductsTable(props) {
     return (
         <table className="bordered-table">
             <thead>
-                <tr style={{textAlign: 'center'}}>
+                <tr>
                     <th>Product ID</th>
                     <th>Title</th>
                     <th>Description</th>
@@ -84,16 +84,16 @@ class ProductsList extends React.Component {
         if (data) {
             this.setState({ products: data.getProducts })
         }
-    }   
+    }
     render() {
         return (
             <React.Fragment>
                 <h1>Product Listings</h1>
                 <Home />
                 <hr />
-                <ProductsTable products={this.state.products}/>
+                <ProductsTable products={this.state.products} />
                 <hr />
-                </React.Fragment>
+            </React.Fragment>
         )
     }
 }
