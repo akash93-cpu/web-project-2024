@@ -1,3 +1,7 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import Navigation from "./Navbar.jsx";
+
 class Home extends React.Component {
     render() {
         return (
@@ -88,6 +92,7 @@ class ProductsList extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <Navigation />
                 <h1>Product Listings</h1>
                 <Home />
                 <hr />
@@ -100,3 +105,7 @@ class ProductsList extends React.Component {
 
 const element = <ProductsList />;
 ReactDOM.render(element, document.getElementById('contents'));
+
+if (module.hot) {
+    module.hot.accept();
+}
