@@ -64,7 +64,7 @@ async function graphQLFetchData(query, variables = {}) {
     }
 }
 
-class ProductsList extends React.Component {
+export default class ProductsList extends React.Component {
     constructor() {
         super();
         this.state = { products: [] };
@@ -106,6 +106,6 @@ class ProductsList extends React.Component {
 const element = <ProductsList />;
 ReactDOM.render(element, document.getElementById('contents'));
 
-if (module.hot) {
-    module.hot.accept();
-}
+// if (module.hot) {
+//     module.hot.accept();
+// }
