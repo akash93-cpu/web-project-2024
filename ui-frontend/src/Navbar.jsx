@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import image from "../images/icon.png";
 
 function Navigation() {
 
@@ -14,37 +15,42 @@ function Navigation() {
       marginLeft: "auto",
     }, 
     mainBar: {
-      background: "linear-gradient(45deg, rgba(118,139,195,1) 1%, rgba(23,217,182,0.7511379551820728) 43%)",
+      background: "linear-gradient(45deg, rgba(116,120,130,1) 1%, rgba(215,215,215,0.7511379551820728) 43%)",
     },
     textColors: {
-      fontFamily: "Courier New",
+      fontFamily: "Fira Code",
       color: "white",
       textShadow: '2px 2px #B22222',
     },
     linkColors: {
-      fontFamily: "Courier New",
-      color: "DarkSlateBlue",
-      textShadow: '1px 1px rebeccapurple',
-    }
+      borderRadius: "1rem",
+      fontFamily: "Fira Code",
+      color: "DarkSlateGray",
+      textShadow: '1px 1px DarkSlateBlue',
+    },
+    linkText: {
+      fontFamily: "Fira Code",
+    },
   }
   
   return (
-    <Navbar expand="lg" sticky="top" style={styles.mainBar}>
+    <Navbar expand="lg" sticky='top' style={styles.mainBar}>
       <Container>
-        <Navbar.Brand href="#home" style={styles.textColors}>IT Lite</Navbar.Brand>
+        <Navbar.Brand href="#home" style={styles.textColors}><img src={image}/>
+        <span className="text-link"> IT Lite</span></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto" style={styles.nav}>
-            <Nav.Link href="#home" style={styles.linkColors}>Login | Register</Nav.Link>
-            <Nav.Link href="#link" style={styles.linkColors}>Blog</Nav.Link>
+            <Nav.Link href="#home" id="link-1" style={styles.linkColors}>Login | Register</Nav.Link>
+            <Nav.Link href="#link" id="link-2" style={styles.linkColors}>Blog</Nav.Link>
             <NavDropdown title="More" id="basic-nav-dropdown" >
-              <NavDropdown.Item href="#action/3.1" >Prices</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+              <NavDropdown.Item href="#action/3.1" style={styles.linkText}>Prices</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2" style={styles.linkText}>
                 Reviews
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Contact</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3" style={styles.linkText}>Contact</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
+              <NavDropdown.Item href="#action/3.4" style={styles.linkText}>
                 About Us
               </NavDropdown.Item>
             </NavDropdown>

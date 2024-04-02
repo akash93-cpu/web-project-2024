@@ -5,18 +5,45 @@
   <meta charset="utf-8">
   <title>Frontend w/ React</title>
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code&family=League+Spartan&family=Source+Code+Pro:wght@200&display=swap"
+    rel="stylesheet" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     table.bordered-table th, td {border: 1px solid silver; padding: 4px;}
     table.bordered-table {border-collapse: collapse;}
     a.active {background-color: #D8D8F5;}
-    input.invalid {border-color: red;}
-    div.error {color: red;}
+
+    @keyframes animation {
+      25% { text-shadow: 5px 5px 5px #1E90FF; }
+    }
+    .text-link:hover {
+      animation: animation 2.5s;
+    }
+    
     #basic-nav-dropdown {
-      font-family: 'Courier New', Courier, monospace;
-      color: darkslateblue;
-      text-shadow: 1px 1px rebeccapurple;
+      border-radius: 1rem;
+      font-family: 'Fira Code';
+      color: DarkSlateGray;
+      text-shadow: 1px 1px DarkSlateBlue;
+    }
+    #link-1:hover {
+      color: aliceblue !important;
+      border-radius: 1rem;
+      background-color: rgb(85, 199, 219);
+    }
+    #link-2:hover {
+      color: aliceblue !important;
+      border-radius: 1rem;
+      background-color: rgb(85, 199, 219);
+    }
+    #basic-nav-dropdown:hover {
+      border-radius: 1rem;
+      background-color: rgb(85, 199, 219);
+      color: aliceblue;
     }
   </style>
 </head>

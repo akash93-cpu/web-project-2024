@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Navigation from "./Navbar.jsx";
 
 class Home extends React.Component {
     render() {
@@ -92,12 +91,11 @@ export default class ProductsList extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Navigation />
-                <h1>Product Listings</h1>
-                <Home />
-                <hr />
-                <ProductsTable products={this.state.products} />
-                <hr />
+                    <h1>Product Listings</h1>
+                    <Home />
+                    <hr />
+                    <ProductsTable products={this.state.products} />
+                    <hr />
             </React.Fragment>
         )
     }

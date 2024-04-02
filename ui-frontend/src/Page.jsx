@@ -1,11 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ProductsList from "./App.jsx";
+import Navigation from "./Navbar.jsx";
+// import ProductsList from "./App.jsx";
+import Footer from "./Footer.jsx";
+import Contents from "./Contents.jsx";
 
 export default function Page() {
     return (
         <React.Fragment>
-            <ProductsList />
+            <Navigation />
+            <Contents />
+            {/* <ProductsList /> */}
+            <Footer />
         </React.Fragment>
     )
 }
