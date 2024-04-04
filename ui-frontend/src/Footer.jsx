@@ -12,15 +12,15 @@ export default function Footer() {
             </head>
             
             <footer>
-                <div class="footer">
-                    <div class="row" style={{display: "block"}}>
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-youtube"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
+                <div className="footer">
+                    <div className="row" style={{display: "block"}}>
+                        <a href="#"><i className="fa fa-facebook"></i></a>
+                        <a href="#"><i className="fa fa-instagram"></i></a>
+                        <a href="#"><i className="fa fa-youtube"></i></a>
+                        <a href="#"><i className="fa fa-twitter"></i></a>
                     </div>
 
-                    <div class="row">
+                    <div className="row">
                         <ul>
                             <li><a href="#">Contact us</a></li>
                             <li><a href="#">Our Services</a></li>

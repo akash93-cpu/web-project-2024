@@ -1,22 +1,28 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from "react-router-dom";
 import Navigation from "./Navbar.jsx";
 // import ProductsList from "./App.jsx";
 import Footer from "./Footer.jsx";
-import Contents from "./Contents.jsx";
+// import Contents from "./Contents.jsx";
+import Index from "./IndexPage.jsx";
 
 export default function Page() {
     return (
-        <React.Fragment>
+        <div>
             <Navigation />
-            <Contents />
-            {/* <ProductsList /> */}
+            <Index />
             <Footer />
-        </React.Fragment>
-    )
+        </div>
+    );
 }
 
-const element = <Page />;
+const element = (
+    <Router>
+        <Page />
+    </Router>
+);
+
 ReactDOM.render(element, document.getElementById('contents'));
 
 if (module.hot) {

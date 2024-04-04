@@ -5,7 +5,6 @@ import "./contentcss.css";
 export default function Contents() {
     const styles = {
         tag1 : {
-            display: "block",
             fontFamily: "Fira Code",
             fontSize: "24px",    
             color: "white",
@@ -15,7 +14,6 @@ export default function Contents() {
             textAlign: "center"
         },
         tag2: {
-            display: "flex",
             fontFamily: "Fira Code",
             fontSize: "24px",    
             color: "white",
@@ -25,11 +23,12 @@ export default function Contents() {
             textAlign: "center"
         },
         buttonSpace: {
-            display: "flex",
+            display: "grid",
+            placeItems: "center",
             fontFamily: "Fira Code",
             position: "absolute",
             top: "60%",
-            left: "48.5%",
+            left: "44.5%",
         }
     }
     return (
@@ -37,7 +36,7 @@ export default function Contents() {
             <div className="effects">
                 <p className="slide-up" style={styles.tag1}>Welcome to IT Lite</p>
                 <span className="effect-2" style={styles.tag2}>Start learning to code today!</span>
-                <button style={styles.buttonSpace}>Enter</button>
+                <a href="#" className="link-1" style={styles.buttonSpace}>Proceed to site {'->'}</a>
             </div>
         </div>
     )

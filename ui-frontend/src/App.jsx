@@ -101,8 +101,8 @@ export default class ProductsList extends React.Component {
     }
 }
 
-const element = <ProductsList />;
-ReactDOM.render(element, document.getElementById('contents'));
+// const element = <ProductsList />;
+// ReactDOM.render(element, document.getElementById('contents'));
 
 // if (module.hot) {
 //     module.hot.accept();
