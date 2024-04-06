@@ -36,7 +36,7 @@ export default function Contents() {
             <div className="effects">
                 <p className="slide-up" style={styles.tag1}>Welcome to IT Lite</p>
                 <span className="effect-2" style={styles.tag2}>Start learning to code today!</span>
-                <a href="#" className="link-1" style={styles.buttonSpace}>Proceed to site {'->'}</a>
+                <a href="/landing" className="link-1" style={styles.buttonSpace}>Proceed to site {'->'}</a>
             </div>
         </div>
     )

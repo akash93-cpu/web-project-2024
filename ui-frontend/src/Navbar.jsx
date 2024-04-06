@@ -36,7 +36,7 @@ function Navigation() {
   return (
     <Navbar expand="lg" sticky='top' style={styles.mainBar}>
       <Container>
-        <Navbar.Brand href="#home" style={styles.textColors}><img src={image}/>
+        <Navbar.Brand href="/" style={styles.textColors}><img src={image}/>
         <span className="text-link"> IT Lite</span></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
