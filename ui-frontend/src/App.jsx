@@ -1,13 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
-
-class Home extends React.Component {
-    render() {
-        return (
-            <div>Welcome to the homepage!</div>
-        )
-    }
-}
+// import ReactDOM from "react-dom";
+import HeaderContent from "./DemoPage.jsx";
 
 function ProductRow(props) {
     const products = props.products;
@@ -63,6 +56,7 @@ async function graphQLFetchData(query, variables = {}) {
     }
 }
 
+// main product page
 export default class ProductsList extends React.Component {
     constructor() {
         super();
@@ -91,8 +85,9 @@ export default class ProductsList extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <HeaderContent />
                     <h1>Product Listings</h1>
-                    <Home />
+                    <div>Welcome to the homepage!</div>
                     <hr />
                     <ProductsTable products={this.state.products} />
                     <hr />

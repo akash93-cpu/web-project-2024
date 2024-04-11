@@ -2,6 +2,7 @@ import React from 'react';
 import backgroundImage from '../images/404-error-page.png';
 import "./404css.css";
 
+// 404 page
 export default function NotFoundPage() {
     const styles = {
         divImage: {

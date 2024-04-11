@@ -2,11 +2,10 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom";
 import Navigation from "./Navbar.jsx";
-// import ProductsList from "./App.jsx";
 import Footer from "./Footer.jsx";
-// import Contents from "./Contents.jsx";
 import Index from "./IndexPage.jsx";
 
+// render page
 export default function Page() {
     return (
         <div>

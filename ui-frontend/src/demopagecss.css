@@ -1,0 +1,181 @@
+/* button glow effect */
+
+#button-1 {
+    overflow: hidden;
+    background: transparent;
+    color: #fff;
+    box-shadow: 0 0 0 0 transparent;
+    -webkit-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+
+#button-1:hover {
+    background: rgb(61, 106, 255);
+    box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+#button-1:hover::before {
+    -webkit-animation: sh02 0.5s 0s linear;
+    -moz-animation: sh02 0.5s 0s linear;
+    animation: sh02 0.5s 0s linear;
+}
+
+#button-1::before {
+    opacity: 0;
+    box-shadow: 0 0 50px 30px #fff;
+    -webkit-transform: skewX(-20deg);
+    -moz-transform: skewX(-20deg);
+    -ms-transform: skewX(-20deg);
+    -o-transform: skewX(-20deg);
+    transform: skewX(-20deg);
+}
+
+@keyframes sh02 {
+    from {
+        opacity: 0;
+        left: 0%;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        left: 100%;
+    }
+}
+
+/* banner text 1 glitch effect */
+.banner-tag-1 {
+    animation: glitched 1s linear infinite;
+}
+
+@keyframes glitched {
+
+    2%,
+    64% {
+        transform: translate(-48%, -50%) skew(0deg);
+    }
+
+    4%,
+    60% {
+        transform: translate(-52%, -50%) skew(0deg);
+    }
+
+    62% {
+        transform: translate(-50%, -50%) skew(5deg);
+    }
+}
+
+.banner-tag-1::before,
+.banner-tag-1::after {
+    content: attr(title);
+    position: absolute;
+    left: 0;
+}
+
+.banner-tag-1::before {
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+    animation: glitchTops 1s linear infinite;
+}
+
+@keyframes glitchTops {
+
+    2%,
+    64% {
+        transform: translate(-2px, -2px);
+    }
+
+    4%,
+    60% {
+        transform: translate(2px, -2px);
+    }
+
+    62% {
+        transform: translate(75px, 1px) skew(-15deg);
+    }
+}
+
+.banner-tag-1::after {
+    clip-path: polygon(0 68%, 100% 68%, 100% 100%, 0 100%);
+    animation: glitchBottoms 1s linear infinite;
+}
+
+@keyframes glitchBottoms {
+
+    2%,
+    64% {
+        transform: translate(-2px, 0);
+    }
+
+    4%,
+    60% {
+        transform: translate(-2px, 0);
+    }
+
+    62% {
+        transform: translate(-42px, 2px) skew(35deg);
+    }
+}
+
+/* banner text 2 glitch effect */
+.banner-tag-2 {
+    text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+        0.025em 0.04em 0 #fffc00;
+    animation: glitch2 725ms infinite;
+}
+
+.banner-tag-2:first-child {
+    animation: glitch2 500ms infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+    transform: translate(-0.04em, -0.03em);
+    opacity: 0.75;
+}
+
+.banner-tag-2:last-child {
+    animation: glitch2 375ms infinite;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    transform: translate(0.04em, 0.03em);
+    opacity: 0.75;
+}
+
+@keyframes glitch2 {
+    0% {
+        text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+            0.025em 0.04em 0 #fffc00;
+    }
+
+    15% {
+        text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+            0.025em 0.04em 0 #fffc00;
+    }
+
+    16% {
+        text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+            -0.05em -0.05em 0 #fffc00;
+    }
+
+    49% {
+        text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+            -0.05em -0.05em 0 #fffc00;
+    }
+
+    50% {
+        text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+            0 -0.04em 0 #fffc00;
+    }
+
+    99% {
+        text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+            0 -0.04em 0 #fffc00;
+    }
+
+    100% {
+        text-shadow: -0.05em 0 0 #00fffc, -0.025em -0.04em 0 #fc00ff,
+            -0.04em -0.025em 0 #fffc00;
+    }
+}

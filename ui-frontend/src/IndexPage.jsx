@@ -3,14 +3,10 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Contents from "./Contents.jsx";
 import ProductsList from "./App.jsx";
+import FAQ from "./FAQs.jsx";
 import NotFoundPage from "./404Page.jsx";
 
-// const NotFound = () => {
-//     return (
-//         <h1 style={{textAlign: 'center'}}>404 ERROR</h1>
-//     )
-// }
-
+// index page
 export default function Index() {
     return (
 
@@ -18,6 +14,7 @@ export default function Index() {
             <Route path="/" element={<Navigate to="/home" />}/>
             <Route path="/home" element={<Contents />} />
             <Route path="/landing" element={<ProductsList />} />
+            <Route path="/faq" element={<FAQ />}/>
             <Route path="*" element={<NotFoundPage />} />
         </Routes>
 

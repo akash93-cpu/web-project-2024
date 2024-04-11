@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import image from "../images/icon.png";
 
+// navbar component
 function Navigation() {
 
   const styles = {
