@@ -39,7 +39,7 @@ export default function FAQ() {
         {
             title: "What other features does this platform have to offer?",
             content: `Some of which are Twitter news feeds from the company and also small quizzes that 
-            users & students can attempt.`,
+            users & students can attempt and also a chatbot that provides 24/7 end user support.`,
         }
     ];
 

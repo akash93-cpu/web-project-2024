@@ -1,39 +1,46 @@
 import React from "react";
-// import ReactDOM from "react-dom";
+import Card from 'react-bootstrap/Card';
+// import Button from 'react-bootstrap/Button';
 import HeaderContent from "./DemoPage.jsx";
 
-function ProductRow(props) {
+// function ProductRow(props) {
+//     const products = props.products;
+//     return (
+//         <tr>
+//             <td>{products.product_id}</td>
+//             <td>{products.title}</td>
+//             <td>{products.description}</td>
+//             <td>{products.category}</td>
+//             <td>{products.rating}</td>
+//         </tr>
+//     );
+// }
+
+function ProductCard(props) {
     const products = props.products;
     return (
-        <tr>
-            <td>{products.product_id}</td>
-            <td>{products.title}</td>
-            <td>{products.description}</td>
-            <td>{products.category}</td>
-            <td>{products.rating}</td>
-        </tr>
-    );
+        <div style={{padding: "4px", display: "grid"}}>
+        <Card style={{width: '12rem'}}>
+            <Card.Body>
+                <Card.Title>{products.title}</Card.Title>
+                <Card.Subtitle>{products.product_id}</Card.Subtitle>
+                <Card.Text>{products.category}</Card.Text>
+                <Card.Subtitle>Rating={products.rating}</Card.Subtitle>
+                <Card.Text>{products.description}</Card.Text>
+            </Card.Body>
+        </Card>
+        </div>
+    )
 }
 
 function ProductsTable(props) {
     const productRows = props.products.map(products =>
-        <ProductRow key={products.id} products={products} />
+        <ProductCard key={products.id} products={products} />
     );
     return (
-        <table className="bordered-table">
-            <thead>
-                <tr>
-                    <th>Product ID</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Rating</th>
-                </tr>
-            </thead>
-            <tbody>
-                {productRows}
-            </tbody>
-        </table>
+        <div style={{display: 'flex', flexWrap: 'wrap'}}>
+            {productRows}
+        </div>
     );
 }
 
@@ -86,9 +93,7 @@ export default class ProductsList extends React.Component {
         return (
             <React.Fragment>
                 <HeaderContent />
-                    <h1>Product Listings</h1>
-                    <div>Welcome to the homepage!</div>
-                    <hr />
+                    <h1 style={{textAlign: 'center'}}>Product Listings</h1>
                     <ProductsTable products={this.state.products} />
                     <hr />
             </React.Fragment>

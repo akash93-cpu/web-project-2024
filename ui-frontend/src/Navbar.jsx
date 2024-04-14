@@ -51,7 +51,7 @@ function Navigation() {
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3" style={styles.linkText}>Contact</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4" style={styles.linkText}>
+              <NavDropdown.Item href="/about-us" style={styles.linkText}>
                 About Us
               </NavDropdown.Item>
             </NavDropdown>
