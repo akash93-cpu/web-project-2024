@@ -16,7 +16,7 @@ function Navigation() {
       marginLeft: "auto",
     }, 
     mainBar: {
-      background: "linear-gradient(45deg, rgba(116,120,130,1) 1%, rgba(215,215,215,0.7511379551820728) 43%)",
+      background: "linear-gradient(45deg, rgba(116,120,130,1) 1%, rgba(215,215,215,0.7511379551820728) 100%)",
     },
     textColors: {
       fontFamily: "Fira Code",

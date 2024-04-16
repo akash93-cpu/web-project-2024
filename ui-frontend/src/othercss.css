@@ -1,0 +1,33 @@
+.background-div {
+    background: rgb(10, 40, 57);
+    background: linear-gradient(41deg, rgba(10, 40, 57, 1) 0%, rgba(190, 187, 165, 1) 20%, rgba(9, 36, 52, 1) 77%);
+}
+
+.card-single {
+    border: 3px solid transparent;
+    border-radius: 10px;
+    transition: border-color 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-single:hover {
+    border-color: rgb(0, 212, 250);
+  }
+  /* Glow effect */
+  .card-single::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    border: linear-gradient(41deg, yellow, transparent 70%);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  .card-single:hover::before {
+    opacity: 1;
+  }

@@ -2,6 +2,7 @@ import React from "react";
 import Card from 'react-bootstrap/Card';
 // import Button from 'react-bootstrap/Button';
 import HeaderContent from "./DemoPage.jsx";
+import "./othercss.css";
 
 // function ProductRow(props) {
 //     const products = props.products;
@@ -17,20 +18,38 @@ import HeaderContent from "./DemoPage.jsx";
 // }
 
 function ProductCard(props) {
+
+    const styles = {
+        cardDiv: {
+            display: 'flex',
+            alignItems: 'center',
+            flex: '1',
+            margin: '2.5rem',
+        },
+        mainDiv: {
+            display: 'flex',
+            alignContent: 'center',
+            marginLeft: '3.5rem',
+        },
+    }
+
     const products = props.products;
     return (
-        <div style={{padding: "4px", display: "grid"}}>
-        <Card style={{width: '12rem'}}>
-            <Card.Body>
-                <Card.Title>{products.title}</Card.Title>
-                <Card.Subtitle>{products.product_id}</Card.Subtitle>
-                <Card.Text>{products.category}</Card.Text>
-                <Card.Subtitle>Rating={products.rating}</Card.Subtitle>
-                <Card.Text>{products.description}</Card.Text>
-            </Card.Body>
-        </Card>
+        <div className="main-div" style={styles.mainDiv}>
+            <div className="card-div" style={styles.cardDiv}>
+            <Card className="card-single" style={{width: '14rem', height: '13rem'}}>
+                <Card.Body>
+                    <Card.Title style={{textAlign: 'center', fontFamily: 'Fira Code', fontSize: '16px'}}>{products.title}</Card.Title>
+                    <hr style={{margin: '25px -17px'}}/>
+                    <Card.Subtitle style={{textAlign: 'center', fontFamily: 'Fira Code', fontSize: '14px', fontWeight: 'bold'}}>{products.product_id}</Card.Subtitle>
+                    <Card.Text style={{textAlign: 'center', fontFamily: 'Fira Code', fontSize: '11px'}}>Category: {products.category}</Card.Text>
+                    <Card.Subtitle style={{textAlign: 'center', fontFamily: 'Fira Code', fontSize: '12px'}}>Rating:{products.rating}</Card.Subtitle>
+                    <Card.Text style={{textAlign: 'center', fontFamily: 'Fira Code', fontSize: '13px'}}>{products.description}</Card.Text>
+                </Card.Body>
+            </Card>
+            </div>
         </div>
-    )
+    );
 }
 
 function ProductsTable(props) {
@@ -38,7 +57,7 @@ function ProductsTable(props) {
         <ProductCard key={products.id} products={products} />
     );
     return (
-        <div style={{display: 'flex', flexWrap: 'wrap'}}>
+        <div className="background-div" style={{display: 'flex', flexWrap: 'wrap'}}>
             {productRows}
         </div>
     );
@@ -52,7 +71,8 @@ async function graphQLFetchData(query, variables = {}) {
             body: JSON.stringify({ query, variables })
         });
         const body = await response.text();
-        const result = JSON.parse(body)
+        const result = JSON.parse(body);
+        console.log("Api data: ",result);
 
         if (result.errors) {
             console.log(result.errors);
@@ -93,7 +113,7 @@ export default class ProductsList extends React.Component {
         return (
             <React.Fragment>
                 <HeaderContent />
-                    <h1 style={{textAlign: 'center'}}>Product Listings</h1>
+                    {/* <h1 style={{textAlign: 'center', fontFamily: 'Fira Code'}}>Product Listings</h1> */}
                     <ProductsTable products={this.state.products} />
                     <hr />
             </React.Fragment>
