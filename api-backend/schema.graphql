@@ -19,7 +19,17 @@ type Query {
     countProducts: ProductCount!
 }
 
+"""Inputs for updateProducts: title + category = not required, description = required."""
+input ProductUpdateInputs {
+    title: String
+    category: String
+    description: String!
+}
+
 type Mutation {
     "Mutation used to add document entries into the database."
     addProducts(product_id: String!, title: String!, category: String!, description: String!, rating: [Int!]!): Product
+
+    "Mutation used to update a document from the database based on product_id."
+    updateProducts(product_id: String!, changes: ProductUpdateInputs!): Product!
 }

@@ -23,6 +23,20 @@ const resolvers = {
             } catch (e) {
                 return e.message;
             }
+        },
+        updateProducts: async (_, args) => {
+            const { product_id, changes } = args;
+            try {
+                const updatedProduct = await Product.findOneAndUpdate(
+                    { product_id: product_id },
+                    { $set: changes },
+                    { new: true }
+                );
+                console.log(updatedProduct);
+                return updatedProduct;
+            } catch (error) {
+                return error.message;
+            }
         }
     }
 };
@@ -47,7 +61,6 @@ async function startServer(app) {
 }
 
 module.exports = { startServer }
-
 
 // const server = new ApolloServer({
 //     typeDefs: fs.readFileSync('./schema.graphql', 'utf-8'),

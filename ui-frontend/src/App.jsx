@@ -37,16 +37,21 @@ function ProductCard(props) {
     return (
         <div className="main-div" style={styles.mainDiv}>
             <div className="card-div" style={styles.cardDiv}>
-            <Card className="card-single" style={{width: '14rem', height: '13rem'}}>
-                <Card.Body>
-                    <Card.Title style={{textAlign: 'center', fontFamily: 'Fira Code', fontSize: '16px'}}>{products.title}</Card.Title>
-                    <hr style={{margin: '25px -17px'}}/>
-                    <Card.Subtitle style={{textAlign: 'center', fontFamily: 'Fira Code', fontSize: '14px', fontWeight: 'bold'}}>{products.product_id}</Card.Subtitle>
-                    <Card.Text style={{textAlign: 'center', fontFamily: 'Fira Code', fontSize: '11px'}}>Category: {products.category}</Card.Text>
-                    <Card.Subtitle style={{textAlign: 'center', fontFamily: 'Fira Code', fontSize: '12px'}}>Rating:{products.rating}</Card.Subtitle>
-                    <Card.Text style={{textAlign: 'center', fontFamily: 'Fira Code', fontSize: '13px'}}>{products.description}</Card.Text>
-                </Card.Body>
-            </Card>
+                <Card className="card-single" style={{ width: '14rem', height: '13rem' }}>
+                    <Card.Body>
+                        <Card.Title style={{ textAlign: 'center', fontFamily: 'Fira Code', fontSize: '16px' }}>
+                            {products.title}</Card.Title>
+                        <hr style={{ margin: '25px -17px' }} />
+                        <Card.Subtitle style={{ textAlign: 'center', fontFamily: 'Fira Code', fontSize: '14px', fontWeight: 'bold' }}>
+                            {products.product_id}</Card.Subtitle>
+                        <Card.Text style={{ textAlign: 'center', fontFamily: 'Fira Code', fontSize: '11px' }}>
+                            Category: {products.category}</Card.Text>
+                        <Card.Subtitle style={{ textAlign: 'center', fontFamily: 'Fira Code', fontSize: '12px' }}>
+                            Rating:{products.rating}</Card.Subtitle>
+                        <Card.Text style={{ textAlign: 'center', fontFamily: 'Fira Code', fontSize: '13px' }}>
+                            {products.description}</Card.Text>
+                    </Card.Body>
+                </Card>
             </div>
         </div>
     );

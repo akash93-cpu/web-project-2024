@@ -4,9 +4,10 @@ const { Schema } = mongoose;
 /**Product schema -> used to create and find all Product documents in 
 the database. */
 const productSchema = new Schema({
-    product_id: {
+    // product_id field - default index
+    product_id: { 
         type: String,
-        unique: true
+        unique: true 
     },
     title: String,
     category: String,
