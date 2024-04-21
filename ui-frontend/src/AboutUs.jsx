@@ -5,7 +5,8 @@ import aboutImage from "../images/about-unsplash.png";
 // about us page
 export default function AboutUsPage() {
     return (
-        <div className="about">
+        <>
+    <div className="about">
         <h1>About Us</h1>
         <p>
           IT Lite - The leading platform in computer programming and training services.
@@ -28,5 +29,51 @@ export default function AboutUsPage() {
             </div>
         </div>
     </div>    
+
+    <div className="extra-content" style={{fontFamily: 'Fira Code'}}>
+    <div class="content-container">
+  <div class="col-container">
+    <div class="column-one">
+      <h1 class="xl-font"><b>What's in it for you?</b></h1>
+      <h1 class="l-font"><b>We give you the best online services we can offer by focusing a lot on 
+        individual skills such as engaging in practical scenarios in coding courses as well as 
+        mentoring you into making the right choices when it comes to choosing a career path.</b></h1>
+    </div>
+    <div class="column-two">
+        <img className="img-extra" src="https://lenadesign.org/wp-content/uploads/2021/04/Sequence-01.gif" />
+    </div>
+  </div>
+</div>
+
+<div class="content-container">
+  <div class="col-container">
+    <div class="column-two">
+      <img className="img-extra" src="https://lenadesign.org/wp-content/uploads/2021/04/css.gif" alt="CSS" width="335" height="471" />
+    </div>
+    <div class="column-one">
+      <h1 class="xl-font"><b>Explore more</b></h1>
+      <h1 class="l-font"><b>When you have successfully completed a course we provide you with the tools and 
+        resources to take on further challenges such as international coding exams in which you 
+        could obtain a globally recognised certificate in a variety of coding fields.</b></h1>
+    </div>
+  </div>
+</div>
+
+<div class="content-container">
+  <div class="col-container">
+    <div class="column-one">
+      <h1 class="xl-font"><b>Our passion and history</b></h1>
+      <h1 class="l-font"><b>It all started as a small online codebase in 2021 and now we're here. We aim to please our audience which comprises mostly of students and other
+        individuals looking to expand their knowledge levels in various activities including the above-mentioned 
+        programming choices.</b></h1>
+    </div>
+    <div class="column-two">
+        <img className="img-extra" src="https://lenadesign.org/wp-content/uploads/2021/04/js-corrected.gif" width="335" height="471" />
+    </div>
+  </div>
+</div>
+    </div>
+    </>
+    
     )
 }

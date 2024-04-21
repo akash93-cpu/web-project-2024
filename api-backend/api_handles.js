@@ -5,7 +5,7 @@ const { Product } = require('./models.js');
 
 const resolvers = {
     Query: {
-        getProducts: async () => await Product.find({}).exec(),
+        getProducts: async () => await Product.find({}).exec(), // return all products mutation 
         countProducts: async () => {
             try {
                 const count = await Product.countDocuments({}).exec();
@@ -16,7 +16,7 @@ const resolvers = {
         }
     },
     Mutation: {
-        addProducts: async (_, args) => {
+        addProducts: async (_, args) => { // add product mutation
             try {
                 let res = await Product.create(args);
                 return res;
@@ -24,7 +24,7 @@ const resolvers = {
                 return e.message;
             }
         },
-        updateProducts: async (_, args) => {
+        updateProducts: async (_, args) => { // update product mutation
             const { product_id, changes } = args;
             try {
                 const updatedProduct = await Product.findOneAndUpdate(
