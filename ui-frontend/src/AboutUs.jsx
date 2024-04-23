@@ -1,6 +1,9 @@
 import React from "react";
 import "./aboutus.css";
 import aboutImage from "../images/about-unsplash.png";
+import about_1 from "../images/about-1-unsplash.png";
+import about_2 from "../images/about-2-unsplash.png";
+import about_3 from "../images/about-3-unsplash.png";
 
 // about us page
 export default function AboutUsPage() {
@@ -40,7 +43,7 @@ export default function AboutUsPage() {
         mentoring you into making the right choices when it comes to choosing a career path.</b></h1>
     </div>
     <div class="column-two">
-        <img className="img-extra" src="https://lenadesign.org/wp-content/uploads/2021/04/Sequence-01.gif" />
+        <img className="img-extra" src={about_1} width="335" height="471"/>
     </div>
   </div>
 </div>
@@ -48,7 +51,7 @@ export default function AboutUsPage() {
 <div class="content-container">
   <div class="col-container">
     <div class="column-two">
-      <img className="img-extra" src="https://lenadesign.org/wp-content/uploads/2021/04/css.gif" alt="CSS" width="335" height="471" />
+      <img className="img-extra" src={about_2} alt="CSS" width="335" height="471" />
     </div>
     <div class="column-one">
       <h1 class="xl-font"><b>Explore more</b></h1>
@@ -68,7 +71,7 @@ export default function AboutUsPage() {
         programming choices.</b></h1>
     </div>
     <div class="column-two">
-        <img className="img-extra" src="https://lenadesign.org/wp-content/uploads/2021/04/js-corrected.gif" width="335" height="471" />
+        <img className="img-extra" src={about_3} width="335" height="471" />
     </div>
   </div>
 </div>

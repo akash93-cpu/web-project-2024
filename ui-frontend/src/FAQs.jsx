@@ -27,7 +27,7 @@ export default function FAQ() {
             content: `This will entirely depend on you as the student as to the time length you provide us with.`,
         },
         {
-            title: "Will I receive a certificate/graduation at the end of each course?",
+            title: "Will I receive a certificate at the end of each course?",
             content: `Yes. After completing each course you will be awarded with your own certificate 
             of completion.`,
         },

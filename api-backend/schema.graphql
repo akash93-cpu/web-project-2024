@@ -7,6 +7,12 @@ type Product {
     rating: [Int!]
 }
 
+type User {
+    _id: ID!
+    email: String!
+    token: String!
+}
+
 type ProductCount {
     count: Int!
 }
@@ -26,10 +32,21 @@ input ProductUpdateInputs {
     description: String!
 }
 
+"""Inputs for creating a new user."""
+input UserInput {
+    email: String!
+    password: String!
+    username: String!
+    confirm: String!
+}
+
 type Mutation {
     "Mutation used to add document entries into the database."
     addProducts(product_id: String!, title: String!, category: String!, description: String!, rating: [Int!]!): Product
 
     "Mutation used to update a document from the database based on product_id."
     updateProducts(product_id: String!, changes: ProductUpdateInputs!): Product!
+
+    "Mutation to add a new user into the system."
+    createUser(userInput: UserInput): User
 }

@@ -77,7 +77,7 @@ async function graphQLFetchData(query, variables = {}) {
         });
         const body = await response.text();
         const result = JSON.parse(body);
-        console.log("Api data: ",result);
+        console.log("API data: ", result);
 
         if (result.errors) {
             console.log(result.errors);

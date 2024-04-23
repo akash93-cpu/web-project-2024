@@ -17,6 +17,30 @@ const productSchema = new Schema({
     }]
 });
 
+const userSchema = new Schema({
+    email: {
+        type: String,
+        required: [true, "Email required!"],
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: [true, "Password required!"],
+        min: 8,
+        max: 16,
+    },
+    username: {
+        type: String,
+        required: [true, "Username required!"],  
+    },
+    role: {
+        type: String,
+        default: "user",
+    },
+});
+
 const Product = mongoose.model('Product', productSchema);
 
-module.exports = { Product };
+const User = mongoose.model('User', userSchema);
+
+module.exports = { Product, User };
