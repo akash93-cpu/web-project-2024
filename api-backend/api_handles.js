@@ -2,6 +2,7 @@ const fs = require('fs');
 const { ApolloServer } = require('apollo-server-express');
 const { Product } = require('./models.js');
 const { User } = require('./models.js');
+const { Admin } = require('./models.js');
 const validator = require('validator');
 const bcrpyt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -10,11 +11,27 @@ require('dotenv').config();
 
 const resolvers = {
     Query: {
-        getProducts: async () => await Product.find({}).exec(), // return all products
-        countProducts: async () => {
+        getProducts: async () => await Product.find({}).exec(), // return all products in the db
+        countProducts: async () => { // count all products in the db
             try {
                 const count = await Product.countDocuments({}).exec();
                 return { count };
+            } catch (e) {
+                return e.message;
+            }
+        },
+        countAllUsers: async () => { // counts all registered users in db
+            try {
+                const countUsers = await User.countDocuments({}).exec();
+                return { countUsers };
+            } catch (e) {
+                return e.message;
+            }
+        },
+        countAllAdmins: async () => { // counts all admins in db
+            try {
+                const countAdmins = await Admin.countDocuments({}).exec();
+                return { countAdmins };
             } catch (e) {
                 return e.message;
             }
@@ -56,9 +73,20 @@ const resolvers = {
                 if (!validator.isStrongPassword(password)){
                     throw Error('Password not strong enough!');
                 }
+
+                const existingOtherUser = await Admin.findOne({ email });
+                if (existingOtherUser) {
+                    throw new Error(`Admin with email: ${ email } is already registered! Cannot
+                    re-register as a User!`);
+                }
+
                 const existingUser = await User.findOne({ email });
                 if (existingUser) {
-                    throw new Error('User already exists!');
+                    throw new Error(`User with email: ${ email } already exists!`);
+                }
+                const userName = await User.findOne({ username });
+                if (userName) {
+                    throw new Error(`Username ${ username } already exists!`)
                 }
                 if (password !== confirm) {
                     throw new Error('Passwords do not match!');
@@ -79,7 +107,55 @@ const resolvers = {
             } catch (error) {
                 throw error;
             } 
-        }
+        },
+        createAdmin: async (_, args) => { // create admin
+            const { email, password, username, confirm } = args.adminInput;
+            try {
+                if (!email || !password || !username || !confirm) {
+                    throw Error("Please enter all fields!");
+                }
+                // validators
+                if (!validator.isEmail(email)) {
+                    throw Error("Email not valid!");
+                }
+                if (!validator.isStrongPassword(password)){
+                    throw Error('Password not strong enough!');
+                }
+                
+                const existingOtherUser = await User.findOne({ email });
+                if (existingOtherUser) {
+                    throw new Error(`Another user with email: ${ email } already exists 
+                    in the User database!`);
+                }
+
+                const existingUser = await Admin.findOne({ email });
+                if (existingUser) {
+                    throw new Error(`Admin with email: ${ email } already exists!`);
+                }
+                const userName = await Admin.findOne({ username });
+                if (userName) {
+                    throw new Error(`Admin ${ username } already exists!`)
+                }
+                if (password !== confirm) {
+                    throw new Error('Passwords do not match!');
+                }
+                const hashedPassword = await bcrpyt.hash(password, 10);
+                const admin = new Admin({
+                    email,
+                    username,
+                    password: hashedPassword,
+                    role: "admin",
+                }, (err) => { if (err) throw err; });
+                admin.save();
+
+                const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET_KEY_2);
+                console.log('admin created successfully!', admin);            
+                return { token, password: null, ...admin._doc }
+    
+            } catch (error) {
+                throw error;
+            } 
+        },
     }
 };
 

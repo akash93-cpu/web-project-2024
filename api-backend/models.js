@@ -31,7 +31,10 @@ const userSchema = new Schema({
     },
     username: {
         type: String,
-        required: [true, "Username required!"],  
+        required: [true, "Username required!"],
+        index: {
+            unique: true,
+        } 
     },
     role: {
         type: String,
@@ -39,8 +42,35 @@ const userSchema = new Schema({
     },
 });
 
+const adminSchema = new Schema({
+    email: {
+        type: String,
+        required: [true, "Email required!"],
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: [true, "Password required!"],
+        min: 8,
+        max: 16,
+    },
+    username: {
+        type: String,
+        required: [true, "Username required!"],
+        index: {
+            unique: true,
+        } 
+    },
+    role: {
+        type: String,
+        default: "admin",
+    },
+});
+
 const Product = mongoose.model('Product', productSchema);
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = { Product, User };
+const Admin = mongoose.model('Admin', adminSchema);
+
+module.exports = { Product, User, Admin };

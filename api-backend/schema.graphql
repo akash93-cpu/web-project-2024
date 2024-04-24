@@ -13,8 +13,22 @@ type User {
     token: String!
 }
 
+type Admin {
+    _id: ID!
+    email: String!
+    token: String!
+}
+
 type ProductCount {
     count: Int!
+}
+
+type UserCount {
+    countUsers: Int!
+}
+
+type AdminCount {
+    countAdmins: Int!
 }
 
 type Query {
@@ -23,6 +37,12 @@ type Query {
 
     "Query used to count number of database objects -> returns an INT."
     countProducts: ProductCount!
+
+    "Query used to count total number of registered users -> returns an INT."
+    countAllUsers: UserCount!
+
+    "Query used to count total number of admins -> returns an INT."
+    countAllAdmins: AdminCount!
 }
 
 """Inputs for updateProducts: title + category = not required, description = required."""
@@ -40,6 +60,14 @@ input UserInput {
     confirm: String!
 }
 
+"""Inputs for creating a new admin."""
+input AdminInput {
+    email: String!
+    password: String!
+    username: String!
+    confirm: String!
+}
+
 type Mutation {
     "Mutation used to add document entries into the database."
     addProducts(product_id: String!, title: String!, category: String!, description: String!, rating: [Int!]!): Product
@@ -49,4 +77,7 @@ type Mutation {
 
     "Mutation to add a new user into the system."
     createUser(userInput: UserInput): User
+
+    "Mutation to add an admin into the system."
+    createAdmin(adminInput: AdminInput): Admin
 }
