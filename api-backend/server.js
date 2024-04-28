@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
+const cookieParser = require('cookie-parser');
 const { connectToDatabase, insertOneIntoDatabase } = require('./db.js');
 const { startServer } = require('./api_handles.js');
 require('dotenv').config();
 
 app.use(express.static('public'));
+
+app.use(cookieParser());
 
 startServer(app);
 

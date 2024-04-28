@@ -10,6 +10,8 @@ require('dotenv').config();
 // const { error } = require('console');
 
 const resolvers = {
+
+    // queries
     Query: {
         getProducts: async () => await Product.find({}).exec(), // return all products in the db
         countProducts: async () => { // count all products in the db
@@ -35,8 +37,59 @@ const resolvers = {
             } catch (e) {
                 return e.message;
             }
+        },
+        userLogin: async (_, args, { res }) => { // user login
+            const { email, password } = args;
+            try {
+                const userExist = await User.findOne({ email: email });
+                if (!userExist) throw new Error (`User with email ${ email } does not exist! Please register!`);    
+
+                const checkPasswordIsValid = bcrpyt.compareSync(password, userExist.password);
+                if (!checkPasswordIsValid) throw new Error('Incorrect password!');
+
+                const token = jwt.sign({ id: userExist._id, username: userExist.username }, process.env.JWT_SECRET_KEY, {
+                    expiresIn: 1 * 24 * 60 * 60, // 1 day
+                });
+                res.cookie("token", token, {
+                    withCredentials: true,
+                    httpOnly: false,
+                });
+
+                return { token, password: null, ...userExist._doc };
+            } catch (err) {
+                throw err;
+            }
+        },
+        adminLogin: async (_, args) => { // admin login
+            const { email, password } = args;
+            try {
+                const adminExist = await Admin.findOne({ email: email });
+                if (!adminExist) throw new Error (`Admin with email ${ email } does not exist! Please register!`);
+
+                const checkPasswordIsValid = bcrpyt.compareSync(password, adminExist.password);
+                if (!checkPasswordIsValid) throw new Error('Incorrect password!');
+
+                const token = jwt.sign({ id: adminExist._id }, process.env.JWT_SECRET_KEY_2, {
+                    expiresIn: 600, // 10 minutes
+                });
+
+                return { token, password: null, ...adminExist._doc };
+            } catch (err) {
+                throw err;
+            }
+        },
+        verifyTokenUser: async (_, args) => { // verify user token
+            try {
+                const decodedUserToken = jwt.verify(args.token, process.env.JWT_SECRET_KEY);
+                const user = await User.findOne({ _id: decodedUserToken.id });
+                return { ...user._doc, password: null };
+            } catch (err) {
+                throw err;
+            }
         }
     },
+    
+    // mutations
     Mutation: {
         addProducts: async (_, args) => { // add product
             try {
@@ -164,37 +217,54 @@ async function startServer(app) {
     const enableCors = ((console.log('cors')) || 'true') === 'true';
     let cors;
     if (enableCors) {
-        const origin = 'http://localhost:8000';
-        const methods = 'POST';
-        cors = { origin, methods }
+        const allowedOrigins = ['http://localhost:5000', 'https://studio.apollographql.com'];
+        const methods = ["GET", "POST", "PUT", "DELETE"];
+        cors = { origin: allowedOrigins, methods, credentials: true }
     } else {
         cors = 'false';
     }
     appServer = new ApolloServer({
         typeDefs: fs.readFileSync('./schema.graphql', 'utf-8'),
         resolvers,
+        context: ({ res, req }) => ({ res, req }),
     });
     await appServer.start();
-    appServer.applyMiddleware({ app, path: '/graphql-server' });
+    appServer.applyMiddleware({ app, path: '/graphql-server', cors });
 }
 
 module.exports = { startServer }
 
-// copy+paste into graphQL editor to use createUser: 
+// frequently used GraphQL queries -> copy+paste into graphQL editor : 
 
-// mutation {
+// mutation createUser{
 //     createUser(userInput: {
-//       email: "test@email.com",
+//       email: "someone2@email.com",
 //       password: "Password123!",
 //       confirm: "Password123!",
-//       username: "Akash1",
+//       username: "Person1",
 //     }) {
 //       _id
 //       token
 //       email
 //     }
 //   }
-
+  
+//   query userLogin{
+//     userLogin(email: "someone@email.com", password: "Password123!") {
+//       _id
+//       token
+//       email
+//     }
+//   }
+  
+//   query verifyTokenUser {
+//     verifyTokenUser(token: "") {
+//       _id
+//       email
+//     }
+//   }
+  
+// unused 
 // const server = new ApolloServer({
 //     typeDefs: fs.readFileSync('./schema.graphql', 'utf-8'),
 //     resolvers,

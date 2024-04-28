@@ -43,6 +43,15 @@ type Query {
 
     "Query used to count total number of admins -> returns an INT."
     countAllAdmins: AdminCount!
+
+    "Query for user login."
+    userLogin(email: String!, password: String!): User
+    verifyTokenUser(token: String!): User
+
+    "Query for admin login."
+    adminLogin(email: String!, password: String!): Admin
+    verifyTokenAdmin(token: String!): Admin
+
 }
 
 """Inputs for updateProducts: title + category = not required, description = required."""
