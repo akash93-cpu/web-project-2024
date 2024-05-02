@@ -42,7 +42,7 @@ function Navigation() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto" style={styles.nav}>
-            <Nav.Link href="#home" id="link-1" style={styles.linkColors}>Login|Register</Nav.Link>
+            <Nav.Link href="/login" id="link-1" style={styles.linkColors}>Login|Register</Nav.Link>
             <Nav.Link href="#link" id="link-2" style={styles.linkColors}>Blog</Nav.Link>
             <NavDropdown title="More" id="basic-nav-dropdown" >
               <NavDropdown.Item href="#action/3.1" style={styles.linkText}>Prices</NavDropdown.Item>

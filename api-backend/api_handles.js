@@ -6,8 +6,14 @@ const { Admin } = require('./models.js');
 const validator = require('validator');
 const bcrpyt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+// const router = require('express').Router();
+// const bodyParser = require('body-parser');
+// const cors = require('cors');
 require('dotenv').config();
-// const { error } = require('console');
+
+// const frontendOrigin = 'http://localhost:5000';
+// router.use(bodyParser.json());
+// router.use(cors({ frontendOrigin, credentials: true, methods: ["GET", "POST", "PUT", "DELETE"] }));
 
 const resolvers = {
 
@@ -38,7 +44,8 @@ const resolvers = {
                 return e.message;
             }
         },
-        userLogin: async (_, args, { res }) => { // user login
+    
+        userLogin: async (_, args) => { // user login
             const { email, password } = args;
             try {
                 const userExist = await User.findOne({ email: email });
@@ -50,10 +57,11 @@ const resolvers = {
                 const token = jwt.sign({ id: userExist._id, username: userExist.username }, process.env.JWT_SECRET_KEY, {
                     expiresIn: 1 * 24 * 60 * 60, // 1 day
                 });
-                res.cookie("token", token, {
-                    withCredentials: true,
-                    httpOnly: false,
-                });
+
+                // router.post('/login', async (req, res) => { // not used
+                //     res.cookie('jwtToken', token, 
+                //     { httpOnly: true, withCredentials: true })
+                // });
 
                 return { token, password: null, ...userExist._doc };
             } catch (err) {
@@ -232,7 +240,7 @@ async function startServer(app) {
     appServer.applyMiddleware({ app, path: '/graphql-server', cors });
 }
 
-module.exports = { startServer }
+module.exports = { startServer } // removed router
 
 // frequently used GraphQL queries -> copy+paste into graphQL editor : 
 
