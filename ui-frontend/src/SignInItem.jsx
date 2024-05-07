@@ -1,12 +1,17 @@
 import React from "react";
 // import axios from "axios";
+import _fetch from "isomorphic-fetch";
 import { useNavigate } from "react-router-dom";
 import { Cookies } from 'react-cookie';
-import { Form, FormGroup, FormControl } from 'react-bootstrap';
+import { Form, FormControl } from 'react-bootstrap';
+import { Envelope, BracesAsterisk } from 'react-bootstrap-icons';
+import '../css/signin.css';
+import bgLoginImage from '../images/unsplash-login.png';
+
 
 async function postUserData(query, variables = {}) {
     try {
-        const response = await fetch('http://localhost:3000/graphql-server', {
+        const response = await _fetch('http://localhost:3000/graphql-server', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -24,6 +29,9 @@ class SignIn extends React.Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+            emailState: null,
+        }
     }
 
     async handleSubmit(e) {
@@ -39,17 +47,19 @@ class SignIn extends React.Component {
                     _id
                     token
                     email
+                    username
                 }
             }`
         try {
             const userData = await postUserData(query, variables);
-            console.log(userData.userLogin.email);
-            console.log(userData.userLogin.token);
+            console.log("User login data from API -> ", userData);
+            // console.log(userData.userLogin.username);
             const token = userData.userLogin.token; // the user token
-            // const expires = new Date();
+            const emailData = userData.userLogin.email;
             if (token) {
-                const expires = new Date(Date.now() + 10 * 1000); // 10 second expiry time
-                cookies.set('userToken', token, { path: '/', expires: expires, secure: true });
+                const expires = new Date(Date.now() + 20 * 1000); // 20 second expiry time
+                cookies.set('userToken', token, { path: '/', expires: expires, secure: true, httpOnly: false });
+                this.setState({ emailState: emailData });
                 this.props.navigate('/landing');
             }
             return userData;
@@ -58,28 +68,42 @@ class SignIn extends React.Component {
         }
     }
 
-    async handleLogout(e) {
-        e.preventDefault();
-        const cookies = new Cookies();
-        cookies.remove('userToken');
-    }
-
     render() {
+        const styles = {
+            loginBg: {
+                backgroundImage: `url(${bgLoginImage})`,
+                height: "100vh",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",    
+            }
+        }
+        // const { emailState } = this.state;
         return (
             <>
-                <div style={{ marginLeft: '25rem', marginRight: '25rem', margin: '5rem', display: 'flexbox', alignContent: 'center', overflow: 'hidden' }}>
-                    <Form name="userLogin">
-                        <FormGroup>
-                            <label>User Email</label>
-                            <FormControl autoFocus name="email" />
-                        </FormGroup>
-                        <FormGroup>
-                            <label>Password</label>
-                            <FormControl autoFocus name="password" />
-                        </FormGroup>
-                    </Form>
-                    <button type="button" onClick={this.handleSubmit}>Test Submit</button>
-                    <button type="button" onClick={this.handleLogout}>Logout</button>
+                <div className="body-login" style={styles.loginBg}>
+                    <div class="container-login">
+                        <div class="wrapper-login">
+                            <div className="title-login"><span>Login Form</span></div>
+                            <Form name="userLogin" className="login-form-main">
+                                <div className="row-login">
+                                    
+                                    <Envelope className="i"></Envelope>
+                                    <FormControl id="input-login" type="text" placeholder="Email" required name="email"/>
+                                </div>
+                                <div className="row-login">
+                                    <BracesAsterisk className="i"></BracesAsterisk>
+                                    <FormControl id="input-login" 
+                                    autoFocus type="password" placeholder="Password" required name="password" maxLength={16}/>
+                                </div>
+                                {/* <div class="pass"><a href="#">Forgot password?</a></div> */}
+                                <div className="center-login-button">
+                                    <button id="submit-button-login" onClick={this.handleSubmit}>Submit</button>
+                                </div>
+                                <div className="signup-link">Not a member? <a id="register-link" href="/register">Signup now</a></div>
+                            </Form>
+                        </div>
+                    </div>
                 </div>
             </>
         );

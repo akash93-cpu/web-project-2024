@@ -2,7 +2,7 @@ import React from "react";
 import Card from 'react-bootstrap/Card';
 // import Button from 'react-bootstrap/Button';
 import HeaderContent from "./DemoPage.jsx";
-import "./othercss.css";
+import "../css/othercss.css";
 
 // function ProductRow(props) {
 //     const products = props.products;

@@ -9,42 +9,57 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Title</a>
+        <p class="navbar-brand" href="#">SERVER TEST PAGE</p>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class=" collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto ">
-                <li class="nav-item">
-                    <a class="nav-link mx-2 active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mx-2" href="#">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mx-2" href="#">Pricing</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Company
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Blog</a></li>
-                        <li><a class="dropdown-item" href="#">About Us</a></li>
-                        <li><a class="dropdown-item" href="#">Contact us</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+
     </div>
 </nav>
 
 <div class="content">
-    <h2>Featured products</h2>
+    <h2>Server Page</h2>
     <p>This is the server test page. To view front-end of project please 
         start front-end UI server.
     </p>
+
+    <div class="information-div">
+        <h3>Commonly used GraphQL queries</h3>
+        <a href="http://localhost:3000/graphql-server">Use this link to go to the Apollo GraphQL server</a>
+        <p id="first-query">
+            mutation createUser{
+            createUser(userInput: {
+            email: "",
+            password: "",
+            confirm: "",
+            username: "",
+            }) {
+            _id
+            token
+            email
+            }
+            }
+        </p>
+        <p>
+            query userLogin{
+            userLogin(email: "", password: "") {
+            _id
+            token
+            email
+            }
+            }
+        </p>
+        <p>
+            query verifyTokenUser {
+            verifyTokenUser(token: "") {
+            _id
+            email
+            }
+            }
+        </p>
+        
+    </div>
+
 </div>

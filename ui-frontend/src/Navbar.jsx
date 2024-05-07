@@ -1,4 +1,5 @@
 import React from 'react';
+import { Cookies } from 'react-cookie';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -34,6 +35,13 @@ function Navigation() {
     },
   }
   
+  const handleLogout = (e) => {
+    e.preventDefault();
+    const cookies = new Cookies();
+    cookies.remove('userToken');
+  }
+
+
   return (
     <Navbar expand="lg" sticky='top' style={styles.mainBar}>
       <Container>
@@ -58,6 +66,9 @@ function Navigation() {
           </Nav>
         </Navbar.Collapse>
       </Container>
+      <div>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
     </Navbar>
   );
 }

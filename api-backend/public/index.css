@@ -1,4 +1,15 @@
 .content {
     color: brown;
-    
+}
+
+.information-div {
+    margin-top: 5rem;
+    text-align: center;
+}
+.information-div a {
+    margin-top: 3rem;
+}
+
+.information-div #first-query {
+    margin-top: 1rem;
 }

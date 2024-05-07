@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import headerImage from "../images/header-unsplash.png";
 import { InfoCircle } from "react-bootstrap-icons";
-import "./demopagecss.css";
+import "../css/demopagecss.css";
 
 // header 
 export default function HeaderContent() {

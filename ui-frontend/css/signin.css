@@ -1,0 +1,144 @@
+.body-login{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Fira Code';
+ 
+}
+.body-login{
+  background: #1abc9c;
+  overflow: hidden;
+}
+
+/* global modifier */
+::selection{ 
+  background: rgba(117, 105, 231, 0.932);
+}
+
+.container-login{
+  max-width: 440px;
+  padding: 0 20px;
+  margin: 170px auto;
+}
+.wrapper-login{
+  width: 100%;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
+}
+.wrapper-login .title-login{
+  height: 90px;
+  background: rgb(131,58,180);
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(29,229,253,1) 95%);
+    border-radius: 5px 5px 0 0;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper-login .login-form-main{
+  padding: 30px 25px 25px 25px;
+}
+.wrapper-login .login-form-main .row-login{
+  height: 45px;
+  margin-bottom: 15px;
+  position: relative;
+}
+.wrapper-login .login-form-main .row-login #input-login{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding-left: 60px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  font-size: 16px;
+  transition: all 0.3s ease;
+} .login-form-main .row-login #input-login:focus{
+  border-color:rgba(117, 105, 231, 0.932);
+  box-shadow: inset 0px 0px 2px 2px rgba(26,188,156,0.25);
+} .login-form-main .row-login #input-login::placeholder{
+  color: #999;
+}
+.wrapper-login .login-form-main .row-login .i{
+  position: absolute;
+  width: 47px;
+  height: 100%;
+  color: #fff;
+  font-size: 18px;
+  background: #8157f3;
+  border: 1px solid #16a085;
+  border-radius: 5px 0 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper-login .login-form-main{
+  margin: -8px 0 20px 0;
+}
+.wrapper-login .login-form-main #register-link{
+  color: #16a085;
+  font-size: 17px;
+  text-decoration: none;
+}
+.wrapper-login .login-form-main #register-link:hover{
+  text-decoration: underline;
+}
+.wrapper-login .login-form-main .button-login #input-login{
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 0px;
+  background: #16a085;
+  border: 1px solid #16a085;
+  cursor: pointer;
+} .login-form-main .button-login #input-login:hover{
+  background: #12876f;
+}
+.wrapper-login .login-form-main .signup-link{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 17px;
+}
+.wrapper-login .login-form-main .signup-link #register-link{
+  color: rgba(117, 105, 231, 0.932);
+  text-decoration: none;
+} .login-form-main .signup-link #register-link:hover{
+  text-decoration: underline;
+}
+
+/* for submit button  */
+
+#submit-button-login {
+  font-size: 18px;
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  will-change: box-shadow,transform;
+  background: radial-gradient( 100% 100% at 100% 0%, #89E5FF 0%, #5468FF 100% );
+  box-shadow: 0px 0.01em 0.01em rgb(45 35 66 / 40%), 0px 0.3em 0.7em -0.01em rgb(45 35 66 / 30%), inset 0px -0.01em 0px rgb(58 65 111 / 50%);
+  padding: 0 2em;
+  border-radius: 0.3em;
+  color: #fff;
+  height: 2.6em;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  
+}
+
+#submit-button-login:hover {
+  box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
+  transform: translateY(-0.1em);
+}
+
+#submit-button-login:active {
+  box-shadow: inset 0px 0.1em 0.6em #3c4fe0;
+  transform: translateY(0em);
+}
+
+.center-login-button {
+  text-align: center;
+  margin-top: 20px; /* Adjust as needed */
+}

@@ -35,8 +35,8 @@ if (api_proxy_target) {
 // }
 
 const UI_API_ENDPOINT = process.env.UI_API_ENDPOINT || 'http://localhost:3000/graphql-server';
-const apiAuthEndpoint = 'http://localhost:3000/auth';
-const env = { UI_API_ENDPOINT, apiAuthEndpoint };
+// const apiAuthEndpoint = 'http://localhost:3000/auth';
+const env = { UI_API_ENDPOINT }; // removed apiAuthEndpoint
 
 app.get('/env.js', function(req, res) {
     res.send(`window.ENV = ${JSON.stringify(env)}`);    

@@ -11,6 +11,7 @@ type User {
     _id: ID!
     email: String!
     token: String!
+    username: String!
 }
 
 type Admin {

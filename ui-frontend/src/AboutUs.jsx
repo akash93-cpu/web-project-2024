@@ -1,5 +1,5 @@
 import React from "react";
-import "./aboutus.css";
+import "../css/aboutus.css";
 import aboutImage from "../images/about-unsplash.png";
 import about_1 from "../images/about-1-unsplash.png";
 import about_2 from "../images/about-2-unsplash.png";

@@ -1,6 +1,6 @@
 import React from "react";
 import image from "../images/unsplash-homepage.png";
-import "./contentcss.css";
+import "../css/contentcss.css";
 
 // homepage
 export default function Contents() {
