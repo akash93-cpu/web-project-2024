@@ -6,14 +6,7 @@ const { Admin } = require('./models.js');
 const validator = require('validator');
 const bcrpyt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-// const router = require('express').Router();
-// const bodyParser = require('body-parser');
-// const cors = require('cors');
 require('dotenv').config();
-
-// const frontendOrigin = 'http://localhost:5000';
-// router.use(bodyParser.json());
-// router.use(cors({ frontendOrigin, credentials: true, methods: ["GET", "POST", "PUT", "DELETE"] }));
 
 const resolvers = {
 
@@ -45,7 +38,7 @@ const resolvers = {
             }
         },
     
-        userLogin: async (_, args) => { // user login
+        userLogin: async (_, args, { res }) => { // user login
             const { email, password } = args;
             try {
                 const userExist = await User.findOne({ email: email });
@@ -57,6 +50,11 @@ const resolvers = {
                 const token = jwt.sign({ id: userExist._id, username: userExist.username }, process.env.JWT_SECRET_KEY, {
                     expiresIn: 1 * 24 * 60 * 60, // 1 day
                 });
+
+                // setting the cookie
+                const expires = new Date(Date.now() + 30 * 1000); // 30 second expiry time
+                res.cookie('userToken', token, 
+                { path: '/', secure: true, withCredentials: true, expires: expires, httpOnly: true });
 
                 // router.post('/login', async (req, res) => { // not used
                 //     res.cookie('jwtToken', token, 
@@ -86,8 +84,9 @@ const resolvers = {
                 throw err;
             }
         },
-        verifyTokenUser: async (_, args) => { // verify user token
+        verifyTokenUser: async (_, args, { res }) => { // verify user token -- also used in the frontend to logout a user
             try {
+                res.clearCookie('userToken', { path: '/' }); 
                 const decodedUserToken = jwt.verify(args.token, process.env.JWT_SECRET_KEY);
                 const user = await User.findOne({ _id: decodedUserToken.id });
                 return { ...user._doc, password: null };
@@ -127,6 +126,13 @@ const resolvers = {
                 if (!email || !password || !username || !confirm) {
                     throw Error("Please enter all fields!");
                 }
+                if (password.length > 16) { // checks if password is correct length
+                    throw Error('Password too long!');
+                }
+                if (password.length < 8) { // checks if password is correct length
+                    throw Error('Password too short!');
+                }
+
                 // validators
                 if (!validator.isEmail(email)) {
                     throw Error("Email not valid!");
@@ -175,6 +181,13 @@ const resolvers = {
                 if (!email || !password || !username || !confirm) {
                     throw Error("Please enter all fields!");
                 }
+                if (password.length > 16) { // checks if password is correct length
+                    throw Error('Password too long!');
+                }
+                if (password.length < 8) { // checks if password is correct length
+                    throw Error('Password too short!');
+                }
+
                 // validators
                 if (!validator.isEmail(email)) {
                     throw Error("Email not valid!");

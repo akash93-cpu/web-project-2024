@@ -49,7 +49,7 @@ class Registration extends React.Component {
           }`
           try {
             await postUserRegistration(query, variables);
-            this.props.navigate("/landing");
+            this.props.navigate("/login");
           } catch (err) {
             throw err;
           }
@@ -59,9 +59,12 @@ class Registration extends React.Component {
         return (
             <>
             <div className="registration-body">
-                    <div class="wrapper-register">
+                <div className="p-tag-class">
+                    <p id="top-tag">Register a free account {">>"} Enhance your experience.</p>
+                </div>
+                    <div className="wrapper-register">
                         <h2 id="r-text">Registration</h2>
-                        <Form name="createUser" className="form-register">
+                        <Form name="createUser" className="form-register" onSubmit={this.handleSubmit}>
                             <div className="input-box">
                                 <FormControl id="input-r" name="username" type="text" placeholder="Enter a username" required />
                             </div>
@@ -75,10 +78,10 @@ class Registration extends React.Component {
                                 <FormControl id="input-r" name="confirm" type="password" placeholder="Confirm password" required maxLength={16}/>
                             </div>
                             <div className="center-register-button">
-                            <button id="register-button" onClick={this.handleSubmit}>Register as User</button>
+                            <button id="register-button" type="submit">Register as User</button>
                             </div>
                             <div className="text">
-                                <h3 id="h3-r-tag">Already have an account? <a id="link-to" href="/login">Login now</a></h3>
+                                <h3 id="h3-r-tag">Already have an account? <a id="link-to" href="/login">Login</a></h3>
                             </div>
                         </Form>
                     </div>

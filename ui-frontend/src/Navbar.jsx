@@ -1,5 +1,6 @@
 import React from 'react';
-import { Cookies } from 'react-cookie';
+import _fetch from "isomorphic-fetch";
+import { useNavigate } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -7,9 +8,26 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import image from "../images/icon.png";
 
+async function logoutFunction(query) {
+  try {
+      const response = await _fetch('http://localhost:3000/graphql-server', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ query })
+      })
+      const body = await response.text();
+      const result = JSON.parse(body);
+      return result.data;
+  } catch (err) {
+      alert(`Error!`, err);
+  }
+}
+
 // navbar component
 function Navigation() {
 
+  const nav = useNavigate();
   const styles = {
     nav: {
       display: "flex",
@@ -37,8 +55,17 @@ function Navigation() {
   
   const handleLogout = (e) => {
     e.preventDefault();
-    const cookies = new Cookies();
-    cookies.remove('userToken');
+    const query = `
+    query verifyTokenUser {
+      verifyTokenUser(token: "null") {
+        _id
+        email
+      }
+    }`
+    logoutFunction(query);
+    nav('/login');
+    // const cookies = new Cookies();
+    // cookies.remove('userToken');
   }
 
 

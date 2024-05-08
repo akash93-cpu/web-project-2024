@@ -1,7 +1,7 @@
 .background-div {
-    background: rgb(10, 40, 57);
-    background: linear-gradient(41deg, rgba(10, 40, 57, 1) 0%, rgba(190, 187, 165, 1) 20%, rgba(9, 36, 52, 1) 77%);
-}
+  background: rgb(22,150,223);
+  background: linear-gradient(41deg, rgba(22,150,223,1) 0%, rgba(24,54,71,1) 77%);
+  }
 
 .card-single {
     border: 3px solid transparent;

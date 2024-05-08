@@ -26,8 +26,8 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: [true, "Password required!"],
-        min: 8,
-        max: 16,
+        // minlength: 8, not used
+        // maxlength: 16,
     },
     username: {
         type: String,
@@ -51,8 +51,8 @@ const adminSchema = new Schema({
     password: {
         type: String,
         required: [true, "Password required!"],
-        min: 8,
-        max: 16,
+        // minlength: 8, not used
+        // maxlength: 16,
     },
     username: {
         type: String,

@@ -2,9 +2,8 @@ import React from "react";
 // import axios from "axios";
 import _fetch from "isomorphic-fetch";
 import { useNavigate } from "react-router-dom";
-import { Cookies } from 'react-cookie';
 import { Form, FormControl } from 'react-bootstrap';
-import { Envelope, BracesAsterisk } from 'react-bootstrap-icons';
+import { Envelope, BracesAsterisk, Eye, EyeSlash } from 'react-bootstrap-icons';
 import '../css/signin.css';
 import bgLoginImage from '../images/unsplash-login.png';
 
@@ -31,12 +30,19 @@ class SignIn extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             emailState: null,
+            visible: false,
+            password: '',
         }
     }
+    toggleVisibility = () => {
+        this.setState((prevState) => ({
+            visible: !prevState.visible
+        }));
+    };
+
 
     async handleSubmit(e) {
         e.preventDefault();
-        const cookies = new Cookies();
         const form = document.forms.userLogin;
         const variables = { // variables need to be passed directly, not under 'data'
             email: form.email.value.trim(),
@@ -56,9 +62,8 @@ class SignIn extends React.Component {
             // console.log(userData.userLogin.username);
             const token = userData.userLogin.token; // the user token
             const emailData = userData.userLogin.email;
+            console.log(emailData);
             if (token) {
-                const expires = new Date(Date.now() + 20 * 1000); // 20 second expiry time
-                cookies.set('userToken', token, { path: '/', expires: expires, secure: true, httpOnly: false });
                 this.setState({ emailState: emailData });
                 this.props.navigate('/landing');
             }
@@ -75,32 +80,35 @@ class SignIn extends React.Component {
                 height: "100vh",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",    
+                backgroundSize: "cover",
             }
         }
         // const { emailState } = this.state;
+        const { visible, password } = this.state;
         return (
             <>
                 <div className="body-login" style={styles.loginBg}>
                     <div class="container-login">
                         <div class="wrapper-login">
                             <div className="title-login"><span>Login Form</span></div>
-                            <Form name="userLogin" className="login-form-main">
+                            <Form name="userLogin" className="login-form-main" onSubmit={this.handleSubmit}>
                                 <div className="row-login">
-                                    
+
                                     <Envelope className="i"></Envelope>
-                                    <FormControl id="input-login" type="text" placeholder="Email" required name="email"/>
+                                    <FormControl id="input-login" type="text" placeholder="Email" required name="email" />
                                 </div>
                                 <div className="row-login">
                                     <BracesAsterisk className="i"></BracesAsterisk>
-                                    <FormControl id="input-login" 
-                                    autoFocus type="password" placeholder="Password" required name="password" maxLength={16}/>
+                                    <FormControl id="input-login" onChange={(e) => this.setState({ password: e.target.value })}
+                                        autoFocus type={visible ? 'text' : 'password'} placeholder="Password" required name="password" maxLength={16} />
                                 </div>
+                                <button id="show-hide-password-btn-1" type="button" onClick={this.toggleVisibility}>
+                                    {visible ? <Eye /> : <EyeSlash />} Password
+                                </button>
                                 {/* <div class="pass"><a href="#">Forgot password?</a></div> */}
-                                <div className="center-login-button">
-                                    <button id="submit-button-login" onClick={this.handleSubmit}>Submit</button>
+                                <div className="center-login-button"><button id="submit-button-login" type="submit">Submit</button>
                                 </div>
-                                <div className="signup-link">Not a member? <a id="register-link" href="/register">Signup now</a></div>
+                                <div className="signup-link">Not a member? <a id="register-link" href="/register">Signup</a></div>
                             </Form>
                         </div>
                     </div>
@@ -111,7 +119,7 @@ class SignIn extends React.Component {
 }
 
 export default function SignInWrapper() {
-    
+
     const navigate = useNavigate();
     return <SignIn navigate={navigate} />;
 }
