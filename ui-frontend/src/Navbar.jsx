@@ -68,6 +68,21 @@ function Navigation() {
     // cookies.remove('userToken');
   }
 
+  const handleTestBlog = (e) => { // test for blog post
+    e.preventDefault();
+    const query = `mutation createBlog {
+      createBlog(blogInput: {
+        title: "EEEE"
+        content: "SSS"
+      }) {
+        title
+        content
+        createdAt
+      }
+    }`
+    logoutFunction(query);
+  }
+
 
   return (
     <Navbar expand="lg" sticky='top' style={styles.mainBar}>
@@ -95,6 +110,7 @@ function Navigation() {
       </Container>
       <div>
         <button onClick={handleLogout}>Logout</button>
+        <button onClick={handleTestBlog}>TestBlog</button>
       </div>
     </Navbar>
   );

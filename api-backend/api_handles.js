@@ -3,6 +3,7 @@ const { ApolloServer } = require('apollo-server-express');
 const { Product } = require('./models.js');
 const { User } = require('./models.js');
 const { Admin } = require('./models.js');
+const { Blog } = require('./models.js');
 const validator = require('validator');
 const bcrpyt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -10,7 +11,7 @@ require('dotenv').config();
 
 const resolvers = {
 
-    // queries
+    // QUERIES
     Query: {
         getProducts: async () => await Product.find({}).exec(), // return all products in the db
         countProducts: async () => { // count all products in the db
@@ -37,7 +38,8 @@ const resolvers = {
                 return e.message;
             }
         },
-    
+        
+        // user/admin related queries
         userLogin: async (_, args, { res }) => { // user login
             const { email, password } = args;
             try {
@@ -84,7 +86,7 @@ const resolvers = {
                 throw err;
             }
         },
-        verifyTokenUser: async (_, args, { res }) => { // verify user token -- also used in the frontend to logout a user
+        verifyTokenUser: async (_, args, { res, req }) => { // verify user token -- also used in the frontend to logout a user
             try {
                 res.clearCookie('userToken', { path: '/' }); 
                 const decodedUserToken = jwt.verify(args.token, process.env.JWT_SECRET_KEY);
@@ -96,7 +98,7 @@ const resolvers = {
         }
     },
     
-    // mutations
+    // MUTATIONS
     Mutation: {
         addProducts: async (_, args) => { // add product
             try {
@@ -230,6 +232,33 @@ const resolvers = {
                 throw error;
             } 
         },
+        createBlog: async(_, args, { req }) => {
+
+            // requesting cookie 
+            const userToken = req.cookies.userToken;
+            const decodedSomeUser = jwt.verify(userToken, process.env.JWT_SECRET_KEY);
+            const user = await User.findOne({ _id: decodedSomeUser.id });
+            
+            const { title, content } = args.blogInput;
+            try {
+                if (userToken) {
+                    if (!title.trim()) throw Error('Please enter a title!');
+                    if (title.length > 15) throw Error('Title too long!');
+                    if (content.length > 50) throw Error('Content too long!');
+                    const blog = new Blog({
+                        title,
+                        content,
+                        author: user.username,
+                        createdAt: Date.now(),
+                    }, (err) => { if (err) throw err; });
+                    blog.save();
+                    return { title, content, author: user.username, createdAt: Date.now() };
+                }
+
+            } catch (error) {
+                return error;
+            }
+        }
     }
 };
 

@@ -7,6 +7,12 @@ type Product {
     rating: [Int!]
 }
 
+type Blog {
+    title: String!
+    content: String!
+    createdAt: String
+}
+
 type User {
     _id: ID!
     email: String!
@@ -78,6 +84,13 @@ input AdminInput {
     confirm: String!
 }
 
+"""Inputs for creating user blog."""
+input BlogInput {
+    title: String!
+    content: String!
+}
+
+
 type Mutation {
     "Mutation used to add document entries into the database."
     addProducts(product_id: String!, title: String!, category: String!, description: String!, rating: [Int!]!): Product
@@ -90,4 +103,7 @@ type Mutation {
 
     "Mutation to add an admin into the system."
     createAdmin(adminInput: AdminInput): Admin
+
+    "Mutation to add a blog post."
+    createBlog(blogInput: BlogInput): Blog
 }

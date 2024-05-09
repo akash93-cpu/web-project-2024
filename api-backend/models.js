@@ -67,10 +67,31 @@ const adminSchema = new Schema({
     },
 });
 
+const blogSchema = new Schema({
+    title: {
+        required: true,
+        type: String,
+        maxlength: 15,
+    },
+    content: {
+        type: String,
+        maxlength: 50,
+    },
+    createdAt: { // UTC timezone
+        type: Date, 
+    },
+    author: {
+        type: String,
+        required: true,
+    }
+})
+
 const Product = mongoose.model('Product', productSchema);
 
 const User = mongoose.model('User', userSchema);
 
 const Admin = mongoose.model('Admin', adminSchema);
 
-module.exports = { Product, User, Admin };
+const Blog = mongoose.model('Blog', blogSchema);
+
+module.exports = { Product, User, Admin, Blog };

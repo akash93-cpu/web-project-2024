@@ -66,6 +66,7 @@ class SignIn extends React.Component {
             if (token) {
                 this.setState({ emailState: emailData });
                 this.props.navigate('/landing');
+                form.reset();
             }
             return userData;
         } catch (err) {
@@ -100,7 +101,7 @@ class SignIn extends React.Component {
                                 <div className="row-login">
                                     <BracesAsterisk className="i"></BracesAsterisk>
                                     <FormControl id="input-login" onChange={(e) => this.setState({ password: e.target.value })}
-                                        autoFocus type={visible ? 'text' : 'password'} placeholder="Password" required name="password" maxLength={16} />
+                                        autoFocus type={visible ? 'text' : 'password'} placeholder="Password" required name="password" minLength={8} maxLength={16} />
                                 </div>
                                 <button id="show-hide-password-btn-1" type="button" onClick={this.toggleVisibility}>
                                     {visible ? <Eye /> : <EyeSlash />} Password
