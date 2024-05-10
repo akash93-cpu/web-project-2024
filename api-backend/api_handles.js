@@ -14,6 +14,7 @@ const resolvers = {
     // QUERIES
     Query: {
         getProducts: async () => await Product.find({}).exec(), // return all products in the db
+        returnAllPosts: async () => await Blog.find({}).exec(), // return all blog posts
         countProducts: async () => { // count all products in the db
             try {
                 const count = await Product.countDocuments({}).exec();
@@ -53,7 +54,7 @@ const resolvers = {
                     expiresIn: 1 * 24 * 60 * 60, // 1 day
                 });
 
-                // setting the cookie
+                // setting the cookie --user
                 const expires = new Date(Date.now() + 30 * 1000); // 30 second expiry time
                 res.cookie('userToken', token, 
                 { path: '/', secure: true, withCredentials: true, expires: expires, httpOnly: true });
@@ -77,9 +78,7 @@ const resolvers = {
                 const checkPasswordIsValid = bcrpyt.compareSync(password, adminExist.password);
                 if (!checkPasswordIsValid) throw new Error('Incorrect password!');
 
-                const token = jwt.sign({ id: adminExist._id }, process.env.JWT_SECRET_KEY_2, {
-                    expiresIn: 600, // 10 minutes
-                });
+                const token = jwt.sign({ id: adminExist._id }, process.env.JWT_SECRET_KEY_2);
 
                 return { token, password: null, ...adminExist._doc };
             } catch (err) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import backgroundImage from '../images/404-error-page.png';
+import backgroundImage from '../images/404-error-page.jpg';
 import "../css/404css.css";
 
 // 404 page

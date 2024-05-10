@@ -73,7 +73,7 @@ function Navigation() {
     const query = `mutation createBlog {
       createBlog(blogInput: {
         title: "EEEE"
-        content: "SSS"
+        content: "LXXXXS"
       }) {
         title
         content
@@ -93,9 +93,9 @@ function Navigation() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto" style={styles.nav}>
             <Nav.Link href="/login" id="link-1" style={styles.linkColors}>Login|Register</Nav.Link>
-            <Nav.Link href="#link" id="link-2" style={styles.linkColors}>Blog</Nav.Link>
+            <Nav.Link href="/blog" id="link-2" style={styles.linkColors}>Blog</Nav.Link>
             <NavDropdown title="More" id="basic-nav-dropdown" >
-              <NavDropdown.Item href="#action/3.1" style={styles.linkText}>Prices</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.1" style={styles.linkText}>Feeds</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2" style={styles.linkText}>
                 Reviews
               </NavDropdown.Item>

@@ -5,6 +5,7 @@ import Contents from "./Contents.jsx";
 import ProductsList from "./App.jsx";
 import FAQ from "./FAQs.jsx";
 import AboutUsPage from "./AboutUs.jsx";
+import Posts from "./Posts.jsx";
 import NotFoundPage from "./404Page.jsx";
 import SignIn from "./SignInItem.jsx";
 import Registration from './Registration.jsx';
@@ -19,6 +20,7 @@ export default function Index() {
             <Route path="/landing" element={<ProductsList />} />
             <Route path="/login" element={<SignIn />}/>
             <Route path="/register" element={<Registration />}/>
+            <Route path="blog" element={<Posts />}/>
             <Route path="/faq" element={<FAQ />}/>
             <Route path="/about-us" element={<AboutUsPage />}/>
             <Route path="*" element={<NotFoundPage />} />

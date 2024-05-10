@@ -1,0 +1,59 @@
+#blog-text {
+    -webkit-text-fill-color: antiquewhite;
+    -webkit-background-clip: text;
+}
+
+#blog-text {
+    animation: glitchBlog 1s linear infinite;
+}
+
+@keyframes glitchBlog {
+
+    2%,
+    64% {
+        transform: translate(-50%, -50%) skew(0deg);
+    }
+
+    4%,
+    60% {
+        transform: translate(-49%, -50%) skew(0deg);
+    }
+
+    62% {
+        transform: translate(-49%, -50%) skew(5deg);
+    }
+}
+
+#blog-text::before,
+#blog-text::after {
+    content: attr(title);
+    position: absolute;
+    left: 0;
+}
+
+#blog-text::before {
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+    animation: glitchTops 1s linear infinite;
+}
+
+@keyframes glitchTops {
+
+    2%,
+    64% {
+        transform: translate(-2px, -2px);
+    }
+
+    4%,
+    60% {
+        transform: translate(2px, -2px);
+    }
+
+    62% {
+        transform: translate(75px, 1px) skew(-15deg);
+    }
+}
+
+#blog-text::after {
+    clip-path: polygon(0 68%, 100% 68%, 100% 100%, 0 100%);
+    animation: glitchBottoms 1s linear infinite;
+}
