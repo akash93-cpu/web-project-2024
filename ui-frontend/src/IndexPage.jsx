@@ -8,6 +8,7 @@ import AboutUsPage from "./AboutUs.jsx";
 import Posts from "./Posts.jsx";
 import NotFoundPage from "./404Page.jsx";
 import SignIn from "./SignInItem.jsx";
+import SignInAdmin from './AdminLogin.jsx';
 import Registration from './Registration.jsx';
 
 // index page
@@ -19,6 +20,7 @@ export default function Index() {
             <Route path="/home" element={<Contents />} />
             <Route path="/landing" element={<ProductsList />} />
             <Route path="/login" element={<SignIn />}/>
+            <Route path="/admin" element={<SignInAdmin />}/> 
             <Route path="/register" element={<Registration />}/>
             <Route path="blog" element={<Posts />}/>
             <Route path="/faq" element={<FAQ />}/>

@@ -54,6 +54,9 @@ const resolvers = {
                     expiresIn: 1 * 24 * 60 * 60, // 1 day
                 });
 
+                //clear admin cookie if admin cookie is present
+                res.clearCookie('adminToken', { path: '/' });
+
                 // setting the cookie --user
                 const expires = new Date(Date.now() + 30 * 1000); // 30 second expiry time
                 res.cookie('userToken', token, 
@@ -69,7 +72,7 @@ const resolvers = {
                 throw err;
             }
         },
-        adminLogin: async (_, args) => { // admin login
+        adminLogin: async (_, args, { res }) => { // admin login
             const { email, password } = args;
             try {
                 const adminExist = await Admin.findOne({ email: email });
@@ -78,16 +81,24 @@ const resolvers = {
                 const checkPasswordIsValid = bcrpyt.compareSync(password, adminExist.password);
                 if (!checkPasswordIsValid) throw new Error('Incorrect password!');
 
-                const token = jwt.sign({ id: adminExist._id }, process.env.JWT_SECRET_KEY_2);
+                const token = jwt.sign({ id: adminExist._id }, process.env.JWT_SECRET_KEY_2, {
+                    expiresIn: 1 * 24 * 60 * 60, // 1 day
+                });
+
+                // setting the cookie --admin
+                const expires = new Date(Date.now() + 60 * 1000); // 60 second expiry time
+                res.cookie('adminToken', token,
+                { path: '/', secure: true, withCredentials: true, expires: expires, httpOnly: true });
 
                 return { token, password: null, ...adminExist._doc };
             } catch (err) {
                 throw err;
             }
         },
-        verifyTokenUser: async (_, args, { res, req }) => { // verify user token -- also used in the frontend to logout a user
+        verifyTokenUser: async (_, args, { res, req }) => { // verify user token -- also used in the frontend to logout a user/admin
             try {
-                res.clearCookie('userToken', { path: '/' }); 
+                res.clearCookie('userToken', { path: '/' });
+                res.clearCookie('adminToken', { path: '/' });
                 const decodedUserToken = jwt.verify(args.token, process.env.JWT_SECRET_KEY);
                 const user = await User.findOne({ _id: decodedUserToken.id });
                 return { ...user._doc, password: null };

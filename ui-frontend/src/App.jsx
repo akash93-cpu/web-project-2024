@@ -2,6 +2,7 @@ import React from "react";
 import Card from 'react-bootstrap/Card';
 // import Button from 'react-bootstrap/Button';
 import HeaderContent from "./DemoPage.jsx";
+import bgProductImg from '../images/products-bg-unsplash.jpg';
 import "../css/othercss.css";
 
 // function ProductRow(props) {
@@ -62,7 +63,7 @@ function ProductsTable(props) {
         <ProductCard key={products.id} products={products} />
     );
     return (
-        <div className="background-div" style={{display: 'flex', flexWrap: 'wrap'}}>
+        <div className="background-div" style={{display: 'flex', flexWrap: 'wrap', backgroundImage: `url(${bgProductImg})`}}>
             {productRows}
         </div>
     );

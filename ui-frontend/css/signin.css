@@ -38,6 +38,20 @@
   align-items: center;
   justify-content: center;
 }
+
+.title-login-admin{
+  height: 90px;
+  background: rgb(58, 80, 180);
+  background: linear-gradient(90deg, rgb(197, 7, 80) 0%, rgb(255, 232, 26) 95%);
+    border-radius: 5px 5px 0 0;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .wrapper-login .login-form-main{
   padding: 30px 25px 25px 25px;
 }
