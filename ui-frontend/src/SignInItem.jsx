@@ -91,7 +91,7 @@ class SignIn extends React.Component {
                 <div className="body-login" style={styles.loginBg}>
                     <div class="container-login">
                         <div class="wrapper-login">
-                            <div className="title-login"><span>Login Form</span></div>
+                            <div className="title-login"><span>Login</span></div>
                             <Form name="userLogin" className="login-form-main" onSubmit={this.handleSubmit}>
                                 <div className="row-login">
 

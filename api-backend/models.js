@@ -67,7 +67,12 @@ const adminSchema = new Schema({
     },
 });
 
+  
 const blogSchema = new Schema({
+    postID: {
+        type: String,
+        index: true,
+    },
     title: {
         required: true,
         type: String,

@@ -11,6 +11,7 @@ export default function FAQ() {
             backgroundImage: `url(${image_faq})`,
             paddingLeft: "5rem",
             paddingRight: "5rem",
+            height: '100vh',
         }
     }
 

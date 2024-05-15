@@ -15,7 +15,14 @@ type Blog {
     createdAt: String
 }
 
+type BlogUpdate {
+    postID: String!
+    title: String!
+    content: String!
+}
+
 type BlogList {
+    postID: String!
     title: String!
     content: String!
     createdAt: GraphQLDate
@@ -80,6 +87,12 @@ input ProductUpdateInputs {
     description: String!
 }
 
+"""Inputs for updating a blog post by user."""
+input updatePostInput {
+    title: String!
+    content: String!
+}
+
 """Inputs for creating a new user."""
 input UserInput {
     email: String!
@@ -109,6 +122,9 @@ type Mutation {
 
     "Mutation used to update a document from the database based on product_id."
     updateProducts(product_id: String!, changes: ProductUpdateInputs!): Product!
+
+    "Mutation used to update a user post from database based on username."
+    updateUserPost(postID: String!, changes: updatePostInput!): BlogUpdate!
 
     "Mutation to add a new user into the system."
     createUser(userInput: UserInput): User

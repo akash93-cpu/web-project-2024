@@ -64,25 +64,23 @@ function Navigation() {
     }`
     logoutFunction(query);
     nav('/login');
-    // const cookies = new Cookies();
-    // cookies.remove('userToken');
   }
 
-  const handleTestBlog = (e) => { // test for blog post
-    e.preventDefault();
-    const query = `mutation createBlog {
-      createBlog(blogInput: {
-        title: "EEEE"
-        content: "LXXXXS"
-      }) {
-        title
-        content
-        createdAt
-      }
-    }`
-    logoutFunction(query);
-  }
-
+  // const handleUpdateTest = (e) => { //works
+  //   e.preventDefault();
+  //   const query=`mutation UpdateUserPost {
+  //     updateUserPost(postID: "3KamT", changes: {
+  //       title: "Edited by Sss",
+  //       content: "EDIT"
+  //     }) {
+  //       postID
+  //       title
+  //       content
+  //     }
+  //   }
+  //   ` 
+  //   logoutFunction(query);
+  // }
 
   return (
     <Navbar expand="lg" sticky='top' style={styles.mainBar}>
@@ -110,7 +108,7 @@ function Navigation() {
       </Container>
       <div>
         <button onClick={handleLogout}>Logout</button>
-        <button onClick={handleTestBlog}>TestBlog</button>
+        {/* <button onClick={handleUpdateTest}>Update Test</button> */}
       </div>
     </Navbar>
   );

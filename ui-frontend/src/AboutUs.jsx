@@ -66,7 +66,8 @@ export default function AboutUsPage() {
   <div class="col-container">
     <div class="column-one">
       <h1 class="xl-font"><b>Our passion and history</b></h1>
-      <h1 class="l-font"><b>It all started as a small online codebase in 2021 and now we're here. We aim to please our audience which comprises mostly of students and other
+      <h1 class="l-font"><b>It all started as a small online codebase in 2021 where we got involved in teaching and development
+        further enhancing other people's knowledge and skills in the IT sector and now we're here. We aim to please our audience which comprises mostly of students and other
         individuals looking to expand their knowledge levels in various activities including the above-mentioned 
         programming choices.</b></h1>
     </div>

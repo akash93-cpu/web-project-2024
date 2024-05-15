@@ -57,3 +57,80 @@
     clip-path: polygon(0 68%, 100% 68%, 100% 100%, 0 100%);
     animation: glitchBottoms 1s linear infinite;
 }
+
+.blog-div-main {
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-wrap: wrap;
+    height: 2590px; /* Set the height of the container to match the image height */
+}
+
+.blog-card-single {
+    border-radius: 1%;
+    height: auto;
+    transition: transform 0.2s ease-in-out;
+}
+
+.blog-card-single:hover {
+    transform: scale(1.2);
+}
+
+#create-post-button {
+    display: flex;
+    margin: auto;
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, #0400ff, #7c17da);
+    border-radius: 1px;
+    background-size: 100% auto;
+    font-family: Fira Code;
+    font-size: 17px;
+    padding: 0.6em 1.5em;  
+    position: relative;
+    bottom: -40px;
+}
+
+#create-post-button:hover {
+    background-position: right center;
+    background-size: 200% auto;
+    -webkit-animation: pulse 2s infinite;
+    animation: pulse512 1.5s infinite;
+   }
+   
+   @keyframes pulse512 {
+    0% {
+     box-shadow: 0 0 0 0 #05bada66;
+    }
+   
+    70% {
+     box-shadow: 0 0 0 10px rgba(226, 205, 199, 0);
+    }
+   
+    100% {
+     box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+    }
+   }
+
+#create-icon {
+    position: relative;
+    right: 10px;   
+}
+
+.post-modal {
+    font-family: Fira Code;
+}
+
+#post-button {
+    justify-content: end;
+}
+
+#edit-post-btn {
+    border-radius: 3px;
+    background: rgb(63,70,255);
+background: linear-gradient(32deg, rgb(107, 111, 219) 0%, rgb(2, 0, 0) 100%);
+
+    margin-top: 25px;
+}

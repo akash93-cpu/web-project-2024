@@ -7,7 +7,18 @@ const { Blog } = require('./models.js');
 const validator = require('validator');
 const bcrpyt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 require('dotenv').config();
+
+function generateRandomString(length) {
+    const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let randomString = '';
+    for (let i = 0; i < length; i++) {
+        const randomIndex = crypto.randomInt(0, charset.length);
+        randomString += charset.charAt(randomIndex);
+    }
+    return randomString;
+}
 
 const resolvers = {
 
@@ -256,6 +267,7 @@ const resolvers = {
                     if (title.length > 15) throw Error('Title too long!');
                     if (content.length > 50) throw Error('Content too long!');
                     const blog = new Blog({
+                        postID: generateRandomString(5),
                         title,
                         content,
                         author: user.username,
@@ -267,6 +279,32 @@ const resolvers = {
 
             } catch (error) {
                 return error;
+            }
+        },
+        updateUserPost: async(_, args, { req }) => { //edit user post by user
+            const { changes, postID } = args;
+
+            // requesting cookie    
+            const userToken = req.cookies.userToken;
+            const decodedUser = jwt.verify(userToken, process.env.JWT_SECRET_KEY);
+            const usernameFind = await User.findOne({ _id: decodedUser.id });
+            const correctUsername = usernameFind.username;
+            console.log(correctUsername);
+
+            try {
+                const usernameOfBlogPost = await Blog.findOne({ postID: postID });
+                const blogUser = usernameOfBlogPost.author;
+                if (correctUsername === blogUser) {
+                    const updatedPost = await Blog.findOneAndUpdate(
+                        { postID: postID },
+                        { $set: changes },
+                        { new: true },
+                    );
+                    return updatedPost;
+                }
+
+            } catch (error) {
+                return error.message;
             }
         }
     }

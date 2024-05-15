@@ -91,7 +91,7 @@ class SignInAdmin extends React.Component {
                 <div className="body-login" style={styles.loginBg}>
                     <div class="container-login">
                         <div class="wrapper-login">
-                            <div className="title-login-admin"><span>Admin Login</span></div>
+                            <div className="title-login-admin"><span>Admin Login Portal</span></div>
                             <Form name="adminLogin" className="login-form-main" onSubmit={this.handleSubmit}>
                                 <div className="row-login">
 
