@@ -21,6 +21,10 @@ type BlogUpdate {
     content: String!
 }
 
+type BlogDelete {
+    postID: String!
+}
+
 type BlogList {
     postID: String!
     title: String!
@@ -134,4 +138,7 @@ type Mutation {
 
     "Mutation to add a blog post."
     createBlog(blogInput: BlogInput): Blog
+
+    "Mutation to delete a user's post."
+    deletePost(postID: String!): BlogDelete!
 }

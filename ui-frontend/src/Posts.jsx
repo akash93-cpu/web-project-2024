@@ -67,9 +67,11 @@ function PostCards(props) {
     const [isHovered, setIsHovered] = useState(false);
 
     const [showModal, setShowModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedPost, setSelectedPost] = useState(null);
+    const [deletePost, setDeletedPost] = useState(null);
 
-    const handlePostUpdate = async (e) => {
+    const handlePostUpdate = async (e) => { // update user post function
         e.preventDefault();
         const form = document.forms.updateUserPost;
         const variables = { 
@@ -96,6 +98,24 @@ function PostCards(props) {
           } 
     }
 
+    const handleDelete = async (e) => { // delete user post function
+        e.preventDefault();
+        const variables = {
+            postID: posts.postID,
+        }
+        const query = `mutation deletePost($postID: String!) {
+            deletePost(postID: $postID) {
+                postID
+            }
+          }`
+          try {
+            await graphQLFetchData(query, variables);
+            window.location.reload();
+          } catch(error) {
+            alert(error);
+          }
+    }
+
     const handleMouseEnter = () => {
       setIsHovered(true);
     };
@@ -104,14 +124,23 @@ function PostCards(props) {
       setIsHovered(false);
     };
 
-    const handleEditClick = (post) => {
+    const handleEditClick = (post) => { // for editing
         setSelectedPost(post);
         setShowModal(true);
     };
 
+    const handleDeleteClick = (post) => { // for deleting 
+        setDeletedPost(post);
+        setShowDeleteModal(true);
+    }
+
     const handleCloseModal = () => {
         setShowModal(false);
     };
+
+    const handleCloseDeleteModal = () => {
+        setShowDeleteModal(false);
+    }
 
     const styles = {
         cardDiv: {
@@ -136,7 +165,7 @@ function PostCards(props) {
         <div className="main-div-blog-card" style={styles.mainDiv}>
             <div className="card-div" style={styles.cardDiv}>
                 <Card className="blog-card-single" onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave} style={{ width: '15rem', height: '15rem' }}>
+        onMouseLeave={handleMouseLeave} style={{ width: '15rem', height: '17rem', display: 'flex', flexDirection: 'column' }}>
                     <Card.Body>
                         <Card.Title style={{ textAlign: 'center', fontFamily: 'Fira Code', fontSize: '16px' }}>
                            Title: {posts.title}</Card.Title>
@@ -147,12 +176,12 @@ function PostCards(props) {
                             Date: {formattedDate}</Card.Text>
                         <Card.Subtitle style={{ textAlign: 'center', fontFamily: 'Fira Code', fontSize: '12px' }}>
                             By: {posts.author}</Card.Subtitle>
-                    {isHovered &&
-                        <Button className="float-end" id="edit-post-btn" onClick={() => handleEditClick(props.posts)}><Pencil size={15} /></Button>
-                        }
-                    {isHovered &&
-                    <Button id="edit-post-btn"><Trash size={15}/></Button>
-                    }
+                            {isHovered &&
+                                <Button className="float-end" id="edit-post-btn" onClick={() => handleEditClick(props.posts)}><Pencil size={15} /></Button>
+                            }
+                            {isHovered &&
+                                <Button className="float-start" id="edit-post-btn" onClick={() => handleDeleteClick(props.posts)}><Trash size={15} /></Button>
+                            }
                     </Card.Body>
                 </Card>
             </div>
@@ -186,6 +215,18 @@ function PostCards(props) {
 
                     </Form>
                 </Modal.Body>
+            </Modal>
+
+            <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} className="post-modal">
+                <Modal.Header closeButton>
+                    <Modal.Title>Delete Post {'{'}{posts.postID}{'}'}</Modal.Title>
+                </Modal.Header>
+                    <Modal.Body>
+                        <label>Title: {deletePost && posts.title}</label>
+                        <br />
+                        <label>Content: {deletePost && posts.content}</label>
+                    </Modal.Body>
+                    <Button variant="secondary" className="float-end" onClick={handleDelete}>Delete?</Button>
             </Modal>
 
         </div>

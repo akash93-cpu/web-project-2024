@@ -59,6 +59,8 @@
 }
 
 .blog-div-main {
+    position: relative;
+    margin: 0;
     height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
@@ -70,8 +72,10 @@
 
 .blog-card-single {
     border-radius: 1%;
-    height: auto;
+    height: 100vh;
     transition: transform 0.2s ease-in-out;
+    padding-bottom: 40px;
+    
 }
 
 .blog-card-single:hover {
@@ -128,9 +132,9 @@
 }
 
 #edit-post-btn {
-    border-radius: 3px;
+    position: relative;
+    
+    border-radius: 50px;
     background: rgb(63,70,255);
 background: linear-gradient(32deg, rgb(107, 111, 219) 0%, rgb(2, 0, 0) 100%);
-
-    margin-top: 25px;
 }

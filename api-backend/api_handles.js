@@ -22,7 +22,7 @@ function generateRandomString(length) {
 
 const resolvers = {
 
-    // QUERIES
+    // QUERIES // QUERIES // QUERIES // QUERIES // QUERIES // QUERIES // QUERIES // QUERIES
     Query: {
         getProducts: async () => await Product.find({}).exec(), // return all products in the db
         returnAllPosts: async () => await Blog.find({}).exec(), // return all blog posts
@@ -65,7 +65,7 @@ const resolvers = {
                     expiresIn: 1 * 24 * 60 * 60, // 1 day
                 });
 
-                //clear admin cookie if admin cookie is present
+                // clear admin cookie if admin cookie is present
                 res.clearCookie('adminToken', { path: '/' });
 
                 // setting the cookie --user
@@ -96,6 +96,9 @@ const resolvers = {
                     expiresIn: 1 * 24 * 60 * 60, // 1 day
                 });
 
+                // clear user cookie if user cookie is present
+                res.clearCookie('userToken', { path: '/' }); 
+
                 // setting the cookie --admin
                 const expires = new Date(Date.now() + 60 * 1000); // 60 second expiry time
                 res.cookie('adminToken', token,
@@ -119,7 +122,7 @@ const resolvers = {
         }
     },
     
-    // MUTATIONS
+    // MUTATIONS // MUTATIONS // MUTATIONS // MUTATIONS // MUTATIONS // MUTATIONS // MUTATIONS // MUTATIONS 
     Mutation: {
         addProducts: async (_, args) => { // add product
             try {
@@ -281,7 +284,7 @@ const resolvers = {
                 return error;
             }
         },
-        updateUserPost: async(_, args, { req }) => { //edit user post by user
+        updateUserPost: async(_, args, { req }) => { // edit user post by user
             const { changes, postID } = args;
 
             // requesting cookie    
@@ -302,7 +305,34 @@ const resolvers = {
                     );
                     return updatedPost;
                 }
+            } catch (error) {
+                return error.message;
+            }
+        },
+        deletePost: async(_, args, { req }) => {
+            const { postID } = args;
 
+            // requesting cookie
+            const userToken = req.cookies.userToken;
+            // for admin purposes
+            const adminToken = req.cookies.adminToken;
+            
+            try {
+                if (adminToken) {
+                    const deletedPostByAdmin = await Blog.findOneAndDelete({ postID: postID });
+                    return deletedPostByAdmin;
+                }
+                const decodedToken = jwt.verify(userToken, process.env.JWT_SECRET_KEY);
+                const usernameFind = await User.findOne({ _id: decodedToken.id });
+                const correctUser = usernameFind.username;
+                const usernameOfBlogPostToDelete = await Blog.findOne({ postID: postID });
+                const blogUser = usernameOfBlogPostToDelete.author;            
+
+                if (correctUser === blogUser) {
+                    const deletedPost = await Blog.findOneAndDelete({ postID: postID });
+                    return deletedPost;
+                }
+                
             } catch (error) {
                 return error.message;
             }
