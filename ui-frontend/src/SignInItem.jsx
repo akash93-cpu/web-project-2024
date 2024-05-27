@@ -62,7 +62,8 @@ class SignIn extends React.Component {
             // console.log(userData.userLogin.username);
             const token = userData.userLogin.token; // the user token
             const emailData = userData.userLogin.email;
-            console.log(emailData);
+            const userName = userData.userLogin.username;
+            console.log(userName);
             if (token) {
                 this.setState({ emailState: emailData });
                 this.props.navigate('/landing');

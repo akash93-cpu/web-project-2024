@@ -88,13 +88,14 @@
     border: none;
     color: #fff;
     background-image: linear-gradient(30deg, #0400ff, #7c17da);
-    border-radius: 1px;
+    border-radius: 8px;
     background-size: 100% auto;
     font-family: Fira Code;
     font-size: 17px;
     padding: 0.6em 1.5em;  
     position: relative;
     bottom: -40px;
+    z-index: 1;
 }
 
 #create-post-button:hover {
@@ -131,10 +132,38 @@
     justify-content: end;
 }
 
-#edit-post-btn {
-    position: relative;
-    
+#edit-post-btn-pencil {
     border-radius: 50px;
     background: rgb(63,70,255);
 background: linear-gradient(32deg, rgb(107, 111, 219) 0%, rgb(2, 0, 0) 100%);
+margin-right: 125px;
 }
+
+#edit-post-btn-trash {
+    border-radius: 50px;
+    background: rgb(63,70,255);
+background: linear-gradient(32deg, rgb(107, 111, 219) 0%, rgb(2, 0, 0) 100%);
+
+}
+
+.button-actions {
+    display: flex;
+    justify-content: space-between; /* This evenly spaces the buttons within the card */
+    align-items: flex-end; /* Align items to the bottom */
+    position: absolute;
+    bottom: 0px;
+    margin-bottom: 8px;
+}
+
+.post-modal-del {
+    font-family: Fira Code;
+}
+
+.post-modal-del .modal-content {
+    height: 250px; 
+  }
+
+.float-end-delete-btn {
+    margin: 1em 1em 1em 1em;
+}
+  

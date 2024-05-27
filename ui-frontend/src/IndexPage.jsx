@@ -10,6 +10,7 @@ import NotFoundPage from "./404Page.jsx";
 import SignIn from "./SignInItem.jsx";
 import SignInAdmin from './AdminLogin.jsx';
 import Registration from './Registration.jsx';
+import ContactUsPage from "./ContactUs.jsx";
 
 // index page
 export default function Index() {
@@ -25,6 +26,7 @@ export default function Index() {
             <Route path="blog" element={<Posts />}/>
             <Route path="/faq" element={<FAQ />}/>
             <Route path="/about-us" element={<AboutUsPage />}/>
+            <Route path="/contact-us" element={<ContactUsPage />}/>
             <Route path="*" element={<NotFoundPage />} />
         </Routes>
 

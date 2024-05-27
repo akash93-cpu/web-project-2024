@@ -176,15 +176,17 @@ function PostCards(props) {
                             Date: {formattedDate}</Card.Text>
                         <Card.Subtitle style={{ textAlign: 'center', fontFamily: 'Fira Code', fontSize: '12px' }}>
                             By: {posts.author}</Card.Subtitle>
+                            <div className="button-actions">
                             {isHovered &&
-                                <Button className="float-end" id="edit-post-btn" onClick={() => handleEditClick(props.posts)}><Pencil size={15} /></Button>
+                                <Button id="edit-post-btn-pencil" onClick={() => handleEditClick(props.posts)}><Pencil size={15} /></Button>
                             }
                             {isHovered &&
-                                <Button className="float-start" id="edit-post-btn" onClick={() => handleDeleteClick(props.posts)}><Trash size={15} /></Button>
+                                <Button id="edit-post-btn-trash" onClick={() => handleDeleteClick(props.posts)}><Trash size={15} /></Button>
                             }
+                            </div>
                     </Card.Body>
                 </Card>
-            </div>
+            </div>  
 
             <Modal show={showModal} onHide={handleCloseModal} className="post-modal">
                 <Modal.Header closeButton>
@@ -217,16 +219,16 @@ function PostCards(props) {
                 </Modal.Body>
             </Modal>
 
-            <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} className="post-modal">
+            <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} className="post-modal-del">
                 <Modal.Header closeButton>
                     <Modal.Title>Delete Post {'{'}{posts.postID}{'}'}</Modal.Title>
                 </Modal.Header>
-                    <Modal.Body>
+                    <Modal.Body className="del-modal">
                         <label>Title: {deletePost && posts.title}</label>
                         <br />
                         <label>Content: {deletePost && posts.content}</label>
                     </Modal.Body>
-                    <Button variant="secondary" className="float-end" onClick={handleDelete}>Delete?</Button>
+                    <Button variant="secondary" style={{backgroundColor: 'red'}} className="float-end-delete-btn" onClick={handleDelete}>Delete?</Button>
             </Modal>
 
         </div>
@@ -271,7 +273,7 @@ function PostTable(props) {
         <>
         <div style={{ backgroundImage: `url(${blogBgImage})` }}>
             <button id="create-post-button" onClick={handleOpen}>
-                <NodePlus id="create-icon" className="icon-create" size={25}/>
+                <NodePlus id="create-icon" className="icon-create" size={25} />
                 Create New Post</button>
                 <div className="blog-div-main">
                     {postRows}

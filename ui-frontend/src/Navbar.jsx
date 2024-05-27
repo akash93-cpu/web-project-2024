@@ -97,7 +97,7 @@ function Navigation() {
               <NavDropdown.Item href="#action/3.2" style={styles.linkText}>
                 Reviews
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3" style={styles.linkText}>Contact</NavDropdown.Item>
+              <NavDropdown.Item href="/contact-us" style={styles.linkText}>Contact Us</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/about-us" style={styles.linkText}>
                 About Us

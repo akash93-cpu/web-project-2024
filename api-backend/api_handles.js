@@ -22,7 +22,7 @@ function generateRandomString(length) {
 
 const resolvers = {
 
-    // QUERIES // QUERIES // QUERIES // QUERIES // QUERIES // QUERIES // QUERIES // QUERIES
+    // QUERIES -- QUERIES -- QUERIES -- QUERIES -- QUERIES -- QUERIES -- QUERIES -- QUERIES
     Query: {
         getProducts: async () => await Product.find({}).exec(), // return all products in the db
         returnAllPosts: async () => await Blog.find({}).exec(), // return all blog posts
@@ -122,7 +122,7 @@ const resolvers = {
         }
     },
     
-    // MUTATIONS // MUTATIONS // MUTATIONS // MUTATIONS // MUTATIONS // MUTATIONS // MUTATIONS // MUTATIONS 
+    // MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS 
     Mutation: {
         addProducts: async (_, args) => { // add product
             try {

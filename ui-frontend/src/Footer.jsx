@@ -23,7 +23,7 @@ export default function Footer() {
 
                     <div className="row">
                         <ul>
-                            <li><a href="#">Contact us</a></li>
+                            <li><a href="/contact-us">Contact us</a></li>
                             <li><a href="#">Our Services</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                             <li><a href="#">Terms & Conditions</a></li>
