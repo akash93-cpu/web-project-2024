@@ -9,6 +9,11 @@ type Product {
     rating: [Int!]
 }
 
+type ProductAddRating {
+    product_id: String!
+    rating: [Int]!
+}
+
 type Blog {
     title: String!
     content: String!
@@ -119,6 +124,10 @@ input BlogInput {
     content: String!
 }
 
+"""Inputs for user rating."""
+input RatingInput {
+    rating: Int!
+}
 
 type Mutation {
     "Mutation used to add document entries into the database."
@@ -141,4 +150,7 @@ type Mutation {
 
     "Mutation to delete a user's post."
     deletePost(postID: String!): BlogDelete!
+
+    "Mutation to add rating to a Product - using Product schema."
+    addUserRating(product_id: String!, userRating: RatingInput!): ProductAddRating!
 }

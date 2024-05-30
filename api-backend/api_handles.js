@@ -146,6 +146,20 @@ const resolvers = {
                 return error.message;
             }
         },
+        addUserRating: async (_, args) => { // add a rating to a Product
+            const { product_id, userRating } = args;
+            // product_id - only used for finding and querying for a Product
+            try {
+                const productFinder = await Product.findOne({ product_id: product_id });
+
+                if (!productFinder) throw new Error("Error! Product does not exist!");
+                productFinder.rating.push(userRating.rating);
+                await productFinder.save();
+                return productFinder;
+            } catch (error) {
+                return error.message;
+            }
+        },
         createUser: async (_, args) => { // create user
             const { email, password, username, confirm } = args.userInput;
             try {

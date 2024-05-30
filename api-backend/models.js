@@ -14,9 +14,12 @@ const productSchema = new Schema({
     description: String,
     rating: [{
         type: Number, min: 1, max: 5,
-    }]
+    }],
+    averageRating: Number,
+    ratingsByUser: [String],
 });
 
+/**User schema -> used to create a user in the database. */
 const userSchema = new Schema({
     email: {
         type: String,
@@ -42,6 +45,7 @@ const userSchema = new Schema({
     },
 });
 
+/**Admin schema -> used to create an admin in the database. */
 const adminSchema = new Schema({
     email: {
         type: String,
@@ -67,7 +71,7 @@ const adminSchema = new Schema({
     },
 });
 
-  
+/**Blog schema -> used to create user posts in the database. */
 const blogSchema = new Schema({
     postID: {
         type: String,
