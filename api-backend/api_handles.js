@@ -146,18 +146,30 @@ const resolvers = {
                 return error.message;
             }
         },
-        addUserRating: async (_, args) => { // add a rating to a Product
+        addUserRating: async (_, args, { req }) => { // add a rating to a Product
             const { product_id, userRating } = args;
             // product_id - only used for finding and querying for a Product
-            try {
-                const productFinder = await Product.findOne({ product_id: product_id });
-
-                if (!productFinder) throw new Error("Error! Product does not exist!");
-                productFinder.rating.push(userRating.rating);
-                await productFinder.save();
-                return productFinder;
-            } catch (error) {
-                return error.message;
+            const userToken = req.cookies.userToken; // requesting user token to add a rating to a product
+            if (userRating.rating < 1) {
+                throw new Error("Error! Please enter a value btw 1 - 5");
+            }
+            if (userRating.rating > 5) {
+                throw new Error("Error! Please enter a value btw 1 - 5");
+            }
+            if (userToken) {
+                try {
+                    const productFinder = await Product.findOne({ product_id: product_id });
+    
+                    if (!productFinder) throw new Error("Error! Product does not exist!");
+                    productFinder.rating.push(userRating.rating);
+                    await productFinder.save();
+                    return productFinder;
+                } catch (error) {
+                    return error.message;
+                }
+            }
+            else if (!userToken) {
+                throw new Error("You must be logged in to add a rating!");
             }
         },
         createUser: async (_, args) => { // create user

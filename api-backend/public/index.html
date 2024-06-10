@@ -24,42 +24,41 @@
     <p>This is the server test page. To view front-end of project please 
         start front-end UI server.
     </p>
-
-    <div class="information-div">
-        <h3>Commonly used GraphQL queries</h3>
-        <a href="http://localhost:3000/graphql-server">Use this link to go to the Apollo GraphQL server</a>
-        <p id="first-query">
-            mutation createUser{
-            createUser(userInput: {
-            email: "",
-            password: "",
-            confirm: "",
-            username: "",
-            }) {
-            _id
-            token
-            email
-            }
-            }
-        </p>
-        <p>
-            query userLogin{
-            userLogin(email: "", password: "") {
-            _id
-            token
-            email
-            }
-            }
-        </p>
-        <p>
-            query verifyTokenUser {
-            verifyTokenUser(token: "") {
-            _id
-            email
-            }
-            }
-        </p>
-        
+<div class="information-div">
+    <h3>Commonly used GraphQL queries</h3>
+    <p id="first-query">
+        mutation createUser{
+        createUser(userInput: {
+        email: "",
+        password: "",
+        confirm: "",
+        username: "",
+        }) {
+        _id
+        token
+        email
+        }
+        }
+    </p>
+    <p>
+        query userLogin{
+        userLogin(email: "", password: "") {
+        _id
+        token
+        email
+        }
+        }
+    </p>
+    <p>
+        query verifyTokenUser {
+        verifyTokenUser(token: "") {
+        _id
+        email
+        }
+        }
+    </p>
+    <a href="http://localhost:3000/graphql-server">Use this link to go to the Apollo GraphQL server</a>
+                                                
     </div>
 
 </div>

@@ -15,8 +15,18 @@ const productSchema = new Schema({
     rating: [{
         type: Number, min: 1, max: 5,
     }],
-    averageRating: Number,
-    ratingsByUser: [String],
+    averageRating: Number, 
+});
+
+// Pre-save hook to calculate average rating
+productSchema.pre('save', function(next) {
+    if (this.rating && this.rating.length > 0) {
+        const totalRating = this.rating.reduce((acc, curr) => acc + curr, 0);
+        this.averageRating = totalRating / this.rating.length;
+    } else {
+        this.averageRating = 0;
+    }
+    next();
 });
 
 /**User schema -> used to create a user in the database. */

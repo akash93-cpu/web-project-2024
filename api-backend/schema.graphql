@@ -7,6 +7,7 @@ type Product {
     category: String
     description: String
     rating: [Int!]
+    averageRating: Float
 }
 
 type ProductAddRating {
