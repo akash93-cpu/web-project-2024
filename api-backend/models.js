@@ -22,7 +22,9 @@ const productSchema = new Schema({
 productSchema.pre('save', function(next) {
     if (this.rating && this.rating.length > 0) {
         const totalRating = this.rating.reduce((acc, curr) => acc + curr, 0);
-        this.averageRating = totalRating / this.rating.length;
+        const preCalculatedValue = totalRating / this.rating.length;
+        this.averageRating = Math.round(preCalculatedValue * 100) / 100;
+        // this.averageRating = totalRating / this.rating.length;
     } else {
         this.averageRating = 0;
     }

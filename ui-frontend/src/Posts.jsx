@@ -94,7 +94,7 @@ function PostCards(props) {
             // handleClose();
             window.location.reload();
           } catch(err) {
-            throw err;
+            alert(err);
           } 
     }
 

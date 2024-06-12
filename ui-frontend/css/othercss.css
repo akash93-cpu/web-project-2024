@@ -1,7 +1,7 @@
 
 .card-single {
     border: 3px solid transparent;
-    border-radius: 10px;
+    border-radius: 5px;
     transition: border-color 0.3s ease-in-out;
     position: relative;
     overflow: hidden;
@@ -27,3 +27,67 @@
   .card-single:hover::before {
     opacity: 1;
   }
+
+#ratings-btn {
+  display: flex;
+  justify-content: space-between; /* This evenly spaces the buttons within the card */
+  align-items: flex-end; /* Align items to the bottom */
+  position: absolute;
+  bottom: 0px;
+  text-align: center;
+  z-index: 2;
+
+  font-family: Fira Code;
+  font-size: 14px;
+  --bg: #000;
+  --hover-bg: linear-gradient(32deg, rgba(63,89,255,1) 0%, rgba(17,155,238,1) 100%);
+  --hover-text: #f3f2f2;
+  color: #fff;
+  background-color: linear-gradient(32deg, rgba(63,70,255,1) 0%, rgba(238,17,17,1) 100%);
+  background: rgb(63,70,255);
+  border: none;
+  border-radius: 8px;
+  width: 60px;
+  height: 35px;
+  transition: .3s;
+  margin-bottom: 8px;
+  margin-left: 5px;
+}
+
+#ratings-btn:hover {
+  color: var(--hover-text);
+  transform: translate(0.25rem, -0.25rem);
+  background: var(--hover-bg);
+  box-shadow: 0.25rem 0.25rem var(--bg);
+}
+
+#ratings-btn:active {
+  transform: translate(0);
+  box-shadow: none;
+}
+
+.inline-dropdown {
+  display: inline-block;
+  align-items: center;
+}
+
+.inline-dropdown .dropdown-toggle-form {
+  margin-right: 10px; /* Adjust the spacing between the label and the dropdown */
+  margin-top: 5px;
+}
+
+.ratings-form {
+  font-family: Fira Code;
+}
+
+#btn-submit-1 {
+  margin-top: 30px;
+  background: rgb(63,89,255);
+background: linear-gradient(32deg, rgba(63,89,255,1) 0%, rgba(117,26,201,1) 100%);
+}
+
+#dropdown-toggle {
+  background: rgb(63,89,255);
+  background: linear-gradient(32deg, rgba(63,89,255,1) 0%, rgba(26,147,201,1) 100%);
+  
+}
