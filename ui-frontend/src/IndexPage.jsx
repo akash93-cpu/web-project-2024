@@ -6,6 +6,7 @@ import ProductsList from "./App.jsx";
 import FAQ from "./FAQs.jsx";
 import AboutUsPage from "./AboutUs.jsx";
 import Posts from "./Posts.jsx";
+import Quiz from "./Quiz.jsx";
 import NotFoundPage from "./404Page.jsx";
 import SignIn from "./SignInItem.jsx";
 import SignInAdmin from './AdminLogin.jsx';
@@ -23,7 +24,8 @@ export default function Index() {
             <Route path="/login" element={<SignIn />}/>
             <Route path="/admin" element={<SignInAdmin />}/> 
             <Route path="/register" element={<Registration />}/>
-            <Route path="blog" element={<Posts />}/>
+            <Route path="/blog" element={<Posts />}/>
+            <Route path="/quiz" element={<Quiz />} />
             <Route path="/faq" element={<FAQ />}/>
             <Route path="/about-us" element={<AboutUsPage />}/>
             <Route path="/contact-us" element={<ContactUsPage />}/>
