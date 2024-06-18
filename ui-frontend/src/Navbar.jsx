@@ -93,7 +93,7 @@ function Navigation() {
             <Nav.Link href="/login" id="link-1" style={styles.linkColors}>Login|Register</Nav.Link>
             <Nav.Link href="/blog" id="link-2" style={styles.linkColors}>Blog</Nav.Link>
             <NavDropdown title="More" id="basic-nav-dropdown" >
-              <NavDropdown.Item href="#action/3.1" style={styles.linkText}>Feeds</NavDropdown.Item>
+              <NavDropdown.Item href="/feeds" style={styles.linkText}>Feeds</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2" style={styles.linkText}>
                 Reviews
               </NavDropdown.Item>

@@ -4,7 +4,7 @@
   "description": "ui-frontend",
   "main": "index.js",
   "scripts": {
-    "start": "node uiserver.js",
+    "start": "node src/webData.js && node uiserver.js",
     "compile": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,7 @@
     "isomorphic-fetch": "^3.0.0",
     "nodemon": "^3.1.0",
     "prop-types": "^15.8.1",
+    "puppeteer": "^22.11.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-bootstrap-icons": "^1.11.3",

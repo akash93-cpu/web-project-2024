@@ -7,11 +7,12 @@ import FAQ from "./FAQs.jsx";
 import AboutUsPage from "./AboutUs.jsx";
 import Posts from "./Posts.jsx";
 import Quiz from "./Quiz.jsx";
-import NotFoundPage from "./404Page.jsx";
+import Feeds from "./Feeds.jsx";
 import SignIn from "./SignInItem.jsx";
 import SignInAdmin from './AdminLogin.jsx';
 import Registration from './Registration.jsx';
 import ContactUsPage from "./ContactUs.jsx";
+import NotFoundPage from "./404Page.jsx";
 
 // index page
 export default function Index() {
@@ -26,6 +27,7 @@ export default function Index() {
             <Route path="/register" element={<Registration />}/>
             <Route path="/blog" element={<Posts />}/>
             <Route path="/quiz" element={<Quiz />} />
+            <Route path="/feeds" element={<Feeds />} />
             <Route path="/faq" element={<FAQ />}/>
             <Route path="/about-us" element={<AboutUsPage />}/>
             <Route path="/contact-us" element={<ContactUsPage />}/>
