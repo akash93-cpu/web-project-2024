@@ -4,9 +4,9 @@ import _fetch from "isomorphic-fetch";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
+import Table from 'react-bootstrap/Table';
 
 import HeaderContent from "./DemoPage.jsx";
 import bgProductImg from '../images/products-bg-unsplash.jpg';
@@ -25,7 +25,7 @@ import "../css/othercss.css";
         //     );
         // }
 
-async function graphQLFetchData(query, variables = {}) {
+async function graphQLFetchData(query, variables = {}) { // common function to fetch/execute GraphQL queries
     try {
         const response = await _fetch('http://localhost:3000/graphql-server', {
             method: 'POST',
@@ -61,11 +61,11 @@ function ProductCard(props) {
         console.log("Form data :", variables);
 
         const query = `mutation addUserRating($product_id: String!, $userRating: RatingInput!) {
-  addUserRating(product_id: $product_id, userRating: $userRating) {
-    product_id
-    rating
-  }
-}`
+            addUserRating(product_id: $product_id, userRating: $userRating) {
+                product_id
+                rating
+            }
+        }`
 
         try {
             await graphQLFetchData(query, variables);
@@ -160,7 +160,103 @@ function ProductCard(props) {
 
         </div>
 
+    );
+}
 
+function FilterSearch() {
+
+    const [selectedString, setSelectedString] = useState(null);
+    const [showModal2, setShowModal2] = useState(false);
+
+    const [searchResults, setSearchResults] = useState({ results: [] });
+
+    const handleCloseModal2 = () => {
+        setShowModal2(false);
+    };
+
+    const handleStringSelect = async (string) => {
+        setSelectedString(string);
+        await handleSearchSubmit(string); // Trigger search with the updated selectedString
+    }
+    
+    const handleSearchSubmit = async (selected) => {
+        if (!selected) return; // Ensure a category is selected before submitting
+
+        const variables = {
+            filter: { category: selected },
+        };
+        const query = `query ProductFilter($filter: ProductFilterInput!) {
+            productFilter(filter: $filter) {
+                product_id
+                title
+                category
+                description
+                averageRating
+            }
+        }`;
+
+        try {
+            const searchResult = await graphQLFetchData(query, variables);
+            if (searchResult) {
+                setSearchResults({ results: searchResult.productFilter });
+            }
+            setShowModal2(true); // Open the modal after successful fetch
+            // console.log("data from var", searchResult);
+        } catch (err) {
+            alert(err);
+        }
+    }
+
+    return (
+        <div className="filter-search" style={{ display: 'flex', flexWrap: 'wrap', backgroundImage: `url(${bgProductImg})` }}>
+            <div className="dropdown-search">
+                <Form onSubmit={(e) => { e.preventDefault(); }}>
+                    <Form.Group>
+                        <Dropdown onSelect={handleStringSelect}>
+                            <Dropdown.Toggle>
+                                {selectedString === null ? 'Filter/Search by category' : selectedString}
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {["Programming", "Databases", "Cybersecurity", "Testing"].map((string) => (
+                                    <Dropdown.Item key={string} eventKey={string} href="#">
+                                        {string}
+                                    </Dropdown.Item>
+                                ))}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Form.Group>
+                </Form>
+            </div>
+                        {/* Modal Component */}
+                        <Modal show={showModal2} onHide={handleCloseModal2} className="filter-modal">
+                <Modal.Header closeButton>
+                    <Modal.Title id="modal-search-title">Filter/Search results: {selectedString}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Table striped bordered hover className="filter-table">
+                        <thead className="search-table">
+                            <tr>
+                                <th>product_id</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Average Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {searchResults.results.map((a => (
+                                <tr key={a} className="search-table">
+                                    <td>{a.product_id}</td>
+                                    <td>{a.title}</td>
+                                    <td>{a.description}</td>
+                                    <td>{a.averageRating}</td>
+                                </tr>
+                            )))}
+                        </tbody>
+                    </Table>
+                </Modal.Body>
+            </Modal>
+
+        </div>
     );
 }
 
@@ -174,7 +270,6 @@ function ProductsTable(props) {
         </div>
     );
 }
-
 
 // main product page
 export default class ProductsList extends React.Component {
@@ -208,16 +303,10 @@ export default class ProductsList extends React.Component {
             <React.Fragment>
                 <HeaderContent />
                     {/* <h1 style={{textAlign: 'center', fontFamily: 'Fira Code'}}>Product Listings</h1> */}
+                    <FilterSearch />
                     <ProductsTable products={this.state.products} />
                     <hr />
             </React.Fragment>
         )
     }
 }
-
-// const element = <ProductsList />;
-// ReactDOM.render(element, document.getElementById('contents'));
-
-// if (module.hot) {
-//     module.hot.accept();
-// }

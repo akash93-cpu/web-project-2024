@@ -49,7 +49,7 @@ export default function HeaderContent() {
     return (
         <div style={style.headerDiv}>
             <h1 className="banner-tag-1" style={style.bannerText}>Browse Courses</h1>
-            <h2 className="banner-tag-2" style={style.bannerText2}>Find a course that perfectly suits your needs</h2>
+            <h2 className="banner-tag-2" style={style.bannerText2}>{"{"}Find a course that perfectly suits your needs{"}"}</h2>
             <div style={style.button1}>
                 <a href="/faq"><Button id="button-1"><InfoCircle id="icon-1" style={style.icon} size={25} /> Find out more</Button></a>
             </div>

@@ -91,3 +91,22 @@ background: linear-gradient(32deg, rgba(63,89,255,1) 0%, rgba(117,26,201,1) 100%
   background: linear-gradient(32deg, rgba(63,89,255,1) 0%, rgba(26,147,201,1) 100%);
   
 }
+
+.filter-search {
+  font-family: Fira Code;
+  padding: 20px;
+}
+
+.dropdown-search {
+  margin-left: 50px;
+}
+
+.filter-modal {
+  font-family: Fira Code;
+  font-size: 15px;
+  border-radius: 0;
+}
+
+.search-table {
+  text-align: center;
+}

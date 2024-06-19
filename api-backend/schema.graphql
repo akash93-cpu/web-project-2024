@@ -15,6 +15,12 @@ type ProductAddRating {
     rating: [Int]!
 }
 
+type ProductFilter {
+    category: String!
+}
+
+
+
 type Blog {
     title: String!
     content: String!
@@ -70,6 +76,9 @@ type Query {
 
     "Query used to count number of database objects -> returns an INT."
     countProducts: ProductCount!
+
+    "Query used to filter Products by category -> returns a []."
+    productFilter(filter: ProductFilterInput!): [Product!]!
 
     "Query used to count total number of registered users -> returns an INT."
     countAllUsers: UserCount!
@@ -128,6 +137,10 @@ input BlogInput {
 """Inputs for user rating."""
 input RatingInput {
     rating: Int!
+}
+
+input ProductFilterInput {
+    category: String!
 }
 
 type Mutation {

@@ -25,6 +25,15 @@ const resolvers = {
     // QUERIES -- QUERIES -- QUERIES -- QUERIES -- QUERIES -- QUERIES -- QUERIES -- QUERIES
     Query: {
         getProducts: async () => await Product.find({}).exec(), // return all products in the db
+        productFilter: async (_, { filter }) => { // filter products by category - search query
+            const query = {};
+            if (filter) {
+                if (filter.category) {
+                    query.category = filter.category;
+                } else if (query.category == null) throw new Error("Please enter a category!");
+            }
+            return await Product.find(query);
+        },
         returnAllPosts: async () => await Blog.find({}).exec(), // return all blog posts
         countProducts: async () => { // count all products in the db
             try {
