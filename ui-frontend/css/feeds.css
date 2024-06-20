@@ -1,12 +1,11 @@
 .feeds-main {
-    height: 100vh;
     font-family: Fira Code;
 }
 
 .body-feeds .tweet-card .card-t {
     width: 24%;
-    height: 250px;
-    margin: 0 20px;
+    height: 200px;
+    margin: 0 50px;
     margin-bottom: 30px;
   
 }
@@ -23,12 +22,12 @@
 .body-feeds .tweet-card{
     display: flex;
     flex-wrap: wrap;
-    justify-content:space-around;
+    justify-content:space-between;
     
 }
 
 .tweet-card {
-    padding-top: 100px;
+    padding-top: 50px;
 }
 
 .card-t {

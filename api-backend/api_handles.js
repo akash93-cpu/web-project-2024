@@ -198,6 +198,7 @@ const resolvers = {
                 if (!validator.isEmail(email)) {
                     throw Error("Email not valid!");
                 }
+                if (!validator.isAlphanumeric(username)) throw Error("Username cannot contain special characters!");
                 if (!validator.isStrongPassword(password)){
                     throw Error('Password not strong enough!');
                 }
@@ -253,6 +254,7 @@ const resolvers = {
                 if (!validator.isEmail(email)) {
                     throw Error("Email not valid!");
                 }
+                if (!validator.isAlphanumeric(username)) throw Error("Admin username cannot contain special characters!");
                 if (!validator.isStrongPassword(password)){
                     throw Error('Password not strong enough!');
                 }

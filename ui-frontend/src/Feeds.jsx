@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import '../css/feeds.css';
 import tweets from './all_tweets.json';
 import feedsBg from '../images/feeds-unsplash.jpg';
@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 
 export default function Feeds() {
     
-    const twitterData = tweets;
+    const twitterData = tweets.slice(0, 9);
     console.log("All tweets: ", twitterData);
 
     return (
@@ -21,6 +21,4 @@ export default function Feeds() {
             </div>
         </div>
     );
-
-
 }

@@ -15,7 +15,10 @@ const productSchema = new Schema({
     rating: [{
         type: Number, min: 1, max: 5,
     }],
-    averageRating: Number, 
+    averageRating: {
+        type: Number,
+        default: 0,
+    },
 });
 
 // Pre-save hook to calculate average rating

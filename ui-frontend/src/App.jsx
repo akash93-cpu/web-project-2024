@@ -119,7 +119,7 @@ function ProductCard(props) {
                         <Card.Text style={{ textAlign: 'center', fontFamily: 'Fira Code', fontSize: '11px' }}>
                             Category: {products.category}</Card.Text>
                         <Card.Subtitle style={{ textAlign: 'center', fontFamily: 'Fira Code', fontSize: '12px' }}>
-                           Average Rating: {products.averageRating}</Card.Subtitle>
+                           Average Rating: {products.averageRating}/5</Card.Subtitle>
                         <Card.Text style={{ textAlign: 'center', fontFamily: 'Fira Code', fontSize: '13px' }}>
                             {products.description}</Card.Text>
                     </Card.Body>
