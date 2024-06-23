@@ -94,7 +94,7 @@ function Navigation() {
             <Nav.Link href="/blog" id="link-2" style={styles.linkColors}>Blog</Nav.Link>
             <NavDropdown title="More" id="basic-nav-dropdown" >
               <NavDropdown.Item href="/feeds" style={styles.linkText}>Feeds</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2" style={styles.linkText}>
+              <NavDropdown.Item href="/reviews" style={styles.linkText}>
                 Reviews
               </NavDropdown.Item>
               <NavDropdown.Item href="/contact-us" style={styles.linkText}>Contact Us</NavDropdown.Item>

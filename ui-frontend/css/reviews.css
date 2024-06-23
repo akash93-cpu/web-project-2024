@@ -1,0 +1,36 @@
+.main-heading {
+    background: rgb(49,215,172);
+background: linear-gradient(32deg, rgba(49,215,172,1) 0%, rgba(202,54,251,1) 100%);
+
+}
+
+#review-card-title {
+    text-align: center;
+    color: rgb(92, 92, 92);    
+}
+
+#review-card-description {
+    text-align: center;
+    margin-top: 20px;
+    color: rgb(92, 92, 92);    
+}
+
+.review-main {
+    background-color: honeydew;
+}
+
+.review-card-div {
+    background: mistyrose;
+    border-radius: 8px;
+    box-shadow: 0 24px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.8px);
+    -webkit-backdrop-filter: blur(9.8px);
+    border: 1px solid rgba(233, 70, 255, 0.993);
+
+}
+
+.testimonial-carousel {
+    height: 100vh;
+    font-family: Fira Code;
+    font-size: 20px;
+}

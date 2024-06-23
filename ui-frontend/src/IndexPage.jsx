@@ -8,6 +8,7 @@ import AboutUsPage from "./AboutUs.jsx";
 import Posts from "./Posts.jsx";
 import Quiz from "./Quiz.jsx";
 import Feeds from "./Feeds.jsx";
+import Reviews from "./Reviews.jsx";
 import SignIn from "./SignInItem.jsx";
 import SignInAdmin from './AdminLogin.jsx';
 import Registration from './Registration.jsx';
@@ -26,6 +27,7 @@ export default function Index() {
             <Route path="/admin" element={<SignInAdmin />}/> 
             <Route path="/register" element={<Registration />}/>
             <Route path="/blog" element={<Posts />}/>
+            <Route path="/reviews" element={<Reviews />}/>
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/feeds" element={<Feeds />} />
             <Route path="/faq" element={<FAQ />}/>
