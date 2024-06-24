@@ -82,6 +82,7 @@ const resolvers = {
                 res.cookie('userToken', token, 
                 { path: '/', secure: true, withCredentials: true, expires: expires, httpOnly: true });
 
+
                 // router.post('/login', async (req, res) => { // not used
                 //     res.cookie('jwtToken', token, 
                 //     { httpOnly: true, withCredentials: true })
@@ -128,7 +129,31 @@ const resolvers = {
             } catch (err) {
                 throw err;
             }
-        }
+        },
+        currentLoggedInUser: async (_, __, { req }) => { // to get current logged in user
+            try {
+                const userToken = req.cookies.userToken;
+                if (!userToken) {
+                    throw new Error("No Token!");
+                }
+        
+                const decodedSomeUser = jwt.verify(userToken, process.env.JWT_SECRET_KEY);
+                const user = await User.findOne({ _id: decodedSomeUser.id });
+        
+                if (!user) {
+                    throw new Error("User not found!");
+                }
+        
+                // Ensure userName is not null before accessing username property
+                if (!user.username) {
+                    throw new Error("Username not found for the user!");
+                }
+        
+                return { userName: user.username }; // Return an object with userName field
+            } catch (err) {
+                throw err;
+            }
+        },
     },
     
     // MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS 

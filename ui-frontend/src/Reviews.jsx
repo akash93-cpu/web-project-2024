@@ -120,9 +120,6 @@ const CardComponent = ({ title, description }) => {
     );
   };
 
-
-
-
 export default function Reviews() {
 
     return (

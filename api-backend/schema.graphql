@@ -70,6 +70,10 @@ type AdminCount {
     countAdmins: Int!
 }
 
+type GetUser {
+    userName: String!
+}
+
 type Query {
     "Query used to return all Product objects in the database."
     getProducts: [Product]
@@ -97,6 +101,8 @@ type Query {
     adminLogin(email: String!, password: String!): Admin
     verifyTokenAdmin(token: String!): Admin
 
+    "Query to get current logged-in user -> returns a STR."
+    currentLoggedInUser: GetUser!
 }
 
 """Inputs for updateProducts: title + category = not required, description = required."""

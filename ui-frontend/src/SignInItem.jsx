@@ -18,6 +18,7 @@ async function postUserData(query, variables = {}) {
         })
         const body = await response.text();
         const result = JSON.parse(body);
+        console.log(result);
         return result.data;
     } catch (err) {
         alert(`Error!`, err);

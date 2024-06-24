@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import _fetch from "isomorphic-fetch";
 import { useNavigate } from 'react-router-dom';
 
@@ -18,6 +18,7 @@ async function logoutFunction(query) {
       })
       const body = await response.text();
       const result = JSON.parse(body);
+      // console.log(result.data);
       return result.data;
   } catch (err) {
       alert(`Error!`, err);
@@ -27,12 +28,43 @@ async function logoutFunction(query) {
 // navbar component
 function Navigation() {
 
+  const [loggedInUser, setLoggedInUser] = useState(null);
   const nav = useNavigate();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const query = `query CurrentLoggedInUser {
+        currentLoggedInUser {
+          userName
+        }
+      }`;
+
+      try {
+        const data = await logoutFunction(query);
+        if (data) {
+          // console.log("Current logged in user:", data.currentLoggedInUser.userName);
+          setLoggedInUser(data.currentLoggedInUser.userName);
+        } else {
+          // console.log("No user logged in!");
+          setLoggedInUser(null);
+        }
+      } catch (err) {
+        console.error('Error for user!', err);
+      }
+    };
+
+    getUser(); // Initial fetch
+
+    const interval = setInterval(getUser, 1000); // Fetch every t second(s)
+
+    return () => clearInterval(interval); // Clean up interval on component unmount
+  }, [setLoggedInUser]);
+
   const styles = {
     nav: {
-      display: "flex",
-      justifyContent: "flex-end",
-      marginLeft: "auto",
+      display: "flexbox",
+      justifyContent: "center",
+      marginLeft: 'auto',
     }, 
     mainBar: {
       background: "linear-gradient(45deg, rgba(116,120,130,1) 1%, rgba(215,215,215,0.7511379551820728) 100%)",
@@ -53,7 +85,7 @@ function Navigation() {
     },
   }
   
-  const handleLogout = (e) => {
+  const handleLogout = (e) => { // temporary as for now
     e.preventDefault();
     const query = `
     query verifyTokenUser {
@@ -66,22 +98,6 @@ function Navigation() {
     nav('/login');
   }
 
-  // const handleUpdateTest = (e) => { //works
-  //   e.preventDefault();
-  //   const query=`mutation UpdateUserPost {
-  //     updateUserPost(postID: "3KamT", changes: {
-  //       title: "Edited by Sss",
-  //       content: "EDIT"
-  //     }) {
-  //       postID
-  //       title
-  //       content
-  //     }
-  //   }
-  //   ` 
-  //   logoutFunction(query);
-  // }
-
   return (
     <Navbar expand="lg" sticky='top' style={styles.mainBar}>
       <Container>
@@ -89,27 +105,37 @@ function Navigation() {
         <span className="text-link"> IT Lite</span></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto" style={styles.nav}>
-            <Nav.Link href="/login" id="link-1" style={styles.linkColors}>Login|Register</Nav.Link>
-            <Nav.Link href="/blog" id="link-2" style={styles.linkColors}>Blog</Nav.Link>
-            <NavDropdown title="More" id="basic-nav-dropdown" >
-              <NavDropdown.Item href="/feeds" style={styles.linkText}>Feeds</NavDropdown.Item>
-              <NavDropdown.Item href="/reviews" style={styles.linkText}>
-                Reviews
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/contact-us" style={styles.linkText}>Contact Us</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/about-us" style={styles.linkText}>
-                About Us
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
+          <div className='navbar-links' style={styles.nav}>
+            <Nav className="me-auto">
+
+              {!loggedInUser &&
+                <Nav.Link href="/login" id="link-1" style={styles.linkColors}>Login|Register</Nav.Link>
+              }
+
+              {loggedInUser &&
+                <NavDropdown title={loggedInUser} id="basic-nav-dropdown">
+                  <NavDropdown.Item style={styles.linkText}>Update Password</NavDropdown.Item>
+                  <NavDropdown.Item style={styles.linkText} onClick={handleLogout}>Logout</NavDropdown.Item>
+                </NavDropdown>
+              }
+
+              <Nav.Link href="/blog" id="link-2" style={styles.linkColors}>Blog</Nav.Link>
+              <NavDropdown title="More" id="basic-nav-dropdown" >
+                <NavDropdown.Item href="/feeds" style={styles.linkText}>Feeds</NavDropdown.Item>
+                <NavDropdown.Item href="/reviews" style={styles.linkText}>
+                  Reviews
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/contact-us" style={styles.linkText}>Contact Us</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="/about-us" style={styles.linkText}>
+                  About Us
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+
+          </div>
         </Navbar.Collapse>
       </Container>
-      <div>
-        <button onClick={handleLogout}>Logout</button>
-        {/* <button onClick={handleUpdateTest}>Update Test</button> */}
-      </div>
     </Navbar>
   );
 }

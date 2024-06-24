@@ -203,7 +203,7 @@ function FilterSearch() {
             setShowModal2(true); // Open the modal after successful fetch
             // console.log("data from var", searchResult);
         } catch (err) {
-            alert(err);
+            alert("Filter/Search error!", err);
         }
     }
 
