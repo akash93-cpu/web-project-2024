@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import blogHeaderImage from '../images/blog-unsplash.jpg';
-import _fetch from "isomorphic-fetch";
+import graphQLFetchData from "./graphQLFetch.js";
 import Card from 'react-bootstrap/Card';
 import { NodePlus, Pencil, Trash } from 'react-bootstrap-icons';
 import Modal from 'react-bootstrap/Modal';
@@ -41,27 +41,6 @@ function formatDate(dateString) {
     return date.toISOString().split('T')[0];
 }
   
-async function graphQLFetchData(query, variables = {}) {
-    try {
-        const response = await _fetch('http://localhost:3000/graphql-server', {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ query, variables })
-        });
-        const body = await response.text();
-        const result = JSON.parse(body);
-        console.log("API data:", result);
-
-        if (result.errors) {
-            console.log(result.errors);
-        }
-        return result.data;
-    } catch (e) {
-        alert(`Error getting data from server: ${e.message}`);
-    }
-}
-
 function PostCards(props) {
 
     const [isHovered, setIsHovered] = useState(false);

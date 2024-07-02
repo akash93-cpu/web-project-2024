@@ -19,8 +19,6 @@ type ProductFilter {
     category: String!
 }
 
-
-
 type Blog {
     title: String!
     content: String!
@@ -103,6 +101,9 @@ type Query {
 
     "Query to get current logged-in user -> returns a STR."
     currentLoggedInUser: GetUser!
+
+    "Query used to retrieve user password -> returns USER password."
+    forgotUserPassword(email: String): User
 }
 
 """Inputs for updateProducts: title + category = not required, description = required."""
@@ -145,8 +146,15 @@ input RatingInput {
     rating: Int!
 }
 
+"""Input for product filtering."""
 input ProductFilterInput {
     category: String!
+}
+
+"""Input to reset a user password based on valid token"""
+input resetPassword {
+    token: String!
+    newPassword: String!
 }
 
 type Mutation {
@@ -173,4 +181,7 @@ type Mutation {
 
     "Mutation to add rating to a Product - using Product schema."
     addUserRating(product_id: String!, userRating: RatingInput!): ProductAddRating!
+
+    "Mutation to reset user password on request via email - requires valid token."
+    resetUserpassword(changes: resetPassword!): User
 }

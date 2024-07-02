@@ -1,29 +1,11 @@
 import React from "react";
 // import axios from "axios";
-import _fetch from "isomorphic-fetch";
+import graphQLFetchData from "./graphQLFetch.js";
 import { useNavigate } from "react-router-dom";
 import { Form, FormControl } from 'react-bootstrap';
 import { Envelope, BracesAsterisk, Eye, EyeSlash } from 'react-bootstrap-icons';
 import '../css/signin.css';
 import bgLoginImage from '../images/unsplash-login.png';
-
-
-async function postUserData(query, variables = {}) {
-    try {
-        const response = await _fetch('http://localhost:3000/graphql-server', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({ query, variables })
-        })
-        const body = await response.text();
-        const result = JSON.parse(body);
-        console.log(result);
-        return result.data;
-    } catch (err) {
-        alert(`Error!`, err);
-    }
-}
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -58,7 +40,7 @@ class SignIn extends React.Component {
                 }
             }`
         try {
-            const userData = await postUserData(query, variables);
+            const userData = await graphQLFetchData(query, variables);
             console.log("User login data from API -> ", userData);
             // console.log(userData.userLogin.username);
             const token = userData.userLogin.token; // the user token
@@ -111,6 +93,7 @@ class SignIn extends React.Component {
                                 {/* <div class="pass"><a href="#">Forgot password?</a></div> */}
                                 <div className="center-login-button"><button id="submit-button-login" type="submit">Submit</button>
                                 </div>
+                                <div className="signup-link"><a id="register-link" href="/forgotpassword">Forgot Password</a></div>
                                 <div className="signup-link">Not a member? <a id="register-link" href="/register">Signup</a></div>
                             </Form>
                         </div>

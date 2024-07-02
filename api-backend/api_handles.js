@@ -8,7 +8,10 @@ const validator = require('validator');
 const bcrpyt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 require('dotenv').config();
+
+const tokenStore = new Map();
 
 function generateRandomString(length) {
     const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -154,6 +157,75 @@ const resolvers = {
                 throw err;
             }
         },
+        forgotUserPassword: async (_, { email }) => { // Forgot Password - retrieve user email - if user exists - email password via email 
+            try {
+                // Retrieve user from database 
+                const user = await User.findOne({ email });
+                if (user) {
+                    const token = crypto.randomBytes(20).toString('hex');
+
+                    tokenStore.set(token, {
+                        userId: user._id,
+                        expires: Date.now() + 86400000 // 24 hour expiration
+                    });
+        
+                    const transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                            user: process.env.USER,
+                            pass: process.env.APP_PASSWORD,
+                        },
+                        tls: {
+                            rejectUnauthorized: false // This line allows you to use self-signed certificates, remove it in production
+                        }
+                    });
+                    
+                    const mailOptions = {
+                        from: {
+                            name: 'Akash-test',
+                            address: process.env.USER
+                        },
+                        to: user.email,
+                        subject: "IT Lite - Password Reset",
+                        text: `You requested a password reset. Please click \n http://localhost:5000/reset-password/${token} \n
+                        to reset your password.`,
+                    };
+                    
+                    const sendMail = async (transporter, mailOptions) => {
+                        try {
+                            let info = await transporter.sendMail(mailOptions);
+                            console.log("Email sent: " + info.response);
+                            console.log(mailOptions);
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    };
+                    
+                    sendMail(transporter, mailOptions);
+                    // next steps 
+                    setTimeout(() => {
+                        if (tokenStore.has(token)) {
+                            tokenStore.delete(token);
+                        }
+                    }, 86400000);
+
+                    // console.log("Contents of tokenStore:"); // used to check contents of stored tokens
+                    // tokenStore.forEach((value, key) => {
+                    //     console.log(`${key}:`, value);
+                    // });
+
+                }
+
+                if (!user) {
+                    throw new Error(`User with email ${email} not found.`);
+                }
+
+                return user;
+            } catch (error) {
+                throw new Error(error.message);
+            }
+        }
+
     },
     
     // MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS -- MUTATIONS 
@@ -180,7 +252,7 @@ const resolvers = {
                 return error.message;
             }
         },
-        addUserRating: async (_, args, { req }) => { // add a rating to a Product
+        addUserRating: async (_, args, { req }) => { // add a rating to a Product 
             const { product_id, userRating } = args;
             // product_id - only used for finding and querying for a Product
             const userToken = req.cookies.userToken; // requesting user token to add a rating to a product
@@ -398,6 +470,24 @@ const resolvers = {
             } catch (error) {
                 return error.message;
             }
+        },
+        resetUserpassword: async (_, args) => {
+            const { token, newPassword } = args;
+            const storedToken = tokenStore.get(token);
+            if (!storedToken || storedToken.expires < Date.now()) { // checks if stored token is valid
+                throw new Error('Password reset token is invalid or has expired.');
+            }
+            const user = await User.findById(storedToken.userId);
+            if (!user) {
+              throw new Error('User not found.');
+            }
+            // complete hashing of password and then save
+            user.password = newPassword;
+            await user.save();
+            tokenStore.delete(token);
+
+            return "Password changed on success!";
+      
         }
     }
 };

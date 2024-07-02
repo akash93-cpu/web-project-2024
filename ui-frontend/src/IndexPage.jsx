@@ -12,6 +12,8 @@ import Reviews from "./Reviews.jsx";
 import SignIn from "./SignInItem.jsx";
 import SignInAdmin from './AdminLogin.jsx';
 import Registration from './Registration.jsx';
+import ForgotPassword from "./ForgotPassword.jsx";
+import ResetPasswordComponent from "./ResetPassword.jsx";
 import ContactUsPage from "./ContactUs.jsx";
 import NotFoundPage from "./404Page.jsx";
 
@@ -26,6 +28,8 @@ export default function Index() {
             <Route path="/login" element={<SignIn />}/>
             <Route path="/admin" element={<SignInAdmin />}/> 
             <Route path="/register" element={<Registration />}/>
+            <Route path="/forgotpassword" element={<ForgotPassword />}/>
+            <Route path="/reset-password/:token" element={<ResetPasswordComponent />}/>
             <Route path="/blog" element={<Posts />}/>
             <Route path="/reviews" element={<Reviews />}/>
             <Route path="/quiz" element={<Quiz />} />

@@ -3,11 +3,15 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const { connectToDatabase, insertOneIntoDatabase } = require('./db.js');
 const { startServer } = require('./api_handles.js');
+const bodyParser = require('body-parser');
+
 require('dotenv').config();
 
 app.use(express.static('public'));
 
 app.use(cookieParser()); 
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.use('/auth', router);
 

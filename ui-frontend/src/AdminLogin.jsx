@@ -1,27 +1,11 @@
 import React from "react";
 // import axios from "axios";
-import _fetch from "isomorphic-fetch";
+import graphQLFetchData from "./graphQLFetch.js";
 import { useNavigate } from "react-router-dom";
 import { Form, FormControl } from 'react-bootstrap';
 import { Envelope, BracesAsterisk, Eye, EyeSlash } from 'react-bootstrap-icons';
 import '../css/signin.css';
 import bgLoginImage from '../images/admin-unsplash.jpg';
-
-async function postAdminData(query, variables = {}) {
-    try {
-        const response = await _fetch('http://localhost:3000/graphql-server', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({ query, variables })
-        })
-        const body = await response.text();
-        const result = JSON.parse(body);
-        return result.data;
-    } catch (err) {
-        alert(`Error!`, err);
-    }
-}
 
 class SignInAdmin extends React.Component {
     constructor(props) {
@@ -54,7 +38,7 @@ class SignInAdmin extends React.Component {
                 }
             }`
         try {
-            const adminData = await postAdminData(query, variables);
+            const adminData = await graphQLFetchData(query, variables);
             console.log("Admin login data from API -> ", adminData);
             // console.log(adminData.adminLogin.username);
             const token = adminData.adminLogin.token; // the user token

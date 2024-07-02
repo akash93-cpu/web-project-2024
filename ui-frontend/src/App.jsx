@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import _fetch from "isomorphic-fetch";
+import graphQLFetchData from "./graphQLFetch.js";
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -24,27 +24,6 @@ import "../css/othercss.css";
         //         </tr>
         //     );
         // }
-
-async function graphQLFetchData(query, variables = {}) { // common function to fetch/execute GraphQL queries
-    try {
-        const response = await _fetch('http://localhost:3000/graphql-server', {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ query, variables })
-        });
-        const body = await response.text();
-        const result = JSON.parse(body);
-        console.log("API data:", result);
-
-        if (result.errors) {
-            console.log(result.errors);
-        }
-        return result.data;
-    } catch (e) {
-        alert(`Error getting data from server: ${e.message}`);
-    }
-}
         
 function ProductCard(props) {
 

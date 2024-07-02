@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import _fetch from "isomorphic-fetch";
+import { logoutFunction } from './graphQLFetch.js';
 import { useNavigate } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
@@ -7,23 +7,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import image from "../images/icon.png";
-
-async function logoutFunction(query) {
-  try {
-      const response = await _fetch('http://localhost:3000/graphql-server', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ query })
-      })
-      const body = await response.text();
-      const result = JSON.parse(body);
-      // console.log(result.data);
-      return result.data;
-  } catch (err) {
-      alert(`Error!`, err);
-  }
-}
 
 // navbar component
 function Navigation() {
@@ -49,7 +32,8 @@ function Navigation() {
           setLoggedInUser(null);
         }
       } catch (err) {
-        console.error('Error for user!', err);
+        console.error('Error getting user data!', err);
+        clearInterval(interval); // Clear interval on error
       }
     };
 
@@ -59,7 +43,7 @@ function Navigation() {
 
     return () => clearInterval(interval); // Clean up interval on component unmount
   }, [setLoggedInUser]);
-
+  
   const styles = {
     nav: {
       display: "flexbox",
@@ -68,6 +52,7 @@ function Navigation() {
     }, 
     mainBar: {
       background: "linear-gradient(45deg, rgba(116,120,130,1) 1%, rgba(215,215,215,0.7511379551820728) 100%)",
+      backdropFilter: "blur(4px)",
     },
     textColors: {
       fontFamily: "Fira Code",

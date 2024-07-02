@@ -1,24 +1,8 @@
 import React from "react";
-import _fetch from "isomorphic-fetch";
+import graphQLFetchData from "./graphQLFetch.js";
 import { useNavigate } from "react-router-dom";
-import { Form, FormGroup, FormControl } from 'react-bootstrap';
+import { Form, FormControl } from 'react-bootstrap';
 import "../css/register.css";
-
-async function postUserRegistration(query, variables = {}) {
-    try {
-        const response = await _fetch('http://localhost:3000/graphql-server', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({ query, variables })
-        })
-        const body = await response.text();
-        const result = JSON.parse(body);
-        return result.data;
-    } catch (err) {
-        alert(`Error!`, err);
-    }
-}
 
 class Registration extends React.Component {
     constructor(props) {
@@ -48,7 +32,7 @@ class Registration extends React.Component {
             }
           }`
           try {
-            await postUserRegistration(query, variables);
+            await graphQLFetchData(query, variables);
             this.props.navigate("/login");
           } catch (err) {
             throw err;
