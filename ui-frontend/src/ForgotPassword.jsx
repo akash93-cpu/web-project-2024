@@ -44,11 +44,11 @@ export default function ForgotPassword() {
                             <Col md="6">
                                 <Form onSubmit={handleSubmit} name="forgotUserPassword">
                                     <Form.Group controlId="formBasicEmail">
-                                        <Form.Label>Email address</Form.Label>
-                                        <FormControl type="email" placeholder="Enter email" name="email" />
-                                        <Form.Text className="text-muted">
+                                        <Form.Label style={{color: 'antiquewhite'}}>Email address</Form.Label>
+                                        <FormControl type="email" placeholder="Enter email here" name="email" />
+                                        <p style={{color: 'antiquewhite' ,fontSize: '14px'}}>
                                             We'll send you a password reset link to this email.
-                                        </Form.Text>
+                                        </p>
                                     </Form.Group>
                                     <Button id="submit-forgotpassword-btn" variant="primary" type="submit">
                                         Submit

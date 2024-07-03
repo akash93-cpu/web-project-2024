@@ -102,7 +102,7 @@ type Query {
     "Query to get current logged-in user -> returns a STR."
     currentLoggedInUser: GetUser!
 
-    "Query used to retrieve user password -> returns USER password."
+    "Query used to reset user password -> returns USER email(STR)."
     forgotUserPassword(email: String): User
 }
 
@@ -151,12 +151,6 @@ input ProductFilterInput {
     category: String!
 }
 
-"""Input to reset a user password based on valid token"""
-input resetPassword {
-    token: String!
-    newPassword: String!
-}
-
 type Mutation {
     "Mutation used to add document entries into the database."
     addProducts(product_id: String!, title: String!, category: String!, description: String!, rating: [Int!]!): Product
@@ -183,5 +177,5 @@ type Mutation {
     addUserRating(product_id: String!, userRating: RatingInput!): ProductAddRating!
 
     "Mutation to reset user password on request via email - requires valid token."
-    resetUserpassword(changes: resetPassword!): User
+    resetUserpassword(token: String!, newPassword: String!): User
 }

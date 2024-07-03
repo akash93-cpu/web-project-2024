@@ -209,10 +209,10 @@ const resolvers = {
                         }
                     }, 86400000);
 
-                    // console.log("Contents of tokenStore:"); // used to check contents of stored tokens
-                    // tokenStore.forEach((value, key) => {
-                    //     console.log(`${key}:`, value);
-                    // });
+                    console.log("Contents of tokenStore:"); // used to check contents of stored tokens
+                    tokenStore.forEach((value, key) => {
+                        console.log(`${key}:`, value);
+                    });
 
                 }
 
@@ -477,16 +477,25 @@ const resolvers = {
             if (!storedToken || storedToken.expires < Date.now()) { // checks if stored token is valid
                 throw new Error('Password reset token is invalid or has expired.');
             }
-            const user = await User.findById(storedToken.userId);
-            if (!user) {
-              throw new Error('User not found.');
-            }
-            // complete hashing of password and then save
-            user.password = newPassword;
-            await user.save();
-            tokenStore.delete(token);
+            try {
+                const user = await User.findById(storedToken.userId);
+                if (!user) {
+                    throw new Error('User not found.');
+                }
+                // validation of new password
+                if (newPassword.length > 16) throw new Error('New password too long!');
+                if (newPassword.length < 8) throw new Error('New password too short!');
+                if (!validator.isStrongPassword(newPassword)) throw new Error('New Password not strong enough!');
+                // complete hashing of password and then save
+                const newPasswordHashed = await bcrpyt.hash(newPassword, 10);
+                user.password = newPasswordHashed;
+                await user.save();
+                tokenStore.delete(token);
 
-            return "Password changed on success!";
+                return user;
+            } catch (error) {
+                throw new Error(error);
+            }
       
         }
     }
