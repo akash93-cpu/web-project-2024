@@ -43,7 +43,7 @@ const resolvers = {
                 const count = await Product.countDocuments({}).exec();
                 return { count };
             } catch (e) {
-                return e.message;
+                return { count: 0 };
             }
         },
         countAllUsers: async () => { // counts all registered users in db
@@ -51,7 +51,7 @@ const resolvers = {
                 const countUsers = await User.countDocuments({}).exec();
                 return { countUsers };
             } catch (e) {
-                return e.message;
+                return { countUsers: 0 };
             }
         },
         countAllAdmins: async () => { // counts all admins in db
@@ -59,7 +59,15 @@ const resolvers = {
                 const countAdmins = await Admin.countDocuments({}).exec();
                 return { countAdmins };
             } catch (e) {
-                return e.message;
+                return { countAdmins: 0 };
+            }
+        },
+        countAllPosts: async () => { // counts all blog posts in db
+            try {
+                const countAllPosts = await Blog.countDocuments({}).exec();
+                return { countPosts: countAllPosts };
+            } catch (e) {
+                return { countPosts: 0 };
             }
         },
         

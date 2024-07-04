@@ -1,5 +1,6 @@
 import React from "react";
 import image from "../images/unsplash-homepage.png";
+import BannerCounter from "./CounterBanner.jsx";
 import "../css/contentcss.css";
 
 // homepage
@@ -33,6 +34,7 @@ export default function Contents() {
         }
     }
     return (
+        <>
         <div id="home" style={{ backgroundImage: `url(${image})` }}>    
             <div className="effects">
                 <p className="slide-up" style={styles.tag1}>Welcome to IT Lite</p>
@@ -40,5 +42,9 @@ export default function Contents() {
                 <a href="/landing" className="link-1" style={styles.buttonSpace}>Proceed to site</a>
             </div>
         </div>
+        <div>
+            <BannerCounter />
+        </div>
+        </>
     )
 }

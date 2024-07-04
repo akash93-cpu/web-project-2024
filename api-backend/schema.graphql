@@ -68,6 +68,10 @@ type AdminCount {
     countAdmins: Int!
 }
 
+type BlogCount {
+    countPosts: Int!
+}
+
 type GetUser {
     userName: String!
 }
@@ -90,6 +94,9 @@ type Query {
 
     "Query used to return all blog posts."
     returnAllPosts: [BlogList]
+
+    "Query used to count total number of blog posts -> returns an INT."
+    countAllPosts: BlogCount!
 
     "Query for user login."
     userLogin(email: String!, password: String!): User

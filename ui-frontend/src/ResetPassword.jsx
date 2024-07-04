@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import '../css/passwordreset.css';
-// import graphQLFetchData from './graphQLFetch.js'; not used here
+// import graphQLFetchData from './graphQLFetch.js'; -- not used here
 
 export default function ResetPasswordComponent() {
   const { token } = useParams();

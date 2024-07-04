@@ -150,3 +150,13 @@ background: linear-gradient(32deg, rgba(249,63,63,1) 0%, rgba(37,63,255,1) 100%)
   box-shadow: inset 0px 0.1em 0.6em #3c4fe0;
   transform: translateY(0em);
 }
+
+#counter-container {
+  height: 500px;
+}
+.counter-div {
+  font-family: Fira Code;
+}
+.text-center {
+  margin-top: 100px;
+}
