@@ -1,9 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import graphQLFetchData from "./graphQLFetch.js";
 import { CodeSlash, People, PersonGear, CardText } from 'react-bootstrap-icons';
 import { Container, Row, Col } from 'react-bootstrap';
+import CountUp from 'react-countup';
+
 import '../css/othercss.css';
 import bgImage from '../images/counter-bg-unsplash.jpg';
+
+function useOnScreen(options) { // custom hook for activating on scroll-down
+    const ref = useRef();
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setIsVisible(true);
+                observer.unobserve(ref.current);
+            }
+        }, options);
+
+        if (ref.current) {
+            observer.observe(ref.current);
+        }
+
+        return () => {
+            if (ref.current) {
+                observer.unobserve(ref.current);
+            }
+        };
+    }, [ref, options]);
+
+    return [ref, isVisible];
+}
 
 export default function BannerCounter() {
     const [coursesCount, setCoursesCount] = useState(0);
@@ -88,22 +116,30 @@ export default function BannerCounter() {
         fetchDataPosts();
     }, []);
 
+    const [ref, isVisible] = useOnScreen({ threshold: 0.1 });
+
     const counterData = [
-        { icon: <CodeSlash size={52} />, value: coursesCount, label: 'Courses' },
-        { icon: <People size={52} />, value: countUsers, label: 'Users' },
-        { icon: <PersonGear size={52} />, value: countAdmins, label: 'Admins' },
-        { icon: <CardText size={52} />, value: countPosts, label: 'Posts' },
+        { icon: <CodeSlash id="counter-icons" size={52} />, value: coursesCount, label: 'Courses' },
+        { icon: <People id="counter-icons" size={52} />, value: countUsers, label: 'Users' },
+        { icon: <PersonGear id="counter-icons" size={52} />, value: countAdmins, label: 'Admins' },
+        { icon: <CardText id="counter-icons" size={52} />, value: countPosts, label: 'Posts' },
     ];
 
     return (
         <>
-            <div className="counter-div">
+            <div className="counter-div" ref={ref}>
                 <Container fluid className="bg-light py-5" id="counter-container" style={{ backgroundImage: `url(${bgImage})` }}>
                     <Row className="text-center">
                         {counterData.map((item, index) => (
                             <Col key={index} xs={6} md={3} className="mb-4 mb-md-0">
                                 <div className="text-primary mb-3">{item.icon}</div>
-                                <h2 className="font-weight-bold" style={{ fontSize: '39px' }}>{item.value}</h2>
+                                <h2 className="font-weight-bold" style={{ fontSize: '39px' }}>
+                                    {isVisible ? (
+                                        <CountUp end={item.value} duration={3.5} />
+                                    ) : (
+                                        0
+                                    )}
+                                </h2>
                                 <p className="text-muted" style={{ fontSize: '20px' }}>{item.label}</p>
                             </Col>
                         ))}
@@ -111,5 +147,5 @@ export default function BannerCounter() {
                 </Container>
             </div>
         </>
-    )
+    );
 }

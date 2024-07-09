@@ -30,7 +30,7 @@ export async function logoutFunction(query) {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
             body: JSON.stringify({ query })
-        })
+        });
         const body = await response.text();
         const result = JSON.parse(body);
         // console.log(result.data);

@@ -6,6 +6,70 @@
     background-size: cover;
   }
 
+.banner {
+  display: flexbox;
+  background-color: #ffffff;
+  color: white;
+  font-family: 'Fira Code';
+  padding: 160px 120px;
+  text-align: center;
+
+}
+
+.banner-title {
+  background: -webkit-linear-gradient(#161313, #2c6ee9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+.banner-description {
+  color: black;
+  font-size: 18px;
+  padding: 0 100px;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 70px;
+}
+
+.icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+}
+
+.icon-ring {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  
+  /* Define the gradient as the background */
+  background: linear-gradient(32deg, rgba(227,55,50,1) 25%, rgba(29,223,255,1) 85%);
+  
+  /* Use border-image for the gradient border */
+  border: 8px solid transparent; /* Make the border transparent */
+  border-image: linear-gradient(32deg, rgba(227,55,50,1) 25%, rgba(29,223,255,1) 85%) 1;
+}
+
+.icon {
+  font-size: 2rem;
+}
+
+.icon-text {
+  color: #2b434d;
+  font-size: 1.0rem;
+  text-align: center;
+}
+
 /* EFFECTS */
 .effects {
     display: flexbox;
