@@ -1,4 +1,7 @@
-
+#basic-nav-dropdown {
+  color: BlanchedAlmond;  
+  text-shadow: 2px 2px DeepPink;
+}
 .card-single {
     border: 3px solid transparent;
     border-radius: 5px;
@@ -159,4 +162,92 @@ background: linear-gradient(32deg, rgba(249,63,63,1) 0%, rgba(37,63,255,1) 100%)
 }
 .text-center {
   margin-top: 100px;
+}
+
+#hr-other {
+  margin: 1px;
+}
+
+.end-section {
+  display: flexbox;
+  background: rgb(126,0,171);
+  background: linear-gradient(32deg, rgba(126,0,171,1) 52%, rgba(0,1,250,1) 100%);
+    font-size: 16px;
+font-family: Fira Code;
+}
+
+.hero {
+  display: flex;
+  flex-direction: row;
+  width: 65%;
+  margin: auto;
+  padding: 80px;
+}
+.end-div {
+  margin-right: 40px;
+  padding-top: 0;
+}
+
+#h1-end {
+  color: #A5B4FC;
+  font-size: 3em;
+  padding-bottom: 25px;
+}
+
+#p-end {
+  color: white;
+  font-size: 1.2em;
+  margin-bottom: 70px;
+}
+
+.cta {
+  text-decoration: none;
+  color: white;
+}
+.cta:hover {
+  text-decoration: none;
+}
+
+.cta {
+  color: white;
+  background: linear-gradient(#8E86B5, #ACAEED);
+  padding: 20px 30px;
+  font-size: 1.1em;
+  border-radius: 50px;
+}
+.cta:hover {
+  text-decoration: none;
+  background: linear-gradient(#696484, #8788BA);
+}
+@media screen and (max-width: 996px) {
+  .hero {
+     flex-direction: column;
+     text-align: center;
+     justify-content: center;
+     padding: 30px;
+     padding: 10px;
+     width: 85%;
+    }
+  .hero img {
+     order: 1;
+     margin-bottom: 40px;
+    }
+  .hero div {
+     order: 2;
+     height: auto;
+     margin-bottom: 15px;
+     margin-right: 0;
+    }
+  .home p {
+     padding: 0 50px 0 50px;
+     margin-bottom: 50px;
+    }
+}
+@media screen and (max-width: 470px) {
+  .hero h1 {
+     font-size: 2em;
+    }
+  .hero p {
+     font-size: 1.2em;
+    }
 }

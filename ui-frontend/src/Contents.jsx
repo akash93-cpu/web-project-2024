@@ -35,7 +35,7 @@ export default function Contents() {
     }
     return (
         <>
-            <div id="home" style={{ backgroundImage: `url(${image})` }}>
+            <div className="home" style={{ backgroundImage: `url(${image})` }}>
                 <div className="effects">
                     <p className="slide-up" style={styles.tag1}>Welcome to IT Lite</p>
                     <span className="effect-2" style={styles.tag2}>Start learning to code today!</span>

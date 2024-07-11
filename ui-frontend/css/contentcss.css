@@ -1,4 +1,4 @@
-#home {
+.home {
     display: flexbox;
     height: 100vh;
     background-position: center;
@@ -44,20 +44,14 @@
 }
 
 .icon-ring {
-  width: 64px;
-  height: 64px;
+  width: 84px;
+  height: 84px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
-  
-  /* Define the gradient as the background */
-  background: linear-gradient(32deg, rgba(227,55,50,1) 25%, rgba(29,223,255,1) 85%);
-  
-  /* Use border-image for the gradient border */
-  border: 8px solid transparent; /* Make the border transparent */
-  border-image: linear-gradient(32deg, rgba(227,55,50,1) 25%, rgba(29,223,255,1) 85%) 1;
+  border: 2px solid rebeccapurple;
 }
 
 .icon {
@@ -77,6 +71,7 @@
 
 /* slide up effect */
 .slide-up {
+  display: flexbox;
   /* -webkit-animation: slide-up 0.85s cubic-bezier(0.65, 0, 0.35, 1) both; */
   animation: slide-up 0.85s cubic-bezier(0.65, 0, 0.35, 1) both;
   animation-delay: 100ms;

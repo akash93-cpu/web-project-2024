@@ -250,6 +250,26 @@ function ProductsTable(props) {
     );
 }
 
+const EndDivider = () => {
+    return (
+        <>
+        <div className="end-section">
+        <section className="hero">
+        <div className="end-div">
+            <h1 id="h1-end">Get more out of your experience</h1>
+            <p id="p-end">Make the best out of this platform by attempting a fun challenge and showing off your skillset. Why not 
+                try to test out your knowledge at one of our quiz challenges to see if you really are a true developer and to
+                set a record amongst others! 
+            </p>
+            <a className="cta" href="/quiz">Try The Quiz Challenge</a>
+        </div>
+        <img style={{height: '425px'}} src="https://images.unsplash.com/photo-1584697964190-7383cbee8277?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+    </section>
+        </div>
+        </>
+    )
+}
+
 // main product page
 export default class ProductsList extends React.Component {
     constructor() {
@@ -284,7 +304,8 @@ export default class ProductsList extends React.Component {
                     {/* <h1 style={{textAlign: 'center', fontFamily: 'Fira Code'}}>Product Listings</h1> */}
                     <FilterSearch />
                     <ProductsTable products={this.state.products} />
-                    <hr />
+                    <hr id="hr-other"/>
+                    <EndDivider />
             </React.Fragment>
         )
     }

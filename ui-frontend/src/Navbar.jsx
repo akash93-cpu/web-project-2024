@@ -51,8 +51,8 @@ function Navigation() {
       marginLeft: 'auto',
     }, 
     mainBar: {
-      background: "linear-gradient(45deg, rgba(116,120,130,1) 1%, rgba(215,215,215,0.7511379551820728) 100%)",
-      backdropFilter: "blur(4px)",
+      background: "linear-gradient(32deg, rgba(122,142,150,0.9108018207282913) 52%, rgba(250,0,223,0.22452731092436973) 100%)",
+      backdropFilter: "blur(3px)",
     },
     textColors: {
       fontFamily: "Fira Code",
@@ -62,8 +62,8 @@ function Navigation() {
     linkColors: {
       borderRadius: "1rem",
       fontFamily: "Fira Code",
-      color: "DarkSlateGray",
-      textShadow: '1px 1px DarkSlateBlue',
+      color: "BlanchedAlmond",
+      textShadow: '2px 2px DeepPink',
     },
     linkText: {
       fontFamily: "Fira Code",
