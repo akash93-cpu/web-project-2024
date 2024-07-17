@@ -8,6 +8,7 @@ import AboutUsPage from "./AboutUs.jsx";
 import Posts from "./Posts.jsx";
 import Quiz from "./Quiz.jsx";
 import Feeds from "./Feeds.jsx";
+import Chatbot from "./Chatbot.jsx";
 import Reviews from "./Reviews.jsx";
 import SignIn from "./SignInItem.jsx";
 import SignInAdmin from './AdminLogin.jsx';
@@ -34,6 +35,7 @@ export default function Index() {
             <Route path="/reviews" element={<Reviews />}/>
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/feeds" element={<Feeds />} />
+            <Route path="/chatbot" element={<Chatbot />}/>
             <Route path="/faq" element={<FAQ />}/>
             <Route path="/about-us" element={<AboutUsPage />}/>
             <Route path="/contact-us" element={<ContactUsPage />}/>

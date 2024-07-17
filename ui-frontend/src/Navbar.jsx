@@ -52,7 +52,7 @@ function Navigation() {
     }, 
     mainBar: {
       background: "linear-gradient(32deg, rgba(122,142,150,0.9108018207282913) 52%, rgba(250,0,223,0.22452731092436973) 100%)",
-      backdropFilter: "blur(3px)",
+      backdropFilter: "blur(0.8px)",
     },
     textColors: {
       fontFamily: "Fira Code",
@@ -72,8 +72,7 @@ function Navigation() {
   
   const handleLogout = (e) => { // temporary as for now
     e.preventDefault();
-    const query = `
-    query verifyTokenUser {
+    const query = `query verifyTokenUser {
       verifyTokenUser(token: "null") {
         _id
         email
@@ -99,7 +98,7 @@ function Navigation() {
 
               {loggedInUser &&
                 <NavDropdown title={loggedInUser} id="basic-nav-dropdown">
-                  <NavDropdown.Item style={styles.linkText}>Update Password</NavDropdown.Item>
+                  <NavDropdown.Item style={styles.linkText}>Update your details</NavDropdown.Item>
                   <NavDropdown.Item style={styles.linkText} onClick={handleLogout}>Logout</NavDropdown.Item>
                 </NavDropdown>
               }

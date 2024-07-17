@@ -30,7 +30,7 @@ background: linear-gradient(32deg, rgba(49,215,172,1) 0%, rgba(202,54,251,1) 100
 }
 
 .testimonial-carousel {
-    height: 112vh;
+    height: 100vh;
     font-family: Fira Code;
     font-size: 20px;
 }

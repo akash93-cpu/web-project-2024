@@ -32,7 +32,7 @@ export default function Feeds() {
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img className="d-block w-100" src="https://media.licdn.com/dms/image/C4E12AQG-jdUBcEdBIg/article-cover_image-shrink_720_1280/0/1520202876971?e=2147483647&v=beta&t=9ExUfGBSDL2zVBOmpT8teV6Z4zq1ZHEJeNT7aeiCbJU"
+                        <img className="d-block w-100" src="https://media.licdn.com/dms/image/D5612AQFzPoxxgYLFKw/article-cover_image-shrink_720_1280/0/1710176622623?e=2147483647&v=beta&t=VVGGe0KEMm5HjOiPuV-exREh0udi79v8TCG2cyGvSEc"
                             text="Second slide" />
                         <Carousel.Caption>
                             <h3>Database Design</h3>

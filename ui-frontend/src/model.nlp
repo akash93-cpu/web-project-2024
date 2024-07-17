@@ -1,0 +1,415 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ],
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp",
+    "executeActionsBeforeAnswers": false,
+    "calculateSentiment": true
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager"
+    },
+    "locales": [
+      "en"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "locale": "en",
+          "trainByDomain": false,
+          "tag": "domain-manager-en",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "hello": {
+            "intent": "greeting",
+            "domain": "default"
+          },
+          "hi": {
+            "intent": "greeting",
+            "domain": "default"
+          },
+          "hey,there": {
+            "intent": "greeting",
+            "domain": "default"
+          },
+          "good,morn": {
+            "intent": "greeting",
+            "domain": "default"
+          },
+          "afternoon,good": {
+            "intent": "greeting",
+            "domain": "default"
+          },
+          "goodby": {
+            "intent": "greetings.bye",
+            "domain": "default"
+          },
+          "cours,the": {
+            "intent": "courses",
+            "domain": "default"
+          },
+          "are,how,you": {
+            "intent": "greetings.condition",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "greeting": "default",
+          "greetings.bye": "default",
+          "courses": "default",
+          "greetings.condition": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "hello",
+            "intent": "greeting"
+          },
+          {
+            "domain": "default",
+            "utterance": "hi",
+            "intent": "greeting"
+          },
+          {
+            "domain": "default",
+            "utterance": "hey there",
+            "intent": "greeting"
+          },
+          {
+            "domain": "default",
+            "utterance": "good morning",
+            "intent": "greeting"
+          },
+          {
+            "domain": "default",
+            "utterance": "good afternoon",
+            "intent": "greeting"
+          },
+          {
+            "domain": "default",
+            "utterance": "goodbye",
+            "intent": "greetings.bye"
+          },
+          {
+            "domain": "default",
+            "utterance": "the courses",
+            "intent": "courses"
+          },
+          {
+            "domain": "default",
+            "utterance": "how are you",
+            "intent": "greetings.condition"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "en",
+              "tag": "nlu-en",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "hello": 1,
+              "hi": 1,
+              "hey": 1,
+              "there": 1,
+              "good": 1,
+              "morn": 1,
+              "afternoon": 1,
+              "goodby": 1,
+              "the": 1,
+              "cours": 1,
+              "how": 1,
+              "are": 1,
+              "you": 1
+            },
+            "intents": {
+              "greeting": 1,
+              "greetings.bye": 1,
+              "courses": 1,
+              "greetings.condition": 1
+            },
+            "intentFeatures": {
+              "greeting": {
+                "hello": 1,
+                "hi": 1,
+                "hey": 1,
+                "there": 1,
+                "good": 1,
+                "morn": 1,
+                "afternoon": 1
+              },
+              "greetings.bye": {
+                "goodby": 1
+              },
+              "courses": {
+                "the": 1,
+                "cours": 1
+              },
+              "greetings.condition": {
+                "how": 1,
+                "are": 1,
+                "you": 1
+              }
+            },
+            "featuresToIntent": {
+              "hello": [
+                "greeting"
+              ],
+              "hi": [
+                "greeting"
+              ],
+              "hey": [
+                "greeting"
+              ],
+              "there": [
+                "greeting"
+              ],
+              "good": [
+                "greeting"
+              ],
+              "morn": [
+                "greeting"
+              ],
+              "afternoon": [
+                "greeting"
+              ],
+              "goodby": [
+                "greetings.bye"
+              ],
+              "the": [
+                "courses"
+              ],
+              "cours": [
+                "courses"
+              ],
+              "how": [
+                "greetings.condition"
+              ],
+              "are": [
+                "greetings.condition"
+              ],
+              "you": [
+                "greetings.condition"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "locale": "en",
+                "tag": "nlu-en",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "hello",
+                "hi",
+                "hey",
+                "there",
+                "good",
+                "morn",
+                "afternoon",
+                "goodby",
+                "the",
+                "cours",
+                "how",
+                "are",
+                "you"
+              ],
+              "intents": [
+                "greeting",
+                "greetings.bye",
+                "courses",
+                "greetings.condition"
+              ],
+              "perceptrons": [
+                [
+                  7.681539535522461,
+                  7.686890602111816,
+                  3.9119482040405273,
+                  3.9119482040405273,
+                  5.2151875495910645,
+                  2.613452434539795,
+                  2.602104663848877,
+                  -6.224314212799072,
+                  -3.2204458713531494,
+                  -3.2204458713531494,
+                  -2.1492831707000732,
+                  -2.1492831707000732,
+                  -2.1492831707000732,
+                  6.452437669424974
+                ],
+                [
+                  -1.9160966873168945,
+                  -1.900722861289978,
+                  -1.0070054531097412,
+                  -1.0070054531097412,
+                  -1.3476461172103882,
+                  -0.6781206727027893,
+                  -0.6686567664146423,
+                  11.950389862060547,
+                  -1.0182706117630005,
+                  -1.0182706117630005,
+                  -0.6799875497817993,
+                  -0.6799875497817993,
+                  -0.6799875497817993,
+                  2.0411529126272754
+                ],
+                [
+                  -0.9868603348731995,
+                  -0.9826685190200806,
+                  -0.5425633788108826,
+                  -0.5425633788108826,
+                  -0.7521970868110657,
+                  -0.3832581043243408,
+                  -0.36046698689460754,
+                  -0.9747223854064941,
+                  6.64605712890625,
+                  6.64605712890625,
+                  -0.4085504412651062,
+                  -0.4085504412651062,
+                  -0.4085504412651062,
+                  0.9870527172093785
+                ],
+                [
+                  -0.6437562704086304,
+                  -0.639438807964325,
+                  -0.39253196120262146,
+                  -0.39253196120262146,
+                  -0.5694358348846436,
+                  -0.289082407951355,
+                  -0.26191166043281555,
+                  -0.634853184223175,
+                  -0.37093645334243774,
+                  -0.37093645334243774,
+                  4.549047946929932,
+                  4.549047946929932,
+                  4.549047946929932,
+                  0.6381438973873543
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "en",
+        "hello"
+      ],
+      [
+        "en",
+        "hi"
+      ],
+      [
+        "en",
+        "hey there"
+      ],
+      [
+        "en",
+        "good morning"
+      ],
+      [
+        "en",
+        "good afternoon"
+      ],
+      [
+        "en",
+        "goodbye"
+      ],
+      [
+        "en",
+        "the courses"
+      ],
+      [
+        "en",
+        "how are you"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {
+      "en": {
+        "greeting": [
+          {
+            "answer": "Hi!"
+          },
+          {
+            "answer": "Hey there!"
+          },
+          {
+            "answer": "Hello."
+          },
+          {
+            "answer": "Whatsup!"
+          },
+          {
+            "answer": "Goodbye!"
+          }
+        ],
+        "greetings.bye": [
+          {
+            "answer": "Bye! Until next time!"
+          }
+        ],
+        "greetings.condition": [
+          {
+            "answer": "As a chatbot, I don't have feelings but generally you can think of me as being well and superb!"
+          }
+        ],
+        "courses": [
+          {
+            "answer": "You can view all the available courses on the main page."
+          },
+          {
+            "answer": "If you're interested in viewing courses then that would be on the main page. Let me know if you would like help on how to register."
+          }
+        ]
+      }
+    }
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}
