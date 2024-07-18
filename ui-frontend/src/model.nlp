@@ -379,14 +379,14 @@
           },
           {
             "answer": "Whatsup!"
-          },
-          {
-            "answer": "Goodbye!"
           }
         ],
         "greetings.bye": [
           {
             "answer": "Bye! Until next time!"
+          },
+          {
+            "answer": "Goodbye!"
           }
         ],
         "greetings.condition": [
