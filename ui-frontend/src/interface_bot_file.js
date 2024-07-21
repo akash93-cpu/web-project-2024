@@ -2,6 +2,7 @@ const { NlpManager } = require('node-nlp');
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const Filter = require('bad-words');
 
 const bodyParser = require('body-parser');
 
@@ -14,6 +15,7 @@ const port = 5001;
 
 // Initialize the NLP manager
 const manager = new NlpManager({ languages: ['en'] });
+const filter = new Filter();
 
 // Load the pre-trained model
 manager.load(modelDirectory);
@@ -24,8 +26,12 @@ app.use(bodyParser.json());
 // Endpoint to receive messages from frontend
 app.post('/message', async (req, res) => {
     const { message } = req.body;
-    const response = await manager.process('en', message.trim());
-    res.json({ answer: response.answer || "I don't understand. Please rephrase your question." });
+    if (filter.isProfane(message)) {
+        res.json({ answer: "Please refrain from using profanity! This is a respectable environment." });
+    } else {
+        const response = await manager.process('en', message.trim());
+        res.json({ answer: response.answer || "I don't understand. Please rephrase your question." });
+    }
 });
 
 // Start the server

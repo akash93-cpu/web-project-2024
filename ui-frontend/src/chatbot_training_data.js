@@ -1,30 +1,36 @@
 // only run/execute this script once unless you intend to add more training data if needed
-
 const { NlpManager } = require("node-nlp");
+const Filter = require("bad-words");
 
 // Initialize the NLP manager
 const manager = new NlpManager({ languages: ['en'] });
+const filter = new Filter();
+
+const addDocumentWithFilter = (language, utterance, intent) => {
+    const cleanUtterance = filter.clean(utterance);
+    manager.addDocument(language, cleanUtterance, intent);
+};
 
 // Add documents
-manager.addDocument('en', 'hello', 'greeting');
-manager.addDocument('en', 'hi', 'greeting');
-manager.addDocument('en', 'hey there', 'greeting');
-manager.addDocument('en', 'good morning', 'greeting');
-manager.addDocument('en', 'good afternoon', 'greeting');
-manager.addDocument('en', 'goodbye', 'greetings.bye');
-manager.addDocument('en', 'the courses', 'courses');
-manager.addDocument('en', 'what courses are available', 'courses');
-manager.addDocument('en', 'available courses', 'courses');
-manager.addDocument('en', 'how to register', 'register');
-manager.addDocument('en', 'i need help to register', 'register');
-manager.addDocument('en', 'help on registration', 'register');
-manager.addDocument('en', 'offer assistance on how to register', 'register');
-manager.addDocument('en', 'i need help', 'general');
-manager.addDocument('en', 'help', 'general');
-manager.addDocument('en', 'what features does this platform offer', 'features.other');
-manager.addDocument('en', 'list features', 'features.other');
-manager.addDocument('en', 'who are you', 'about');
-manager.addDocument('en', 'how are you', 'greetings.condition');
+addDocumentWithFilter('en', 'hello', 'greeting');
+addDocumentWithFilter('en', 'hi', 'greeting');
+addDocumentWithFilter('en', 'hey there', 'greeting');
+addDocumentWithFilter('en', 'good morning', 'greeting');
+addDocumentWithFilter('en', 'good afternoon', 'greeting');
+addDocumentWithFilter('en', 'goodbye', 'greetings.bye');
+addDocumentWithFilter('en', 'the courses', 'courses');
+addDocumentWithFilter('en', 'what courses are available', 'courses');
+addDocumentWithFilter('en', 'available courses', 'courses');
+addDocumentWithFilter('en', 'how to register', 'register');
+addDocumentWithFilter('en', 'i need help to register', 'register');
+addDocumentWithFilter('en', 'help on registration', 'register');
+addDocumentWithFilter('en', 'offer assistance on how to register', 'register');
+addDocumentWithFilter('en', 'i need help', 'general');
+addDocumentWithFilter('en', 'help', 'general');
+addDocumentWithFilter('en', 'what features does this platform offer', 'features.other');
+addDocumentWithFilter('en', 'list features', 'features.other');
+addDocumentWithFilter('en', 'who are you', 'about');
+addDocumentWithFilter('en', 'how are you', 'greetings.condition');
 
 // Add answers
 manager.addAnswer('en', 'greeting', 'Hi!');
