@@ -1,0 +1,294 @@
+.button-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  
+  }
+  
+  /* Common styles for both buttons */
+  .brutalist-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 111px;
+    height: 111px;
+    color: #e5dede;
+    font-weight: bold;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  
+  /* Styles for the first button */
+  .button-1 {
+    background-color: #4b5ae4;
+    border: 3px solid #424242;
+    border-radius: 32px;
+    box-shadow: 4px 4px 1px #000000;
+  }
+  
+  .button-1:hover {
+    background-color: #6649e9;
+    border-color: #4b5ae4;
+    box-shadow: 5px 5px 0 #000000, 15px 15px 20px rgba(64, 164, 122, 0.2);
+  }
+  
+  .button-1::before,
+  .button-1::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transition: 0.6s;
+  }
+  
+  .button-1::before {
+    left: -100%;
+  }
+  .button-1::after {
+    left: 100%;
+  }
+  
+  .button-1:hover::before {
+    animation: swipeRight 1.5s infinite;
+  }
+  .button-1:hover::after {
+    animation: swipeLeft 1.5s infinite;
+  }
+  
+  @keyframes swipeRight {
+    100% {
+      transform: translateX(200%) skew(-45deg);
+    }
+  }
+  
+  @keyframes swipeLeft {
+    100% {
+      transform: translateX(-200%) skew(-45deg);
+    }
+  }
+  
+  /* Hover effects */
+  .brutalist-button:hover .bot-logo {
+    transform: translateY(-5px);
+  }
+  
+  .brutalist-button:hover .bot-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .bruta.brutalist-button:hover .bot-text {
+    opacity: 1;
+    max-height: 60px;
+    margin-top: 8px;
+  }
+  
+  /* Styles for the bot logo and text */
+  .bot-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 3;
+  }
+  
+  .bot-icon {
+    width: 64px;
+    height: 64px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  
+  .bot-text {
+    font-size: 24px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+  }
+  
+  .button-text {
+    font-family: Fira Code;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.2;
+    text-align: center;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 3;
+  }
+  
+  .button-text span:first-child {
+    font-size: 12px;
+    font-weight: normal;
+  }
+  
+  .button-text span:last-child {
+    font-size: 14px;
+  }
+  
+  /* Hover effects */
+  .brutalist-button:hover .bot-logo {
+    transform: translateY(-1px);
+  }
+  
+  .brutalist-button:hover .bot-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .brutalist-button:hover .button-text,
+  .brutalist-button:hover .bot-text {
+    opacity: 1;
+    max-height: 60px;
+    margin-top: 3px;
+  }
+  
+  /* Animation for the bot logo */
+  @keyframes spin-and-zoom {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    50% {
+      transform: rotate(180deg) scale(1.1);
+    }
+    100% {
+      transform: rotate(360deg) scale(1);
+    }
+  }
+  
+  .brutalist-button:hover .bot-icon {
+    animation: spin-and-zoom 4s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+  }
+  
+  .brutalist-button:hover .bot-text {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .brutalist-button:active .bot-icon,
+  .brutalist-button:active .bot-text,
+  .brutalist-button:active .button-text {
+    transform: scale(0.95);
+  }
+  
+
+.chatbot-container {
+    overflow-x: hidden;
+    animation-name: slideUp;
+    animation-duration: 0.4s;
+    animation-fill-mode: both;
+    font-family: Fira Code;
+    position: fixed;
+    bottom: 150px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    max-height: 600px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+    background-image: url('https://i.pinimg.com/originals/e5/ca/05/e5ca0521bcdacb0515a7bd8abc2d40f3.gif');
+    background-position: center;
+}
+@keyframes slideUp {
+  from {
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.chatbot-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    color: #d4d4d4;
+}
+
+.chatbot-container #input-user {
+    margin-bottom: 5px;
+}
+
+.messageBox {
+
+  width: fit-content;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2d2d2d;
+  padding: 0 15px;
+  border-radius: 10px;
+  border: 1px solid rgb(63, 63, 63);
+}
+.messageBox:focus-within {
+  border: 1px solid rgb(110, 110, 110);
+}
+#messageInput {
+  width: 265px;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  padding-left: 10px;
+  color: white;
+}
+#messageInput:focus ~ #sendButton svg path,
+#messageInput:valid ~ #sendButton svg path {
+  fill: #3c3c3c;
+  stroke: white;
+}
+
+#sendButton {
+  width: fit-content;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+#sendButton svg {
+  height: 18px;
+  transition: all 0.3s;
+}
+#sendButton svg path {
+  transition: all 0.3s;
+}
+#sendButton:hover svg path {
+  fill: #3c3c3c;
+  stroke: white;
+}

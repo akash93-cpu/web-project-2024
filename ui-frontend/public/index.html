@@ -16,6 +16,13 @@
     table.bordered-table th, td {border: 1px solid silver; padding: 4px;}
     table.bordered-table {border-collapse: collapse;}
     a.active {background-color: #D8D8F5;}
+
+    @keyframes animation {
+      25% { text-shadow: 5px 5px 5px #1E90FF; }
+    }
+    .text-link:hover {
+      animation: animation 2.5s;
+    }
     
     #basic-nav-dropdown {
       border-radius: 1rem;

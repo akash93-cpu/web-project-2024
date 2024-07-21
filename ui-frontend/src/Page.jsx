@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom";
 import Navigation from "./Navbar.jsx";
+import Chatbot from "./Chatbot.jsx";
 import Footer from "./Footer.jsx";
 import Index from "./IndexPage.jsx";
 
@@ -10,6 +11,7 @@ export default function Page() {
     return (
         <div>
             <Navigation />
+            <Chatbot />
             <Index />
             <Footer />
         </div>

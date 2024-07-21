@@ -4,7 +4,7 @@
   "description": "ui-frontend",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"node src/webData.js\" \"node uiserver.js\"",
+    "start": "concurrently \"node src/webData.js\" \"node uiserver.js\" \"node src/interface_bot_file.js\"",
     "compile": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
