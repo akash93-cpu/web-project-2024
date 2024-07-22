@@ -8,8 +8,9 @@
 
 .banner {
   display: flexbox;
-  background-color: #ffffff;
-  color: white;
+  background: rgb(176,82,215);
+  background: linear-gradient(32deg, rgba(176,82,215,0.3785889355742297) 2%, rgba(248,245,250,0) 97%);
+    color: white;
   font-family: 'Fira Code';
   padding: 160px 120px;
   text-align: center;

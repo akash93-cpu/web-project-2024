@@ -423,7 +423,7 @@ const resolvers = {
                 }
 
             } catch (error) {
-                return error;
+                throw error ;
             }
         },
         updateUserPost: async(_, args, { req }) => { // edit user post by user

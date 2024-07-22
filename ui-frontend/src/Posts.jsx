@@ -6,6 +6,7 @@ import { NodePlus, Pencil, Trash } from 'react-bootstrap-icons';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import toast, { Toaster } from "react-hot-toast";
 import '../css/blogcss.css';
 import blogBgImage from '../images/blog-bg-unsplash.jpg';
 
@@ -238,12 +239,16 @@ function PostTable(props) {
             }
           }`
           try {
-            await graphQLFetchData(query, variables);
-            handleClose();
-            window.location.reload();
-          } catch(err) {
-            throw err;
-          } 
+            const response = await graphQLFetchData(query, variables);
+            if (response.createBlog === null) {
+                toast.error('Please sign in to create blog posts!', { duration: 1500, className: 'error-toast-signin' });
+            } else {
+                handleClose();
+                window.location.reload();
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     }
     
     const postRows = props.posts.map(posts =>
@@ -325,6 +330,7 @@ export default class Posts extends React.Component {
             <>
             <BlogHeader />
             <PostTable posts={this.state.posts}/>
+            <Toaster />
             </>
         )
     }

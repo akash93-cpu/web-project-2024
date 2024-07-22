@@ -192,7 +192,6 @@
     transform: scale(0.95);
   }
   
-
 .chatbot-container {
     overflow-x: hidden;
     animation-name: slideUp;
@@ -214,12 +213,12 @@
     display: flex;
     flex-direction: column;
     z-index: 3;
-    background-image: url('https://i.pinimg.com/originals/e5/ca/05/e5ca0521bcdacb0515a7bd8abc2d40f3.gif');
+    background-image: url('https://i.pinimg.com/originals/4b/3f/a3/4b3fa3e71861a7f3f7548eca78ab38e1.gif');
     background-position: center;
 }
 @keyframes slideUp {
   from {
-    transform: translate3d(0, 100%, 0);
+    transform: translate3d(100%, 0, 0);
     visibility: visible;
   }
 
@@ -227,12 +226,16 @@
     transform: translate3d(0, 0, 0);
   }
 }
-
+.my-toast {
+  width: 280px;
+  margin-left: 44px;
+  font-family: Fira Code;
+}
 .chatbot-messages {
     flex-grow: 1;
     overflow-y: auto;
     margin-bottom: 10px;
-    color: #d4d4d4;
+    color: #ffffff;
 }
 
 .chatbot-container #input-user {
@@ -240,16 +243,14 @@
 }
 
 .messageBox {
-
-  width: fit-content;
-  height: 40px;
+  height: 50px; /* Set a fixed height */
   display: flex;
   align-items: center;
-  justify-content: center;
   background-color: #2d2d2d;
-  padding: 0 15px;
+  padding: 0 10px; 
   border-radius: 10px;
   border: 1px solid rgb(63, 63, 63);
+  flex-shrink: 0; /* Prevent shrinking */
 }
 .messageBox:focus-within {
   border: 1px solid rgb(110, 110, 110);

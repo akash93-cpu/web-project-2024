@@ -3,11 +3,17 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Fira Code';
- 
-}
-.body-login{
   background: #1abc9c;
   overflow: hidden;
+  display: flexbox;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-toast-signin {
+  margin-top: 30px;
+  font-family: Fira Code;
+  background-color: rgb(247, 222, 220);
 }
 
 /* global modifier */

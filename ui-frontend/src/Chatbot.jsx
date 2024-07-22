@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Toaster, toast } from 'sonner';
 import "../css/chatbot.css"; // Import your CSS file for styling
 
 export default function Chatbot() {
@@ -9,16 +10,25 @@ export default function Chatbot() {
     const [iconClicked, setIconClicked] = useState(false);
 
     const handleMessageSubmit = async () => {
-        const response = await fetch('http://localhost:5001/message', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ message: input }),
-        });
-        const data = await response.json();
-        setMessages([...messages, { text: input, sender: 'You' }, { text: data.answer, sender: 'Chatbot' }]);
-        setInput('');
+        if (input.trim() === '') {
+            toast.error('Message cannot be blank!', {
+                duration: 1000,
+                cancel: { label: 'X' },
+                className: 'my-toast'
+            });
+        }
+        else {
+            const response = await fetch('http://localhost:5001/message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: input }),
+            });
+            const data = await response.json();
+            setMessages([...messages, { text: input, sender: 'You' }, { text: data.answer, sender: 'Chatbot' }]);
+            setInput('');
+        }
     };
 
     const handleInputChange = (e) => {
@@ -38,7 +48,8 @@ export default function Chatbot() {
             <div className="button-container">
                 <button className="brutalist-button openai button-1" onClick={() => { toggleChatbot(); toggleIcon(); }}>
                     <div className="bot-logo">
-                        <img src={iconClicked ? "https://cdn-icons-png.flaticon.com/64/15862/15862424.png" : "https://cdn-icons-png.flaticon.com/64/1693/1693894.png"} />
+                        <img src={iconClicked ? "https://cdn-icons-png.flaticon.com/64/15862/15862424.png" 
+                            : "https://cdn-icons-png.flaticon.com/64/1693/1693894.png"} />
                     </div>
                     <div className="button-text">
                         <span>Powered By</span>
@@ -59,6 +70,7 @@ export default function Chatbot() {
                     </div>
 
                     <div className="messageBox">
+                        <Toaster richColors/>
                         <input id="messageInput"
                             type="text"
                             placeholder="Ask me a question..."

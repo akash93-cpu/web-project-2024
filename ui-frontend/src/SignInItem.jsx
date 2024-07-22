@@ -4,6 +4,7 @@ import graphQLFetchData from "./graphQLFetch.js";
 import { useNavigate } from "react-router-dom";
 import { Form, FormControl } from 'react-bootstrap';
 import { Envelope, BracesAsterisk, Eye, EyeSlash } from 'react-bootstrap-icons';
+import toast, { Toaster } from "react-hot-toast";
 import '../css/signin.css';
 import bgLoginImage from '../images/unsplash-login.png';
 
@@ -54,7 +55,10 @@ class SignIn extends React.Component {
             }
             return userData;
         } catch (err) {
-            console.error('Error submitting login data:', err);
+            toast.error("Error logging in! Please verify credentials!", {
+                duration: 1500,
+                className: 'error-toast-signin',
+            });
         }
     }
 
@@ -78,7 +82,6 @@ class SignIn extends React.Component {
                             <div className="title-login"><span>Login</span></div>
                             <Form name="userLogin" className="login-form-main" onSubmit={this.handleSubmit}>
                                 <div className="row-login">
-
                                     <Envelope className="i"></Envelope>
                                     <FormControl id="input-login" type="text" placeholder="Email" required name="email" />
                                 </div>
@@ -90,7 +93,6 @@ class SignIn extends React.Component {
                                 <button id="show-hide-password-btn-1" type="button" onClick={this.toggleVisibility}>
                                     {visible ? <Eye /> : <EyeSlash />} Password
                                 </button>
-                                {/* <div class="pass"><a href="#">Forgot password?</a></div> */}
                                 <div className="center-login-button"><button id="submit-button-login" type="submit">Submit</button>
                                 </div>
                                 <div className="signup-link"><a id="register-link" href="/forgotpassword">Forgot Password</a></div>
@@ -99,6 +101,7 @@ class SignIn extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Toaster />
             </>
         );
     }

@@ -10,7 +10,7 @@ const addDocumentWithFilter = (language, utterance, intent) => {
     const cleanUtterance = filter.clean(utterance);
     manager.addDocument(language, cleanUtterance, intent);
 };
-
+  
 // Add documents
 addDocumentWithFilter('en', 'hello', 'greeting');
 addDocumentWithFilter('en', 'hi', 'greeting');
@@ -18,6 +18,7 @@ addDocumentWithFilter('en', 'hey there', 'greeting');
 addDocumentWithFilter('en', 'good morning', 'greeting');
 addDocumentWithFilter('en', 'good afternoon', 'greeting');
 addDocumentWithFilter('en', 'goodbye', 'greetings.bye');
+addDocumentWithFilter('en', 'bye', 'greetings.bye');
 addDocumentWithFilter('en', 'the courses', 'courses');
 addDocumentWithFilter('en', 'what courses are available', 'courses');
 addDocumentWithFilter('en', 'available courses', 'courses');
@@ -31,6 +32,13 @@ addDocumentWithFilter('en', 'what features does this platform offer', 'features.
 addDocumentWithFilter('en', 'list features', 'features.other');
 addDocumentWithFilter('en', 'who are you', 'about');
 addDocumentWithFilter('en', 'how are you', 'greetings.condition');
+addDocumentWithFilter('en', 'where are you', 'location');
+addDocumentWithFilter('en', 'i love you', 'emotion');
+addDocumentWithFilter('en', 'you', 'about');
+addDocumentWithFilter('en', 'i hate you', 'emotion');
+addDocumentWithFilter('en', 'love it', 'emotion.other');
+addDocumentWithFilter('en', 'hate it', 'emotion.other');
+addDocumentWithFilter('en', 'Joy Sadness Anger Fear Surprise Disgust Anxiety Envy Jealousy Compassion Gratitude Pride', 'emotion.many');
 
 // Add answers
 manager.addAnswer('en', 'greeting', 'Hi!');
@@ -47,6 +55,11 @@ manager.addAnswer('en', 'general', "Are you looking for any help? I'm here to of
 manager.addAnswer('en', 'features.other', 'Some of the primary features that this platform offers its users are blogging, course rating and it also provides some neat Twitter feeds!')
 manager.addAnswer('en', 'about', "Just think of me as a general chatbot designed for this platform alone so coincidentally I'm more of an app-centric bot focused on providing feedback mostly aimed at and around the context of this platform.");
 manager.addAnswer('en', 'about', "I'm an app-centric bot meaning that I can help you with stuff around the context of this site.");
+manager.addAnswer('en', 'location', "I can't really provide you with a location but as to say I am integrated into this platform/site.")
+manager.addAnswer('en', 'emotion', "Thanks for expressing your emotions towards me however it means nothing to me as I don't have any emotions programmed into me to respond to you.");
+manager.addAnswer('en', 'emotion.other', "Good for you ;)");
+manager.addAnswer('en', 'emotion.many', "It seems like you're expressing your emotions. I don't have any emotions programmed into me as I am just a bot so I cannot be of any assistance here -_-");
+manager.addAnswer('en', 'emotion.other', "That's not nice... better seek some advice if I were you :'( ");
 
 manager.train().then(() => {
     manager.save();
