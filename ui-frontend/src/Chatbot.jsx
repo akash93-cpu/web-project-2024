@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Toaster, toast } from 'sonner';
-import "../css/chatbot.css"; // Import your CSS file for styling
+import "../css/chatbot.css"; 
 
 export default function Chatbot() {
     const [input, setInput] = useState('');

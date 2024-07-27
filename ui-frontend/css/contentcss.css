@@ -9,11 +9,13 @@
 .banner {
   display: flexbox;
   background: rgb(176,82,215);
-  background: linear-gradient(32deg, rgba(176,82,215,0.3785889355742297) 2%, rgba(248,245,250,0) 97%);
+  background: url('https://www.tecnotree.com/wp-content/uploads/2022/09/Globe-Animation_f7f7f7.gif');
     color: white;
   font-family: 'Fira Code';
   padding: 160px 120px;
   text-align: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
 }
 

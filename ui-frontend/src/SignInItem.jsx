@@ -57,7 +57,7 @@ class SignIn extends React.Component {
         } catch (err) {
             toast.error("Error logging in! Please verify credentials!", {
                 duration: 1500,
-                className: 'error-toast-signin',
+                className: 'error-toast',
             });
         }
     }

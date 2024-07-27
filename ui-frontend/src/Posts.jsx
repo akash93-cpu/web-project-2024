@@ -54,7 +54,7 @@ function PostCards(props) {
     const handlePostUpdate = async (e) => { // update user post function
         e.preventDefault();
         const form = document.forms.updateUserPost;
-        const variables = { 
+        const variables = {
             postID: posts.postID,
             title: form.title.value.trim(),
             content: form.content.value.trim(),
@@ -69,13 +69,13 @@ function PostCards(props) {
               content
             }
           }`
-          try {
+        try {
             await graphQLFetchData(query, variables);
             // handleClose();
             window.location.reload();
-          } catch(err) {
-            alert(err);
-          } 
+        } catch (err) {
+            toast.error("Error! You do cannot edit/update this post!", { duration: 1500, className: 'error-toast' });
+        } 
     }
 
     const handleDelete = async (e) => { // delete user post function
@@ -91,8 +91,8 @@ function PostCards(props) {
           try {
             await graphQLFetchData(query, variables);
             window.location.reload();
-          } catch(error) {
-            alert(error);
+          } catch (err) {
+            toast.error("Error! You cannot remove another user's post!", { duration: 1500, className: 'error-toast' });
           }
     }
 
@@ -239,15 +239,11 @@ function PostTable(props) {
             }
           }`
           try {
-            const response = await graphQLFetchData(query, variables);
-            if (response.createBlog === null) {
-                toast.error('Please sign in to create blog posts!', { duration: 1500, className: 'error-toast-signin' });
-            } else {
-                handleClose();
-                window.location.reload();
-            }
-        } catch (error) {
-            console.error('Error fetching data:', error);
+            await graphQLFetchData(query, variables);
+            handleClose();
+            window.location.reload();
+        } catch (err) {
+            toast.error('Error! Please sign in to create posts!', { duration: 1500, className: 'error-toast' })
         }
     }
     

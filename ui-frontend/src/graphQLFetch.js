@@ -9,16 +9,21 @@ export default async function graphQLFetchData(query, variables = {}) { // commo
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ query, variables })
         });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const body = await response.text();
         const result = JSON.parse(body);
         console.log("API data:", result);
 
         if (result.errors) {
-            console.log(result.errors);
+            throw new Error(result.errors.map(error => error.message).join(', '));
         }
         return result.data;
     } catch (e) {
-        alert(`Error getting data from server: ${e.message}`);
+        throw new Error(`Error from server: ${e.message}`);
     }
 }
 

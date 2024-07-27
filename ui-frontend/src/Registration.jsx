@@ -2,6 +2,7 @@ import React from "react";
 import graphQLFetchData from "./graphQLFetch.js";
 import { useNavigate } from "react-router-dom";
 import { Form, FormControl } from 'react-bootstrap';
+import toast, { Toaster } from "react-hot-toast";
 import "../css/register.css";
 
 class Registration extends React.Component {
@@ -33,10 +34,11 @@ class Registration extends React.Component {
           }`
           try {
             await graphQLFetchData(query, variables);
+            toast.success('User created successfuly!', { duration: 1500, className: 'toast-success' });
             this.props.navigate("/login");
-          } catch (err) {
-            throw err;
-          }
+        } catch (err) {
+            toast.error(`Error! ${err.message}`, { duration: 1500, className: 'error-toast' })
+        }
     }
 
     render(){
@@ -68,6 +70,7 @@ class Registration extends React.Component {
                                 <h3 id="h3-r-tag">Already have an account? <a id="link-to" href="/login">Login</a></h3>
                             </div>
                         </Form>
+                        <Toaster />
                     </div>
             </div>
             </>

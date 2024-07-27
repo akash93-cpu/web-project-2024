@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
+import toast, { Toaster } from "react-hot-toast";
 
 import HeaderContent from "./DemoPage.jsx";
 import bgProductImg from '../images/products-bg-unsplash.jpg';
@@ -48,9 +49,10 @@ function ProductCard(props) {
 
         try {
             await graphQLFetchData(query, variables);
+            toast.success('Rating submitted!', { duration: 1500, className: 'toast-success' });
             window.location.reload();
         } catch (err) {
-            alert(err);
+            toast.error(`Error! ${err.message}`, { duration: 1500, className: 'error-toast' });
         }
     }
 
@@ -306,6 +308,7 @@ export default class ProductsList extends React.Component {
                     <ProductsTable products={this.state.products} />
                     <hr id="hr-other"/>
                     <EndDivider />
+                    <Toaster />
             </React.Fragment>
         )
     }
