@@ -176,6 +176,58 @@ background: linear-gradient(32deg, rgba(249,63,63,1) 0%, rgba(37,63,255,1) 100%)
 font-family: Fira Code;
 }
 
+.update-modal .modal-header {
+  font-family: Fira Code;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.update-modal .modal-title {
+  color: #343a40;
+  font-weight: bold;
+}
+
+.update-modal .modal-body {
+  padding: 2rem;
+}
+
+.update-modal-form {
+  font-family: Fira Code;
+  display: flex;
+  flex-direction: column;
+}
+
+.update-modal-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.update-modal-form .form-label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.update-modal-form .form-control {
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  padding: 0.5rem;
+}
+
+.update-modal .btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+.update-modal .btn:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+
+
+
 .hero {
   display: flex;
   flex-direction: row;

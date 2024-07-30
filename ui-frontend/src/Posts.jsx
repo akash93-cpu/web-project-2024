@@ -74,7 +74,7 @@ function PostCards(props) {
             // handleClose();
             window.location.reload();
         } catch (err) {
-            toast.error("Error! You do cannot edit/update this post!", { duration: 1500, className: 'error-toast' });
+            toast.error(`${err}`, { duration: 1500, className: 'error-toast' });
         } 
     }
 
@@ -243,7 +243,7 @@ function PostTable(props) {
             handleClose();
             window.location.reload();
         } catch (err) {
-            toast.error('Error! Please sign in to create posts!', { duration: 1500, className: 'error-toast' })
+            toast.error(`Error! ${err}`, { duration: 1500, className: 'error-toast' })
         }
     }
     

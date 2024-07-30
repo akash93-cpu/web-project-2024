@@ -342,6 +342,33 @@ const resolvers = {
                 throw error;
             } 
         },
+        updateUsername: async (_, args, { req }) => {
+            const { updatedUsername } = args;
+
+            const userToken = req.cookies.userToken;
+            if (!userToken) throw new Error('No user token found!');
+        
+            const decodedUser = jwt.verify(userToken, process.env.JWT_SECRET_KEY);
+            const user = await User.findById(decodedUser.id);
+            if (!user) throw new Error('User not found!');
+        
+            try {
+                const existingUser = await User.findOne({ username: updatedUsername });
+                if (existingUser) {
+                    throw new Error(`Username ${updatedUsername} already exists!`);
+                }
+        
+                if (!validator.isAlphanumeric(updatedUsername)) {
+                    throw new Error("Username cannot contain special characters!");
+                }
+        
+                user.username = updatedUsername;
+                await user.save();
+                console.log('Username and related posts updated successfully!');
+            } catch (error) {
+                throw error;
+            }
+        },
         createAdmin: async (_, args) => { // create admin
             const { email, password, username, confirm } = args.adminInput;
             try {
@@ -409,6 +436,7 @@ const resolvers = {
             try {
                 if (userToken) {
                     if (!title.trim()) throw Error('Please enter a title!');
+                    if (!content.trim()) throw Error('Please enter some content');
                     if (title.length > 15) throw Error('Title too long!');
                     if (content.length > 50) throw Error('Content too long!');
                     const blog = new Blog({
@@ -431,6 +459,7 @@ const resolvers = {
 
             // requesting cookie    
             const userToken = req.cookies.userToken;
+            if (!userToken) throw new Error('Please signin to perform this operation!');
             const decodedUser = jwt.verify(userToken, process.env.JWT_SECRET_KEY);
             const usernameFind = await User.findOne({ _id: decodedUser.id });
             const correctUsername = usernameFind.username;
@@ -439,6 +468,8 @@ const resolvers = {
             try {
                 const usernameOfBlogPost = await Blog.findOne({ postID: postID });
                 const blogUser = usernameOfBlogPost.author;
+                if (!changes.title.trim()) throw new Error('Title cannot be blank!');
+                if (!changes.content.trim()) throw new Error('Content cannot be blank!');
                 if (correctUsername === blogUser) {
                     const updatedPost = await Blog.findOneAndUpdate(
                         { postID: postID },

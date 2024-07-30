@@ -165,6 +165,9 @@ type Mutation {
     "Mutation used to update a document from the database based on product_id."
     updateProducts(product_id: String!, changes: ProductUpdateInputs!): Product!
 
+    "Mutation used to update a username - from auth token." 
+    updateUsername(updatedUsername: String!): User
+
     "Mutation used to update a user post from database based on username."
     updateUserPost(postID: String!, changes: updatePostInput!): BlogUpdate!
 

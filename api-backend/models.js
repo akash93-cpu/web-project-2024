@@ -108,7 +108,21 @@ const blogSchema = new Schema({
         type: String,
         required: true,
     }
-})
+});
+
+/** Pre-save middleware to check if the username is modified */
+userSchema.pre('save', async function(next) {
+    if (this.isModified('username')) {
+        const Blog = mongoose.model('Blog'); // Get the Blog model
+        await Blog.updateMany({ author: this._previousUsername }, { author: this.username });
+    }
+    next();
+});
+
+/** Post-find middleware to store the current username before modification */
+userSchema.post('init', function(doc) {
+    this._previousUsername = doc.username;
+});
 
 const Product = mongoose.model('Product', productSchema);
 

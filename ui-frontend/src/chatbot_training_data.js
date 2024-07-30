@@ -29,6 +29,8 @@ addDocumentWithFilter('en', 'offer assistance on how to register', 'register');
 addDocumentWithFilter('en', 'i need help', 'general');
 addDocumentWithFilter('en', 'help', 'general');
 addDocumentWithFilter('en', 'what features does this platform offer', 'features.other');
+addDocumentWithFilter('en', 'about blogs', 'features.blogs');
+addDocumentWithFilter('en', 'blogging', 'features.blogs');
 addDocumentWithFilter('en', 'list features', 'features.other');
 addDocumentWithFilter('en', 'who are you', 'about');
 addDocumentWithFilter('en', 'how are you', 'greetings.condition');
@@ -53,10 +55,11 @@ manager.addAnswer('en', 'courses', "If you're interested in viewing courses then
 manager.addAnswer('en', 'register', "I'm happy to offer assistance on registraion! All you need to do to register is simply copy both the course ID and the title and email it to registration@ITLite.co.za together with your proof of payment and we'll get back to you shortly afterwards!");
 manager.addAnswer('en', 'general', "Are you looking for any help? I'm here to offer assistance! If you want to know more about how to register please ask me! Or if your question is related to something different you can type it in the chat window as well.");
 manager.addAnswer('en', 'features.other', 'Some of the primary features that this platform offers its users are blogging, course rating and it also provides some neat Twitter feeds!')
+manager.addAnswer('en', 'features.blogs', 'So blogs are integrated into this platform allowing users to share content publicly.');
 manager.addAnswer('en', 'about', "Just think of me as a general chatbot designed for this platform alone so coincidentally I'm more of an app-centric bot focused on providing feedback mostly aimed at and around the context of this platform.");
 manager.addAnswer('en', 'about', "I'm an app-centric bot meaning that I can help you with stuff around the context of this site.");
 manager.addAnswer('en', 'location', "I can't really provide you with a location but as to say I am integrated into this platform/site.")
-manager.addAnswer('en', 'emotion', "Thanks for expressing your emotions towards me however it means nothing to me as I don't have any emotions programmed into me to respond to you.");
+manager.addAnswer('en', 'emotion', "Thanks for expressing your emotions towards me however it means nothing as I don't have any emotions programmed into my core to respond to you.");
 manager.addAnswer('en', 'emotion.other', "Good for you ;)");
 manager.addAnswer('en', 'emotion.many', "It seems like you're expressing your emotions. I don't have any emotions programmed into me as I am just a bot so I cannot be of any assistance here -_-");
 manager.addAnswer('en', 'emotion.other', "That's not nice... better seek some advice if I were you :'( ");
