@@ -243,7 +243,7 @@ function PostTable(props) {
             handleClose();
             window.location.reload();
         } catch (err) {
-            toast.error(`Error! ${err}`, { duration: 1500, className: 'error-toast' })
+            toast.error(`${err}`, { duration: 1500, className: 'error-toast' })
         }
     }
     

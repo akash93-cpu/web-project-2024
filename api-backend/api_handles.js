@@ -37,7 +37,7 @@ const resolvers = {
             }
             return await Product.find(query);
         },
-        returnAllPosts: async () => await Blog.find({}).exec(), // return all blog posts
+        returnAllPosts: async () => await Blog.find({}).limit(25).exec(), // return first 25 blog posts
         countProducts: async () => { // count all products in the db
             try {
                 const count = await Product.countDocuments({}).exec();
@@ -429,6 +429,7 @@ const resolvers = {
 
             // requesting cookie 
             const userToken = req.cookies.userToken;
+            if (!userToken) throw new Error('Please login to create posts!');
             const decodedSomeUser = jwt.verify(userToken, process.env.JWT_SECRET_KEY);
             const user = await User.findOne({ _id: decodedSomeUser.id });
             
@@ -479,7 +480,7 @@ const resolvers = {
                     return updatedPost;
                 }
             } catch (error) {
-                return error.message;
+                throw error;
             }
         },
         deletePost: async(_, args, { req }) => {

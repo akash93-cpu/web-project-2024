@@ -135,14 +135,14 @@
 #edit-post-btn-pencil {
     border-radius: 50px;
     background: rgb(63,70,255);
-background: linear-gradient(32deg, rgb(107, 111, 219) 0%, rgb(2, 0, 0) 100%);
+background: linear-gradient(32deg, rgb(250, 89, 236) 0%, rgb(58, 139, 172) 100%);
 margin-right: 125px;
 }
 
 #edit-post-btn-trash {
     border-radius: 50px;
     background: rgb(63,70,255);
-background: linear-gradient(32deg, rgb(107, 111, 219) 0%, rgb(2, 0, 0) 100%);
+    background: linear-gradient(32deg, rgb(250, 89, 236) 0%, rgb(58, 139, 172) 100%);
 
 }
 
