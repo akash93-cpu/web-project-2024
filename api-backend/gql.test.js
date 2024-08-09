@@ -1,7 +1,10 @@
 const fs = require('fs');
+const jwt = require('jsonwebtoken');
 const { ApolloServer, gql } = require('apollo-server-express');
 const { Product } = require('./models.js');
 const { Blog } = require('./models.js');
+const { User } = require('./models.js');
+require('dotenv').config();
 
 // ------------------------------------------ 
 const product1 = {
@@ -45,9 +48,12 @@ jest.mock('./models.js', () => ({ // mock data here for test1, test2 and test4
         author: "Nobody"
       }])
     })
+  },
+  User: {
+    findOne: jest.fn().mockResolvedValue(userDetails),
   }
 }));
-
+// ------------------------------------------ 
 async function test1() { // test 1 - return data from getProducts query using mock data
   const resolvers = {
     Query: {
@@ -219,8 +225,110 @@ async function test4() { // test 4 - returns total number of entries using count
     expect(data?.countProducts.count).toEqual(2);
   });
 }
+// ------------------------------------------
+const userDetails = {
+  _id: "6627f29a63557176c8062867", 
+  email: "testuser@test.com",
+  password: "TestPassword123!", 
+  username: "TestUser",
+  role: "user",
+} 
+
+async function test5() { // test 5 - user login from provided variables using userLogin --token is returned upon successful tests
+  const resolvers = {
+    Query: {
+      userLogin: async (_, args) => { // user login
+        const { email, password } = args;
+        try {
+          const userExist = await User.findOne({ email: email });
+          if (!userExist) throw new Error(`User with email ${ email } does not exist! Please register!`);
+          
+          const userEmail = userExist.email;
+          const userPassword = userExist.password;
+          if (password === userPassword && email === userEmail) {
+            const token = jwt.sign({ id: userExist._id, username: userExist.username }, process.env.JWT_SECRET_KEY, {
+              expiresIn: 1 * 24 * 60 * 60, // 1 day
+            });
+  
+            return { token, password: null, ...userExist };
+          }
+        } catch (err) {
+          throw err;
+        }
+      },
+    }
+  }
+  
+  test('return token on successful login[user] --using userDetails mock data', async () => {
+    const testServer = new ApolloServer({
+      typeDefs: fs.readFileSync('./schema.graphql', 'utf-8'), 
+      resolvers
+    });
+    const { errors, data } = await testServer.executeOperation({
+      query: `query userLogin($email: String!, $password: String!) {
+                userLogin(email: $email, password: $password) {
+                  _id
+                  token
+                  email
+                  username
+                }
+            }`,
+      variables: { email: "testuser@test.com", password: "TestPassword123!" },
+    });
+    expect(errors).toBeUndefined();
+    expect(data?.userLogin).toEqual(
+      {
+        _id: "6627f29a63557176c8062867",
+        token: expect.any(String),
+        email: "testuser@test.com",
+        username: "TestUser",
+      } 
+    );
+  });
+
+  test('return null on failed user login using wrong password[user] --using userDetails mock data', async () => {
+    const testServer = new ApolloServer({
+      typeDefs: fs.readFileSync('./schema.graphql', 'utf-8'), 
+      resolvers
+    });
+    const { errors, data } = await testServer.executeOperation({
+      query: `query userLogin($email: String!, $password: String!) {
+                userLogin(email: $email, password: $password) {
+                  _id
+                  token
+                  email
+                  username
+                }
+            }`,
+      variables: { email: "testuser@test.com", password: "FailPassword123!" },
+    });
+    expect(errors).toBeUndefined();
+    expect(data?.userLogin).toEqual(null);
+  });
+
+  test('return null on failed user login using wrong username[user] --using userDetails mock data', async () => {
+    const testServer = new ApolloServer({
+      typeDefs: fs.readFileSync('./schema.graphql', 'utf-8'), 
+      resolvers
+    });
+    const { errors, data } = await testServer.executeOperation({
+      query: `query userLogin($email: String!, $password: String!) {
+                userLogin(email: $email, password: $password) {
+                  _id
+                  token
+                  email
+                  username
+                }
+            }`,
+      variables: { email: "failtest@test.com", password: "TestPassword123!" },
+    });
+    expect(errors).toBeUndefined();
+    expect(data?.userLogin).toEqual(null);
+  });
+}
 
 test1();
 test2();
 test3();
 test4();
+test5();

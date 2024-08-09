@@ -602,19 +602,3 @@ module.exports = { startServer } // removed router
 //         return error;
 //     }
 // });
-
-// function installHandler(app) {
-//     const enableCors = ((console.log('cors')) || 'true') === 'true';
-//     console.log('CORS Settings:', enableCors);
-//     let cors;
-//     if (enableCors) {
-//         const origin = 'http://localhost:8000';
-//         const methods = 'POST';
-//         cors = { origin, methods }
-//     } else {
-//         cors = 'false';
-//     }
-//     server.applyMiddleware({ app, path: '/graphql', cors });
-// };
-
-// module.exports = { installHandler }
